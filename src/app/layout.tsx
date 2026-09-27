@@ -3,6 +3,7 @@ import { Bricolage_Grotesque, Hanken_Grotesk, JetBrains_Mono } from "next/font/g
 import "./globals.css";
 import "katex/dist/katex.min.css";
 import { AppShell } from "@/components/AppShell";
+import { FundingReel } from "@/components/FundingReel";
 
 // distinctive pairing (not Inter/Roboto): Bricolage carries the headlines with
 // an engineered character; Hanken is a warm, highly legible body for coursework.
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${display.variable} ${body.variable} ${jbmono.variable} h-full antialiased`}>
       <body className="min-h-full">
+        <FundingReel />
         <AppShell>{children}</AppShell>
       </body>
     </html>

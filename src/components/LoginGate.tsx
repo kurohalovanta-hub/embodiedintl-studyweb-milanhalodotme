@@ -196,6 +196,12 @@ export function LoginGate() {
             </button>
           )}
 
+          {!firstRun && auth.seats && (
+            <p className="mt-3 text-center font-mono text-[12px] text-dim">
+              Total users: <span className="text-ink">{auth.seats.taken}</span> / {auth.seats.cap}
+            </p>
+          )}
+
           <div className="mt-4"><TutorStatusCard /></div>
 
           <p className="mt-4 text-center text-[11px] text-faint">

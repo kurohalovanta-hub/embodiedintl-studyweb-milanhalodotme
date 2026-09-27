@@ -172,6 +172,12 @@ export async function userCount(redis: Redis): Promise<number> {
   return (await redis.scard(USERS_SET)) ?? 0;
 }
 
+// Places shown on the sign-in screen: SEAT_BASE plus the accounts in the store,
+// out of SEAT_CAP. Joining closes once the total reaches the cap.
+export const SEAT_BASE = Number(process.env.HALO_SEAT_BASE ?? 30);
+export const SEAT_CAP = Number(process.env.HALO_SEAT_CAP ?? 50);
+export const seatsTaken = (accounts: number) => Math.min(SEAT_CAP, SEAT_BASE + accounts);
+
 // ── the authenticated-request helper every data route uses ─────────
 export interface AuthContext {
   redis: Redis;

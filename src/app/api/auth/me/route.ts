@@ -1,5 +1,5 @@
 import {
-  getRedis, getSecret, getUser, readCookie, SESSION_COOKIE, userCount, verifyToken,
+  getRedis, getSecret, getUser, readCookie, SEAT_CAP, seatsTaken, SESSION_COOKIE, userCount, verifyToken,
 } from "@/lib/server/auth";
 
 // Reports auth configuration + current session. Never errors — the client
@@ -27,10 +27,13 @@ export async function GET(req: Request) {
   // Redis down or over quota: report signed-out rather than a 500, which the
   // client would mistake for "no accounts configured".
   let bootstrapped = true;
+  let seats: { taken: number; cap: number } | null = null;
   try {
-    bootstrapped = (await userCount(redis)) > 0;
+    const accounts = await userCount(redis);
+    bootstrapped = accounts > 0;
+    seats = { taken: seatsTaken(accounts), cap: SEAT_CAP };
   } catch {
-    // keep the default
+    // keep the defaults
   }
-  return Response.json({ configured: true, bootstrapped, user });
+  return Response.json({ configured: true, bootstrapped, user, seats });
 }

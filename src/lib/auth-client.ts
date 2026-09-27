@@ -18,6 +18,7 @@ interface AuthState {
   status: AuthStatus;
   bootstrapped: boolean; // does any account exist yet?
   user: AuthUser | null;
+  seats: { taken: number; cap: number } | null;
   error?: string;
   refresh: () => Promise<void>;
   login: (username: string, password: string) => Promise<{ ok: boolean; error?: string; pending?: boolean }>;
@@ -55,11 +56,12 @@ export const useAuth = create<AuthState>((set, get) => ({
   status: "loading",
   bootstrapped: true,
   user: null,
+  seats: null,
 
   refresh: async () => {
     try {
       const res = await fetch("/api/auth/me", { cache: "no-store" });
-      const data = await json<{ configured: boolean; bootstrapped?: boolean; user: AuthUser | null }>(res);
+      const data = await json<{ configured: boolean; bootstrapped?: boolean; user: AuthUser | null; seats?: { taken: number; cap: number } | null }>(res);
       if (!data.configured) {
         set({ status: "local", user: null });
       } else {
@@ -70,6 +72,7 @@ export const useAuth = create<AuthState>((set, get) => ({
           status: data.user ? "authed" : guest ? "guest" : "signedout",
           bootstrapped,
           user: data.user ?? null,
+          seats: data.seats ?? null,
         });
       }
     } catch {
@@ -101,7 +104,11 @@ export const useAuth = create<AuthState>((set, get) => ({
     });
     const data = await json<{ ok?: boolean; approved?: boolean }>(res);
     if (res.ok && data.ok) {
-      set({ bootstrapped: true });
+      const seats = get().seats;
+      set({
+        bootstrapped: true,
+        seats: seats ? { ...seats, taken: Math.min(seats.cap, seats.taken + 1) } : seats,
+      });
       return { ok: true, approved: data.approved };
     }
     return { ok: false, error: data.error ?? "Registration failed." };

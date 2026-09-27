@@ -1,5 +1,5 @@
 import {
-  clientIp, getRedis, hashPassword, normalizeUsername, putUser, rateLimit, userCount,
+  clientIp, getRedis, hashPassword, normalizeUsername, putUser, rateLimit, SEAT_BASE, SEAT_CAP, userCount,
 } from "@/lib/server/auth";
 
 export async function POST(req: Request) {
@@ -24,13 +24,17 @@ export async function POST(req: Request) {
   // account is the admin, who can still revoke or delete anyone from /admin.
   let isFirst: boolean;
   try {
+    const accounts = await userCount(redis);
+    if (accounts > 0 && SEAT_BASE + accounts >= SEAT_CAP) {
+      return Response.json({ error: `All ${SEAT_CAP} places are taken.` }, { status: 403 });
+    }
     // reserve the name atomically
     const reserved = await redis.set(`user:${username}`, "pending", { nx: true, ex: 30 });
     if (reserved !== "OK") {
       return Response.json({ error: "That username is taken." }, { status: 409 });
     }
 
-    isFirst = (await userCount(redis)) === 0;
+    isFirst = accounts === 0;
     const { hash, salt } = await hashPassword(password);
     await putUser(redis, {
       username, hash, salt,

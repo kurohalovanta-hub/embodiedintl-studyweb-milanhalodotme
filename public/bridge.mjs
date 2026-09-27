@@ -192,6 +192,14 @@ setInterval(() => void backup(), 6 * 3600 * 1000);
 let stopping = false;
 process.on("SIGINT", () => { stopping = true; console.log("\nbridge stopping…"); });
 
+// Poll fast while a conversation is live, slow when idle. Every poll costs
+// the site database requests, and an always-on 1.5s poll used up a whole
+// month of the free tier in under two days.
+const FAST_MS = 1500;
+const IDLE_MS = Math.min(Math.max(Number(process.env.HALO_IDLE_MS) || 20_000, FAST_MS), 40_000);
+const FAST_WINDOW_MS = 3 * 60_000;
+let lastJobAt = 0;
+
 let failures = 0;
 for (;;) {
   if (stopping) process.exit(0);
@@ -207,11 +215,12 @@ for (;;) {
       const engine = job.provider === "codex" && HAS_CODEX ? "codex" : HAS_CLAUDE ? "claude" : "codex";
       console.log(`[${new Date().toISOString().slice(11, 19)}] job ${job.id.slice(0, 8)} → ${engine}${job.model ? ` (${job.model})` : ""}`);
       await (engine === "codex" ? runCodex(job) : runClaude(job));
+      lastJobAt = Date.now();
       continue; // check for the next job immediately
     }
   } catch {
     failures += 1;
     if (failures === 5) console.error("Can't reach HALO — retrying in the background…");
   }
-  await new Promise((r) => setTimeout(r, 1500));
+  await new Promise((r) => setTimeout(r, Date.now() - lastJobAt < FAST_WINDOW_MS ? FAST_MS : IDLE_MS));
 }

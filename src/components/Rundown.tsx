@@ -23,7 +23,7 @@ const STEPS: Step[] = [
   { target: "/review", title: "Review", body: "Short recall sessions. Passing a review is what turns a claim into something proven, so nothing you learn quietly slips away." },
   { target: "/guide", title: "Field Manual", body: "The how-it-works handbook. Five minutes here explains tiers, gates, and every screen. Come back whenever something's unclear." },
   { target: "/settings", title: "Settings", body: "Make the text bigger or smaller, switch between Beginner and the full toolkit (Pro), and connect your own Claude or ChatGPT to the tutor." },
-  { target: "/admin", title: "Admin", body: "Approve people who ask to join, and share your tutor with them. New sign-ups wait here until you let them in.", adminOnly: true },
+  { target: "/admin", title: "Admin", body: "See who has joined, switch off or delete accounts, and share your tutor with the people you choose.", adminOnly: true },
   { title: "That's the tour", body: "Your one thing is waiting on Today. Take the first step and the rest lays itself out. You can replay this from Settings any time." },
 ];
 

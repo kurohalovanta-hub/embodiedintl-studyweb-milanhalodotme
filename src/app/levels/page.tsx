@@ -27,7 +27,7 @@ export default function LevelsPage() {
           {PHASES.map((p) => {
             const active = day != null && day >= p.days[0] && day <= p.days[1];
             return (
-              <div key={p.month} className="flex-1" title={`${p.title} — ${p.primary}`}>
+              <div key={p.month} className="flex-1" title={`${p.title}: ${p.primary}`}>
                 <div
                   className="h-2 rounded-sm"
                   style={{ background: active ? "#4dd6e8" : "#1d2733" }}
@@ -39,7 +39,7 @@ export default function LevelsPage() {
         </div>
         {day != null && (
           <div className="mt-1 text-center text-xs text-dim">
-            {PHASES.find((p) => day >= p.days[0] && day <= p.days[1])?.title ?? "Research sprint"} — the calendar paces, mastery gates.
+            {PHASES.find((p) => day >= p.days[0] && day <= p.days[1])?.title ?? "Research sprint"}. The calendar paces, mastery gates.
           </div>
         )}
       </Panel>

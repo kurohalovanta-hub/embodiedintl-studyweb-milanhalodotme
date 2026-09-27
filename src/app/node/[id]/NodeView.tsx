@@ -61,7 +61,7 @@ export function NodeView({ id, packet }: { id: string; packet?: LearningPacket |
             {p?.verified && <span className="rounded bg-acc-robot/15 px-1.5 py-0.5 font-mono text-[10px] text-acc-robot">✓ verified</span>}
             {p?.provisional && (
               <span className="rounded bg-acc-math/15 px-1.5 py-0.5 font-mono text-[10px] text-acc-math">
-                {p.legacy ? "legacy claim — unverified" : "claimed — not yet verified"}
+                {p.legacy ? "legacy claim, unverified" : "claimed, not yet verified"}
               </span>
             )}
             <span className="font-mono text-xs text-faint">packet ≈{Math.round(pk.minutes / 6) / 10}h</span>
@@ -98,7 +98,7 @@ export function NodeView({ id, packet }: { id: string; packet?: LearningPacket |
       {/* repair-class nodes lead with the test-out (Δ1: test out first, patch only gaps) */}
       {pk.diagnostic?.repair && (
         <Panel accent="#e8b34d">
-          <SectionTitle>Test out first — only fix what breaks</SectionTitle>
+          <SectionTitle>Test out first, then fix only what breaks</SectionTitle>
           <p className="text-[14.5px] leading-[1.7] text-dim"><SmartText>{pk.diagnostic.prompt}</SmartText></p>
           <p className="mt-1 mb-2 text-[11px] text-faint">
             ~{pk.diagnostic.minutes} min. Pass → skip this node. Everything below is only for
@@ -134,7 +134,7 @@ export function NodeView({ id, packet }: { id: string; packet?: LearningPacket |
           {/* equations */}
           {node.equations && node.equations.length > 0 && (
             <Panel>
-              <SectionTitle>The equations you&apos;ll actually use</SectionTitle>
+              <SectionTitle>The equations you&apos;ll use</SectionTitle>
               <div className="space-y-2 rounded-md bg-panel2 p-3">
                 {node.equations.map((eq, i) => (
                   <Katex key={i} tex={eq} block />
@@ -145,7 +145,7 @@ export function NodeView({ id, packet }: { id: string; packet?: LearningPacket |
 
           {/* the academy path (§19) */}
           <div>
-            <div className="section-title mb-2.5">Your path — one step at a time</div>
+            <div className="section-title mb-2.5">Your path, one step at a time</div>
             <PacketRunner packet={pk} curated={curated} />
           </div>
 
@@ -194,7 +194,7 @@ export function NodeView({ id, packet }: { id: string; packet?: LearningPacket |
           <Panel>
             <SectionTitle>Comes before this</SectionTitle>
             {node.prereqs.length === 0 ? (
-              <div className="text-sm text-faint">None — a root node.</div>
+              <div className="text-sm text-faint">None. This is a root node.</div>
             ) : (
               <div className="space-y-1.5">
                 {node.prereqs.map((pr) => {
@@ -265,7 +265,7 @@ export function NodeView({ id, packet }: { id: string; packet?: LearningPacket |
               </summary>
               <p className="mt-2 text-sm text-dim"><SmartText>{node.diagnostic}</SmartText></p>
               <p className="mt-1 text-[11px] text-faint">
-                Prove it cold below — passing skips this node now (never wait on the calendar). A quick
+                Prove it cold below. Passing skips this node now (never wait on the calendar). A quick
                 review lands in ~2 days to make sure it was real.
               </p>
               <AssessmentBox id={id} diagnostic />
@@ -307,7 +307,7 @@ function BossAttemptBox({ bossId }: { bossId: string }) {
           {a.notes && <span className="ml-2 text-dim">{a.notes}</span>}
         </div>
       ))}
-      <div className="mono-label mb-1 mt-3">pass criteria — check each only when it is actually true</div>
+      <div className="mono-label mb-1 mt-3">pass criteria: check each only when it is true</div>
       <div className="space-y-1">
         {criteria.map((c, i) => (
           <label key={i} className="flex cursor-pointer items-start gap-2 text-[13px] text-dim">
@@ -351,7 +351,7 @@ function BossAttemptBox({ bossId }: { bossId: string }) {
         <button
           className="btn btn-acc !py-1.5 text-xs disabled:opacity-35"
           disabled={!canPass}
-          title={!canPass ? "All criteria checked + notes + honesty declaration required" : undefined}
+          title={!canPass ? "All criteria checked, notes, and an honesty declaration are required" : undefined}
           onClick={() => {
             if (!choice) return;
             store.recordBossAttempt({ bossId, date: new Date().toISOString().slice(0, 10), passed: true, notes });

@@ -72,7 +72,7 @@ export const L1_NODES: SkillNode[] = [
     masteryGate: "gold",
     masteryTest: "Given a messy 80-line procedural script, produce a clean decomposition with docstrings and no globals, and explain each boundary choice.",
     diagnostic: "What does a function without `return` return? What prints: default arg `def f(x, xs=[])` called twice (the classic trap)?",
-    misconceptions: ["Default mutable arguments are evaluated once, the [] trap will bite you in real ML configs."],
+    misconceptions: ["Default mutable arguments are evaluated once. The [] trap will bite you in real ML configs."],
   },
   {
     id: "l1-data-structures",
@@ -94,7 +94,7 @@ export const L1_NODES: SkillNode[] = [
     exercises: [
       "Word-frequency counter → top-10, with and without Counter",
       "Invert a dict; group a list of records by field; flatten nested lists",
-      "Demonstrate the aliasing bug: two names, one list, then fix with copy",
+      "Demonstrate the aliasing bug: two names, one list. Then fix with copy",
     ],
     masteryGate: "gold",
     masteryTest: "Parse a small CSV-like text into records, filter/aggregate/sort by multiple criteria, comprehensions throughout, clean first-pass code.",
@@ -121,13 +121,13 @@ export const L1_NODES: SkillNode[] = [
       "Robust file reader: handles missing file, bad encoding, malformed line, each with a distinct, informative error path",
     ],
     masteryGate: "silver",
-    masteryTest: "Build a config-driven script: reads params.json, validates fields with clear errors, writes results.csv, survives five adversarial inputs I throw at it.",
+    masteryTest: "Build a config-driven script: reads params.json, validates fields with clear errors, writes results.csv, and survives five adversarial inputs I throw at it.",
     diagnostic: "When would you catch an exception vs let it crash? Show the with-statement equivalent of try/finally close.",
   },
   {
     id: "l1-classes",
     level: 1,
-    title: "Classes, Exactly Enough OOP",
+    title: "Classes: Exactly Enough OOP",
     track: "code",
     labs: ["code"],
     why: "PyTorch modules, gym environments, and every robotics framework are classes. You need to read and write them, not to worship inheritance hierarchies.",
@@ -139,7 +139,7 @@ export const L1_NODES: SkillNode[] = [
     prereqs: [{ id: "l1-functions" }],
     hours: 4,
     primary: { resourceId: "think-python", sections: "The OOP block (returned to, as scheduled)" },
-    skip: ["Multiple inheritance, metaclasses, descriptors, read about them the day a library forces you"],
+    skip: ["Multiple inheritance, metaclasses, descriptors: read about them the day a library forces you"],
     exercises: [
       "Vector2D class with +, *, norm, __repr__, then rewrite as @dataclass",
       "Read a small gym-style Env class and diagram its lifecycle (reset/step)",
@@ -163,7 +163,7 @@ export const L1_NODES: SkillNode[] = [
     prereqs: [{ id: "l1-functions" }],
     hours: 5,
     primary: { resourceId: "cs50p", sections: "Week 5 (Unit Tests), the best beginner pytest intro anywhere" },
-    backup: { resourceId: "exercism", sections: "Continue track, every exercise is test-driven" },
+    backup: { resourceId: "exercism", sections: "Continue track; every exercise is test-driven" },
     exercises: [
       "Write tests FIRST for a stats module (mean/median/variance), then implement to green",
       "Add type hints to three earlier exercises; find one real bug via hints",
@@ -193,13 +193,13 @@ export const L1_NODES: SkillNode[] = [
     equations: ["\\text{broadcast: } (m,1)\\odot(1,n)\\to(m,n)"],
     exercises: [
       "Predict result shapes for 15 broadcasting expressions before running",
-      "Pairwise distance matrix of N points, loop version, then fully vectorized; time both",
+      "Pairwise distance matrix of N points: loop version, then fully vectorized; time both",
       "Image-as-array: load, crop, flip, channel-swap a picture with pure indexing",
     ],
     masteryGate: "gold",
     masteryTest: "Vectorize three loop-based numerical routines (moving average, standardize-by-column, k-nearest by distance matrix) with zero Python loops and matching outputs.",
     diagnostic: "Shape of (3,1)+(1,4)? Of A[Boolean mask]? Does `a[2:5]` copy? Prove each in the REPL.",
-    misconceptions: ["`axis=0` means 'collapse rows' (operate DOWN columns), draw it once, never confuse it again."],
+    misconceptions: ["`axis=0` means 'collapse rows' (operate DOWN columns). Draw it once, never confuse it again."],
   },
   {
     id: "l1-matplotlib",
@@ -207,7 +207,7 @@ export const L1_NODES: SkillNode[] = [
     title: "Matplotlib & the Jupyter Workflow",
     track: "code",
     labs: ["code"],
-    why: "You cannot debug what you cannot see. Loss curves, trajectories, filters, attention maps, plotting is your instrument panel for the next 200 days.",
+    why: "You cannot debug what you cannot see. Loss curves, trajectories, filters, attention maps: plotting is your instrument panel for the next 200 days.",
     objectives: [
       "fig/ax object API (not pyplot state soup): line, scatter, hist, imshow, subplots",
       "Labels/legends/log-scales; save publication-quality figures",
@@ -242,7 +242,7 @@ export const L1_NODES: SkillNode[] = [
     exercises: [
       "Conway's Game of Life step with zero loops",
       "Batch polynomial evaluation via Vandermonde matrix",
-      "Write matmul three ways: loops, broadcasting+sum, einsum, verify equal, time them",
+      "Write matmul three ways: loops, broadcasting+sum, einsum. Verify equal, time them",
     ],
     masteryGate: "silver",
     masteryTest: "Vectorize an unseen simulation kernel (I provide the loop version) achieving ≥50× speedup with identical output.",
@@ -268,7 +268,7 @@ export const L1_NODES: SkillNode[] = [
     ],
     masteryGate: "gold",
     masteryTest: "P1 accepted: clean repo, tests green, README with three figures, and a 10-line writeup of what the timestep experiment showed.",
-    diagnostic: ", ",
+    diagnostic: "No separate diagnostic. Use this node's mastery test.",
     projectIds: ["p1-physics-toy"],
   },
   {
@@ -288,7 +288,7 @@ export const L1_NODES: SkillNode[] = [
     hours: 6,
     masteryGate: "gold",
     masteryTest: "Timed (one sitting): from a two-page spec (predator–prey grid world with config file, CLI, plots, and 3 required tests), produce a working, tested, committed repo. No AI code generation; docs allowed.",
-    diagnostic: ", ",
+    diagnostic: "No separate diagnostic. Use this node's mastery test.",
     exercises: [],
   },
 ];

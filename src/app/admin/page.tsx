@@ -60,7 +60,7 @@ export default function AdminPage() {
         <div className="mono-label">access control</div>
         <h1 className="font-mono text-2xl font-bold">ADMIN</h1>
         <p className="mt-1 text-sm text-dim">
-          New registrations wait here until you approve them. Revoking bumps the session version — the user is signed out everywhere immediately.
+          Anyone can join and sign in straight away. Revoke an account to switch it off and sign that person out everywhere, or delete it.
         </p>
       </div>
 
@@ -68,23 +68,23 @@ export default function AdminPage() {
 
       <SharingPanel />
 
+      {pending.length > 0 && (
       <Panel accent="#e8b34d">
-        <SectionTitle>pending approval · {pending.length}</SectionTitle>
-        {pending.length === 0 ? (
-          <div className="text-sm text-faint">No requests waiting.</div>
-        ) : (
+        <SectionTitle>switched off · {pending.length}</SectionTitle>
+        {(
           <div className="space-y-2">
             {pending.map((u) => (
               <div key={u.username} className="flex flex-wrap items-center gap-2 rounded-md border border-line bg-panel2 px-3 py-2">
                 <span className="min-w-0 flex-1 font-mono text-sm">{u.username}</span>
                 <span className="text-[11px] text-faint">{new Date(u.createdAt).toLocaleDateString()}</span>
-                <button className="btn btn-acc !py-1" onClick={() => act(u.username, "approve")}>Approve</button>
-                <button className="btn btn-danger !py-1" onClick={() => act(u.username, "delete")}>Reject</button>
+                <button className="btn btn-acc !py-1" onClick={() => act(u.username, "approve")}>Switch on</button>
+                <button className="btn btn-danger !py-1" onClick={() => act(u.username, "delete")}>Delete</button>
               </div>
             ))}
           </div>
         )}
       </Panel>
+      )}
 
       <Panel>
         <SectionTitle>active accounts · {active.length}</SectionTitle>
@@ -171,7 +171,7 @@ function SharingPanel() {
         changes. For this to stay safe, keep your bridge in normal mode, not full-control.
       </p>
       <div className="mb-3 rounded-md border border-line bg-panel2/50 px-3 py-2 text-[12px] leading-relaxed text-faint">
-        The order: a person signs up at your site → they appear under <b className="text-dim">pending approval</b> below → you approve them → then add their username here. If nobody is listed to approve, nobody has signed up yet. Share your link (www.milanhalo.me) so they can register.
+        The order: a person joins at your site (www.milanhalo.me), they show up under <b className="text-dim">active accounts</b> below, then you add their username here.
       </div>
 
       <div className="flex flex-wrap items-center gap-3">

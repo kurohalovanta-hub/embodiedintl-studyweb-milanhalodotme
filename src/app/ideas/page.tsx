@@ -42,7 +42,7 @@ export default function IdeasPage() {
       </Panel>
 
       {ideas.length === 0 ? (
-        <EmptyState title="Inbox empty" hint="Questions you can't answer yet are research leads — write them down mid-node." />
+        <EmptyState title="Inbox empty" hint="Questions you can't answer yet are research leads. Write them down mid-node." />
       ) : (
         <div className="space-y-3">
           {ideas.map((idea) => (

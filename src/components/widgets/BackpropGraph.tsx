@@ -140,7 +140,7 @@ export default function BackpropGraph() {
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
             Every amber number is a full chain-rule product, e.g.{" "}
             <Katex tex="\frac{\partial L}{\partial w}=\underbrace{2d}_{L\to d}\cdot\underbrace{1}_{d\to a}\cdot\underbrace{a(1-a)}_{a\to z}\cdot\underbrace{1}_{z\to u}\cdot\underbrace{x}_{u\to w}" />.
-            Move a slider and watch gradients update; press <b>step</b> repeatedly — only the boxed
+            Move a slider and watch gradients update; press <b>step</b> repeatedly: only the boxed
             parameters w, b move, and the loss sparkline falls. That loop <i>is</i> training.
           </div>
         </>

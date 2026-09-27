@@ -29,7 +29,7 @@ export function LoginGate() {
           if (l.ok) startSync();
           else setMsg({ tone: "ok", text: "You're set up. Sign in." });
         } else {
-          setMsg({ tone: "ok", text: "Sent. An admin needs to let you in before you can sign in." });
+          setMsg({ tone: "ok", text: "You're set up. Sign in." });
           setMode("login");
         }
       } else if (mode === "recover") {
@@ -84,7 +84,7 @@ export function LoginGate() {
                 <div className="mono-label text-acc">you&apos;re first</div>
                 <div className="mt-1 text-[16px] font-semibold">Set up your account</div>
                 <p className="mt-1 text-[12.5px] leading-relaxed text-dim">
-                  Nobody&apos;s here yet, so this one runs the place. Pick a name and password you&apos;ll remember. Anyone who joins later waits for you to let them in.
+                  Nobody&apos;s here yet, so this one runs the place. Pick a name and password you&apos;ll remember. Anyone who joins later gets in straight away, and you can remove them from Admin.
                 </p>
               </div>
             ) : mode === "recover" ? (
@@ -167,7 +167,7 @@ export function LoginGate() {
                 disabled={busy || !username || !password || (mode === "recover" && !code)}
                 className="btn btn-glow w-full justify-center !py-2.5 disabled:opacity-40"
               >
-                {busy ? "…" : firstRun ? "Create my account" : mode === "login" ? "Sign in" : mode === "recover" ? "Reset password" : "Ask to join"}
+                {busy ? "…" : firstRun ? "Create my account" : mode === "login" ? "Sign in" : mode === "recover" ? "Reset password" : "Join"}
               </button>
             </form>
 

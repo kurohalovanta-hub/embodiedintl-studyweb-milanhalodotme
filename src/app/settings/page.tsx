@@ -35,7 +35,7 @@ export default function SettingsPage() {
     download(`CURRENT_STATE-${stamp()}.md`, buildLearnerStateMarkdown(data), "text/markdown");
     download(`current-state-${stamp()}.json`, JSON.stringify(buildLearnerStateJson(data), null, 2), "application/json");
     download(`HANDOFF-${stamp()}.md`, buildHandoffMarkdown(data), "text/markdown");
-    setMsg("Exported 4 files: full backup + tutor-readable state + handoff. Store them privately — they are yours, not the repo's.");
+    setMsg("Exported 4 files: full backup, tutor-readable state, and handoff. Store them privately. They are yours, not the repo's.");
   };
   const dataBytes = new Blob([JSON.stringify(store.exportData())]).size;
 
@@ -85,7 +85,7 @@ export default function SettingsPage() {
             </div>
             <p className="text-xs text-dim">
               Progress saves to your account automatically (a few seconds after each change) and follows you
-              across devices — sign in anywhere with the same username.
+              across devices. Sign in anywhere with the same username.
             </p>
             <div className="flex flex-wrap gap-2">
               <button
@@ -134,9 +134,9 @@ export default function SettingsPage() {
               in this browser only (plus your JSON exports below).
             </p>
             <p className="text-xs text-faint">
-              To enable accounts + cross-device sync: in Vercel open <b>Storage → Create Database → Upstash for
-              Redis</b>, link it to the project, redeploy (~3 minutes). The first account registered becomes the
-              administrator; later registrations wait for approval. Full steps in the README.
+              To turn on accounts and cross-device sync: in Vercel open <b>Storage → Create Database → Upstash for
+              Redis</b>, link it to the project, and redeploy (about 3 minutes). The first account registered becomes the
+              administrator. Everyone after that can join straight away. Full steps are in the README.
             </p>
           </div>
         )}
@@ -193,13 +193,13 @@ export default function SettingsPage() {
 
       {/* AI connections */}
       <Panel accent="#4dd6e8">
-        <SectionTitle>connections — your AI</SectionTitle>
+        <SectionTitle>connections: your AI</SectionTitle>
         <AIConnect />
       </Panel>
 
       {/* AI memory */}
       <Panel accent="#a78bfa">
-        <SectionTitle>memory — your AI&apos;s long-term recall</SectionTitle>
+        <SectionTitle>memory: your AI&apos;s long-term recall</SectionTitle>
         <MemorySync />
       </Panel>
 
@@ -235,7 +235,7 @@ export default function SettingsPage() {
               <option value="none">CPU only</option>
               <option value="12">12 GB (4070-class)</option>
               <option value="16">16 GB (4080/5080)</option>
-              <option value="24">24 GB (3090/4090) — recommended</option>
+              <option value="24">24 GB (3090/4090), recommended</option>
               <option value="32+">32 GB+ (5090+)</option>
             </select>
           </label>
@@ -267,12 +267,12 @@ export default function SettingsPage() {
           <input ref={fileRef} type="file" accept="application/json" hidden onChange={(e) => e.target.files?.[0] && importJson(e.target.files[0])} />
         </div>
         <p className="mt-2 text-xs text-faint">
-          &quot;Everything&quot; = full backup + CURRENT_STATE.md / current-state.json / HANDOFF.md — the
-          provider-neutral tutor snapshot (paste into any fresh Claude/ChatGPT session). Downloads only:
-          nothing is auto-committed to the public repo. Export weekly — a file you hold beats every cloud.
+          &quot;Everything&quot; is the full backup plus CURRENT_STATE.md, current-state.json and HANDOFF.md, a
+          tutor snapshot that works with any provider (paste into any fresh Claude/ChatGPT session). Downloads only:
+          nothing is auto-committed to the public repo. Export weekly so you always hold a copy.
         </p>
         <p className="mt-1 font-mono text-[11px] text-faint">
-          data size: {(dataBytes / 1024).toFixed(0)} KB{dataBytes > 2 * 1024 * 1024 ? " — large; export now and keep the habit" : ""} · evidence events: {store.events.length}
+          data size: {(dataBytes / 1024).toFixed(0)} KB{dataBytes > 2 * 1024 * 1024 ? " (large; export now and keep the habit)" : ""} · evidence events: {store.events.length}
         </p>
       </Panel>
 
@@ -291,7 +291,7 @@ export default function SettingsPage() {
       </Panel>
 
       <div className="text-center text-[11px] text-faint">
-        HALO · PROJECT : VANTA HALO · curriculum verified 2026-08-21 · content is code — see docs/ in the repo
+        HALO · PROJECT : VANTA HALO · curriculum verified 2026-08-21 · content is code, see docs/ in the repo
       </div>
     </div>
   );

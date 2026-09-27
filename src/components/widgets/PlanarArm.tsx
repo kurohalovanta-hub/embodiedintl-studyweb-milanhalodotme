@@ -204,25 +204,25 @@ export default function PlanarArm({ params }: WidgetProps) {
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
             {mode === "fk" && (
               <>
-                Forward kinematics is just accumulated rotation: joint i turns everything after it.{" "}
-                <Katex tex="p_{ee}=\sum_i \ell_i\,[\cos\phi_i,\ \sin\phi_i],\ \ \phi_i=\theta_1+\cdots+\theta_i" /> —
-                unique pose for every θ. The dashed circle is the reachable workspace boundary.
+                Forward kinematics is accumulated rotation: joint i turns everything after it.{" "}
+                <Katex tex="p_{ee}=\sum_i \ell_i\,[\cos\phi_i,\ \sin\phi_i],\ \ \phi_i=\theta_1+\cdots+\theta_i" />:
+                a unique pose for every θ. The dashed circle is the reachable workspace boundary.
               </>
             )}
             {mode === "ik" && (
               <>
-                Drag the target — each frame runs one damped-least-squares update{" "}
+                Drag the target. Each frame runs one damped-least-squares update{" "}
                 <Katex tex="\Delta\theta=J^\top(JJ^\top+\lambda^2 I)^{-1}e" />. Put the target near the
                 boundary with λ small: joints thrash near the singularity. Raise λ: motion calms but
-                converges slower. Outside the circle the arm points at the unreachable target — the
+                converges slower. Outside the circle the arm points at the unreachable target, the
                 least-squares answer.
               </>
             )}
             {mode === "jac" && (
               <>
-                Each colored arrow is a <i>column</i> of J — where the end-effector goes if only that joint
+                Each colored arrow is a <i>column</i> of J: where the end-effector goes if only that joint
                 moves at 1 rad/s. The ellipse is every velocity reachable with ‖θ̇‖=1 (axes = singular
-                values). Straighten the arm: the ellipse collapses to a line — σ₂→0, and no joint motion
+                values). Straighten the arm: the ellipse collapses to a line (σ₂→0), and no joint motion
                 can move the hand along the lost direction. That is a singularity, seen rather than defined.
               </>
             )}

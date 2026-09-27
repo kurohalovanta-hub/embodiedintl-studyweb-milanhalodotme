@@ -15,7 +15,7 @@ export default function BossesPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-5">
       <div>
-        <div className="mono-label">synthesis gates — evidence, not attendance</div>
+        <div className="mono-label">synthesis gates: evidence, not attendance</div>
         <h1 className="font-mono text-2xl font-bold">BOSS FIGHTS</h1>
       </div>
 

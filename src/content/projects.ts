@@ -37,7 +37,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "p4-classifier", num: 4, title: "CIFAR-10, Run Like a Researcher", levelWindow: [4, 4], hours: 6,
-    purpose: "First full DL experiment with baselines, ablation, seeds, tracking, habits over accuracy.",
+    purpose: "First full DL experiment with baselines, ablation, seeds, tracking; habits over accuracy.",
     prereqNodeIds: ["l4-classifier-project"],
     minimum: ["Linear probe → CNN → +aug → +schedule, each a tracked run", "≥90% test", "3-seed mean±std final table"],
     stretch: ["ResNet-18 from scratch", "One deliberate ablation quantified"],
@@ -109,7 +109,7 @@ export const PROJECTS: Project[] = [
     stretch: ["EKF unicycle + landmark version; PF comparison with kidnapping"],
     metrics: ["NEES within chi-square bounds", "RMSE vs measurement-only baseline"],
     failureModes: ["A filter that 'looks smooth' but is inconsistent (overconfident)"],
-    researchConnection: "Uncertainty honesty, the same discipline as reporting CIs.",
+    researchConnection: "Uncertainty honesty: the same discipline as reporting CIs.",
     artifact: "est.py + consistency plots.",
   },
   {
@@ -142,7 +142,7 @@ export const PROJECTS: Project[] = [
     stretch: ["Duplicate/absent-object handling; monocular (DA3) variant"],
     metrics: ["≥85% localization success; cm/deg errors"],
     failureModes: ["Eval scenes that match the demo scene (self-deception)"],
-    researchConnection: "Grounding, where language meets geometry.",
+    researchConnection: "Grounding: where language meets geometry.",
     artifact: "Pipeline repo + eval table.",
   },
   {
@@ -161,10 +161,10 @@ export const PROJECTS: Project[] = [
     purpose: "The classical-stack capstone: perceive → plan → grasp → recover, end to end.",
     prereqNodeIds: ["l9-manipulation-pipeline", "l9-grasping", "l8-perception-project"],
     minimum: ["'Clean up': 3 randomized objects sorted into bins by language prompt", "≥80% completion over 10 episodes", "One induced-failure recovery (re-detect, re-grasp)"],
-    stretch: ["Mobile base variant (only if ahead of schedule, pre-agreed de-scope lever)"],
+    stretch: ["Mobile base variant (only if ahead of schedule; pre-agreed de-scope lever)"],
     metrics: ["Completion rate, per-stage failure attribution"],
     failureModes: ["Scripted-pose brittleness hidden by easy randomization ranges"],
-    researchConnection: "The baseline system VLAs claim to replace, know its real ceiling.",
+    researchConnection: "The baseline system VLAs claim to replace. Know its real ceiling.",
     artifact: "Video + eval table + architecture diagram (Boss evidence).",
   },
   {
@@ -197,7 +197,7 @@ export const PROJECTS: Project[] = [
     stretch: ["Flow-matching 4th arm; pixel-obs repeat"],
     metrics: ["Success rates with CIs; robustness deltas"],
     failureModes: ["Underpowered comparisons (the CI table forbids them)"],
-    researchConnection: "Your first defensible empirical claim, the method IS the result.",
+    researchConnection: "Your first defensible empirical claim: the method IS the result.",
     artifact: "2-page report with money plots (Boss evidence).",
   },
   {

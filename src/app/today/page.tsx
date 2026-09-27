@@ -34,7 +34,7 @@ function humanStep(label: string): string {
 function encouragement(loggedMin: number, unlocks?: string): string {
   if (loggedMin > 0) return "You've already started today. Keep the thread going while it's warm.";
   const lines = [
-    unlocks ? `Clear this and ${unlocks} opens up. One block is all it takes.` : "Just this one thing today. That's the whole job.",
+    unlocks ? `Clear this and ${unlocks} opens up. One block is all it takes.` : "One thing today. That's the whole job.",
     "You don't have to finish it all at once. Start the first step and momentum does the rest.",
     "Small, honest reps beat a heroic all-nighter. Ten focused minutes still counts.",
   ];
@@ -198,7 +198,7 @@ export default function TodayPage() {
           </div>
 
           <div className="mt-5 border-t border-line/60 pt-4">
-            <div className="mb-2 text-[12px] font-medium text-dim">Stuck on any of it? Just ask. It knows where you are.</div>
+            <div className="mb-2 text-[12px] font-medium text-dim">Stuck on any of it? Ask the tutor. It knows where you are.</div>
             <LiveTutor nodeId={bottleneck.id} />
           </div>
 
@@ -226,7 +226,7 @@ export default function TodayPage() {
           href="/review"
           label={reviews.length > 0 ? `Review · ${reviews.length} waiting` : "Review · all caught up"}
           hot={reviews.length > 0}
-          detail={reviews.length > 0 ? "Closed book first — a clean review is what makes a claim real." : "A quick recall of yesterday's key idea."}
+          detail={reviews.length > 0 ? "Closed book first. A clean review is what makes a claim real." : "A quick recall of yesterday's key idea."}
         />
         {mission.slots.find((s) => s.projectTitle) && (
           <SecondaryRow
@@ -243,7 +243,7 @@ export default function TodayPage() {
               key={s.node!.id}
               href={`/node/${s.node!.id}`}
               label={`Also open · ${s.node!.title}`}
-              detail="Save this for after the main thing moves — less to juggle at once."
+              detail="Save this for after the main thing moves, so there is less to juggle at once."
             />
           ))}
       </div>
@@ -298,23 +298,23 @@ function ResearchToday() {
     <div className="mx-auto max-w-2xl space-y-4">
       <div className="mono-label">day {day ?? "—"} · research loop</div>
       <Panel accent="#e86ea4" className="!p-5">
-        <div className="mono-label text-acc-frontier">the loop — hypothesize → run → measure → write</div>
+        <div className="mono-label text-acc-frontier">the loop: hypothesize → run → measure → write</div>
         {open ? (
           <div className="mt-2">
             <div className="text-[15px] font-semibold text-ink">{open.title || "(untitled experiment)"}</div>
-            <p className="mt-1 text-[13px] text-dim">{open.hypothesis || "No hypothesis written — that is today's first task."}</p>
+            <p className="mt-1 text-[13px] text-dim">{open.hypothesis || "No hypothesis written. That is today's first task."}</p>
             <Link href="/experiments" className="btn btn-acc mt-3">Open experiment</Link>
           </div>
         ) : (
           <div className="mt-2">
-            <p className="text-sm text-acc-math">No planned or running experiment. Pre-register the next one before anything else — the log entry is the deliverable.</p>
+            <p className="text-sm text-acc-math">No planned or running experiment. Pre-register the next one before anything else. The log entry is the deliverable.</p>
             <Link href="/experiments" className="btn btn-acc mt-3">Pre-register</Link>
           </div>
         )}
         <div className="mt-4 space-y-1.5 border-t border-line/60 pt-3 text-[12.5px] text-dim">
-          <div>▸ <b className="text-ink">Read/think 45m</b>{paper ? <> — continue <Link className="text-acc hover:underline" href={`/papers/${paper[0]}`}>{paper[0]}</Link></> : " — pick from the ladder"}</div>
-          <div>▸ <b className="text-ink">Write</b> — the report grows a little every day; claims tied to evidence.</div>
-          <div>▸ <b className="text-ink">Review {reviews.length > 0 ? `(${reviews.length} due)` : ""}</b> — <Link className="text-acc hover:underline" href="/review">keep the foundations warm</Link>.</div>
+          <div>▸ <b className="text-ink">Read/think 45m</b>{paper ? <>: continue <Link className="text-acc hover:underline" href={`/papers/${paper[0]}`}>{paper[0]}</Link></> : ": pick from the ladder"}</div>
+          <div>▸ <b className="text-ink">Write</b>: the report grows a little every day; claims tied to evidence.</div>
+          <div>▸ <b className="text-ink">Review{reviews.length > 0 ? ` (${reviews.length} due)` : ""}</b>: <Link className="text-acc hover:underline" href="/review">keep the foundations warm</Link>.</div>
         </div>
       </Panel>
       <ShipLine />
@@ -372,7 +372,7 @@ function ShipLine() {
   };
   return (
     <div className="rounded-md border border-line p-3">
-      <div className="mono-label mb-1.5">ship — what exists now that didn&apos;t this morning?</div>
+      <div className="mono-label mb-1.5">ship: what exists now that didn&apos;t this morning?</div>
       <div className="flex gap-2">
         <input value={note} onChange={(e) => setNote(e.target.value)} onKeyDown={(e) => e.key === "Enter" && ship()} placeholder="a commit, a passing check, a derivation page…" />
         <button className="btn shrink-0 !py-1.5 text-xs" disabled={!note.trim()} onClick={ship}>Ship</button>

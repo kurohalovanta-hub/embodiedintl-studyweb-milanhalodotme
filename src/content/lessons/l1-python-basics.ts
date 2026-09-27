@@ -11,14 +11,14 @@ export const lesson: Lesson = {
   sections: [
     {
       id: "why",
-      title: "What a program actually is",
+      title: "What a program is",
       depth: "intuition",
       blocks: [
         {
           kind: "prose",
-          md: `A robot program is two things: **state** (numbers describing the world right now — joint angles, a camera frame, a gripper's width) and **transformations** (code that turns current state into the next action). That's it. Everything you will ever build here — training loops, kinematics, VLA fine-tunes — is state flowing through transformations.
+          md: `A robot program is two things: **state** (numbers describing the world right now: joint angles, a camera frame, a gripper's width) and **transformations** (code that turns current state into the next action). Everything you will build here (training loops, kinematics, VLA fine-tunes) is state flowing through transformations.
 
-Python is how you write both. Not because it's fast (it isn't), but because it is the language the entire robot-learning stack — PyTorch, LeRobot, MuJoCo, ROS 2 bindings — is glued together with. There is no path into this field around Python. The good news: the core language is small, and you can hold all of it in your head.`,
+Python is how you write both. It isn't fast. It is the language that glues together the entire robot-learning stack (PyTorch, LeRobot, MuJoCo, ROS 2 bindings), so there is no path into this field around it. The core language is small, and you can hold all of it in your head.`,
         },
         {
           kind: "callout",
@@ -35,7 +35,7 @@ Python is how you write both. Not because it's fast (it isn't), but because it i
       blocks: [
         {
           kind: "prose",
-          md: `\`=\` in Python does not mean "equals". It means **"stick this name onto this value"**. The value exists first; the name points at it. Names can be re-stuck at any time — that's all "assignment" is.`,
+          md: `\`=\` in Python does not mean "equals". It means **"stick this name onto this value"**. The value exists first; the name points at it. Names can be re-stuck at any time. That is all "assignment" is.`,
         },
         {
           kind: "code",
@@ -46,15 +46,15 @@ gripper_open = gripper_open - 0.03
 target = gripper_open
 gripper_open = 0.0
 print(target)`,
-          prompt: "What does this print? Reason line by line — what does each name point at?",
-          options: ["0.0", "0.05", "0.08", "Error — target was never assigned a number"],
+          prompt: "What does this print? Reason line by line: what does each name point at?",
+          options: ["0.0", "0.05", "0.08", "Error: target was never assigned a number"],
           answerIndex: 1,
-          explanation: `Line 2 computes 0.08 − 0.03 = 0.05 and re-sticks \`gripper_open\` onto it. Line 3 sticks \`target\` onto **that same value**, 0.05. Line 4 moves \`gripper_open\` to 0.0 — but \`target\` still points at 0.05. Re-assigning one name never moves another name. (For plain numbers this is always safe; lists behave differently — that trap is coming in the data-structures node.)`,
+          explanation: `Line 2 computes 0.08 − 0.03 = 0.05 and re-sticks \`gripper_open\` onto it. Line 3 sticks \`target\` onto **that same value**, 0.05. Line 4 moves \`gripper_open\` to 0.0, but \`target\` still points at 0.05. Re-assigning one name never moves another name. (For plain numbers this is always safe; lists behave differently, and that trap is coming in the data-structures node.)`,
         },
         {
           kind: "misconception",
           wrong: "A variable is a box that stores a value, and assignment copies things into the box.",
-          right: "A variable is a label tied onto a value that already exists. `a = b` ties a's label onto whatever b's label is on. For numbers and strings the difference is invisible; for lists and arrays it is the #1 source of real bugs — two labels on ONE object.",
+          right: "A variable is a label tied onto a value that already exists. `a = b` ties a's label onto whatever b's label is on. For numbers and strings the difference is invisible; for lists and arrays it is the #1 source of real bugs: two labels on ONE object.",
         },
       ],
     },
@@ -75,7 +75,7 @@ print(target)`,
 | \`str\` | \`"pick up the mug"\` | text: an instruction, a file path |
 | \`list\` | \`[0.1, -0.4, 1.57]\` | ordered values: a pose, a trajectory |
 
-Types decide what operations mean: \`3 * 2\` is 6, \`"ab" * 2\` is \`"abab"\`, and \`"ab" + 2\` is an error. Python checks types **when the line runs**, not before — a wrong type deep in a 3-hour training run will crash it at hour 2. This is why later nodes make you write type hints and asserts.`,
+Types decide what operations mean: \`3 * 2\` is 6, \`"ab" * 2\` is \`"abab"\`, and \`"ab" + 2\` is an error. Python checks types **when the line runs**, not before. A wrong type deep in a 3-hour training run will crash it at hour 2. This is why later nodes make you write type hints and asserts.`,
         },
         {
           kind: "code",
@@ -99,9 +99,9 @@ print(half, pairs, type(half) == type(pairs))`,
       blocks: [
         {
           kind: "prose",
-          md: `An expression evaluates inside-out, with operator precedence you already know from math: \`**\` before \`*\`/\`/\` before \`+\`/\`-\`, comparisons after arithmetic, \`and\`/\`or\` last. When in doubt, parenthesize — every serious codebase does.
+          md: `An expression evaluates inside-out, with operator precedence you already know from math: \`**\` before \`*\`/\`/\` before \`+\`/\`-\`, comparisons after arithmetic, \`and\`/\`or\` last. When in doubt, parenthesize. Every serious codebase does.
 
-Being able to **trace** evaluation in your head is the actual skill. Practice it now on a real formula: the linear interpolation every trajectory generator uses.`,
+Being able to **trace** evaluation in your head is the skill. Practice it now on a real formula: the linear interpolation every trajectory generator uses.`,
         },
         {
           kind: "code",
@@ -125,7 +125,7 @@ done = err < 0.25`,
         },
         {
           kind: "prose",
-          md: `That formula — $(1-t)\\,\\text{start} + t\\,\\text{goal}$ — is **lerp**, and you will write it a dozen more times: blending trajectories, scheduling learning rates, interpolating between poses. At $t=0$ you're at start, at $t=1$ at goal, in between you slide linearly.`,
+          md: `That formula, $(1-t)\\,\\text{start} + t\\,\\text{goal}$, is **lerp**, and you will write it a dozen more times: blending trajectories, scheduling learning rates, interpolating between poses. At $t=0$ you're at start, at $t=1$ at goal, in between you slide linearly.`,
         },
       ],
     },
@@ -136,7 +136,7 @@ done = err < 0.25`,
       blocks: [
         {
           kind: "prose",
-          md: `Until you meet real debuggers (L0 gave you the mindset; tooling comes soon), \`print\` with **f-strings** is how running code talks to you. An f-string embeds any expression in \`{}\` and formats it: \`{angle:.3f}\` means "3 decimal places". Sloppy prints are unreadable at 50 Hz — precise ones are a instrument panel.`,
+          md: `Until you meet real debuggers (L0 gave you the mindset; tooling comes soon), \`print\` with **f-strings** is how running code talks to you. An f-string embeds any expression in \`{}\` and formats it: \`{angle:.3f}\` means "3 decimal places". Sloppy prints are unreadable at 50 Hz. Precise ones are an instrument panel.`,
         },
         {
           kind: "code",
@@ -178,7 +178,7 @@ print(f"{joint_rad:.3f} rad")`,
           ],
           answerIndex: 1,
           answer: 'joint_deg = 45  (or: float("45") if it truly arrives as text)',
-          explanation: `\`"45"\` is text, not a number — \`str * int\` would repeat it, but \`str * float\` is a TypeError, so the crash happens at the multiplication (evaluation is left-to-right). Values arriving as strings (from files, ROS params, CLI args) and being used as numbers is one of the most common real robot-code bugs. The fix is to convert at the boundary: \`float(joint_deg)\`.`,
+          explanation: `\`"45"\` is text, not a number. \`str * int\` would repeat it, but \`str * float\` is a TypeError, so the crash happens at the multiplication (evaluation is left-to-right). Values arriving as strings (from files, ROS params, CLI args) and being used as numbers is one of the most common real robot-code bugs. The fix is to convert at the boundary: \`float(joint_deg)\`.`,
         },
       ],
     },
@@ -189,7 +189,7 @@ print(f"{joint_rad:.3f} rad")`,
       blocks: [
         {
           kind: "prose",
-          md: `Open a real editor (VS Code, from your L0 setup), create \`status.py\`, and write this from the spec. No copying from above — recognizing code is not writing code.`,
+          md: `Open a real editor (VS Code, from your L0 setup), create \`status.py\`, and write this from the spec. No copying from above: recognizing code is not writing code.`,
         },
         {
           kind: "code",
@@ -213,7 +213,7 @@ print(f"{joint_rad:.3f} rad")`,
         {
           kind: "exercise",
           level: 2,
-          prompt: "Extend status.py: add battery_v = 11.4. Print a WARNING line (separate print) only when battery_v < 11.1. Then make the threshold a named variable — why is `LOW_BATTERY_V = 11.1` better than the bare number in the comparison?",
+          prompt: "Extend status.py: add battery_v = 11.4. Print a WARNING line (separate print) only when battery_v < 11.1. Then make the threshold a named variable. Why is `LOW_BATTERY_V = 11.1` better than the bare number in the comparison?",
           solution: "A named constant states intent, appears once (change it in one place), and is searchable. 'Magic numbers' scattered in comparisons are how real robot codebases rot.",
         },
       ],
@@ -228,15 +228,15 @@ print(f"{joint_rad:.3f} rad")`,
           title: "closed-book retrieval",
           items: [
             {
-              q: "`a = [1, 2]` then `b = a` then `b.append(3)`. Based on the name-on-value model, what is `a` now? (Reason it out — lists are objects.)",
-              options: ["[1, 2] — b is a copy", "[1, 2, 3] — two names, one list", "Error — can't append through b", "[3] — b replaced a"],
+              q: "`a = [1, 2]` then `b = a` then `b.append(3)`. Based on the name-on-value model, what is `a` now? (Reason it out: lists are objects.)",
+              options: ["[1, 2]: b is a copy", "[1, 2, 3]: two names, one list", "Error: can't append through b", "[3]: b replaced a"],
               answerIndex: 1,
               a: "[1, 2, 3]",
-              why: "Assignment sticks a second name onto the SAME list. Mutating through either name is visible through both. This is the trap the 'label, not box' model predicts — and `numpy` views make it matter even more.",
+              why: "Assignment sticks a second name onto the SAME list. Mutating through either name is visible through both. This is the trap the 'label, not box' model predicts, and `numpy` views make it matter even more.",
             },
             {
               q: "Why does `traj[len(traj)/2]` crash even when len(traj) is even?",
-              a: "`/` always returns a float, and list indices must be ints — use `//`.",
+              a: "`/` always returns a float, and list indices must be ints. Use `//`.",
             },
             {
               q: "In one sentence: what is an expression?",
@@ -246,11 +246,11 @@ print(f"{joint_rad:.3f} rad")`,
         },
         {
           kind: "connection",
-          md: `**Where you'll use this next.** \`l1-control-flow\` makes expressions decide and repeat (the 50 Hz control loop is literally a \`while\` around expressions like today's lerp). \`l1-data-structures\` turns single values into trajectories and configs — where the two-names-one-list trap becomes real. \`l1-numpy\` replaces one-number-at-a-time with whole-vector expressions, and \`p1-physics-toy\` is where your Python first moves a simulated world.`,
+          md: `**Where you'll use this next.** \`l1-control-flow\` makes expressions decide and repeat (the 50 Hz control loop is a \`while\` around expressions like today's lerp). \`l1-data-structures\` turns single values into trajectories and configs, where the two-names-one-list trap becomes real. \`l1-numpy\` replaces one-number-at-a-time with whole-vector expressions, and \`p1-physics-toy\` is where your Python first moves a simulated world.`,
           nodeIds: ["l1-control-flow", "l1-data-structures", "l1-numpy"],
           projectIds: ["p1-physics-toy"],
         },
-        { kind: "sources", note: "The primary resource below is your structured practice track for this node — do its exercises even if this lesson felt easy. Volume builds fluency." },
+        { kind: "sources", note: "The primary resource below is your structured practice track for this node. Do its exercises even if this lesson felt easy. Volume builds fluency." },
       ],
     },
     {
@@ -260,7 +260,7 @@ print(f"{joint_rad:.3f} rad")`,
       blocks: [
         {
           kind: "prose",
-          md: `**The bar:** without references — write a script from a 4-line spec (variables of 4 types, a computed quantity, a formatted status line), predict outputs of assignment chains, and name the type of any expression on sight. If you produced \`status.py\` cleanly and got the quiz cold, claim. If anything felt shaky, redo the section that wobbled first — this node underpins literally everything.`,
+          md: `**The bar:** without references, write a script from a 4-line spec (variables of 4 types, a computed quantity, a formatted status line), predict outputs of assignment chains, and name the type of any expression on sight. If you produced \`status.py\` cleanly and got the quiz cold, claim. If anything felt shaky, redo the section that wobbled first. This node underpins everything that follows.`,
         },
         { kind: "mastery" },
       ],

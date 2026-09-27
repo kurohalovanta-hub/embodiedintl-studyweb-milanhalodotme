@@ -21,7 +21,7 @@ const STAGES: Stage[] = [
   {
     id: "lang", label: "instruction", sub: "“put mug on shelf”", x: 8, y: 96, w: 92, h: 54, color: "#a78bfa",
     shape: "~5–30 text tokens, same embedding width as the VLM's vocabulary",
-    role: "The task specification — the only thing that changes between tasks at deploy time.",
+    role: "The task specification, the only thing that changes between tasks at deploy time.",
     trains: "Tokenizer + embeddings inherited from the language model, frozen or lightly tuned.",
   },
   {
@@ -45,13 +45,13 @@ const STAGES: Stage[] = [
   {
     id: "fast", label: "FAST tokens", sub: "autoregressive", x: 330, y: 30, w: 122, h: 64, color: "#f2934d",
     shape: "action chunk → DCT → quantize → BPE ≈ 30–60 discrete tokens, decoded one by one",
-    role: "Actions become text-like tokens the VLM can emit directly — one softmax per token.",
-    trains: "Plain next-token cross-entropy — simple and stable, but decoding is ~10× slower at control time.",
+    role: "Actions become text-like tokens the VLM can emit directly, one softmax per token.",
+    trains: "Plain next-token cross-entropy: simple and stable, but decoding is ~10× slower at control time.",
   },
   {
     id: "chunk", label: "action chunk", sub: "H=50 × 7-DoF", x: 330, y: 138, w: 122, h: 54, color: "#cfe6ec",
     shape: "50 future actions × (6 arm + 1 gripper) executed at 50 Hz before re-planning",
-    role: "Chunking smooths control and halves compounding error — one inference covers a full second.",
+    role: "Chunking smooths control and halves compounding error. One inference covers a full second.",
     trains: "—",
   },
 ];
@@ -149,8 +149,8 @@ export default function VLAFlow() {
           </div>
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
             Tap each block. The architecture is three ideas: <b>inherit semantics</b> from a pretrained
-            VLM, <b>fuse</b> vision + language + proprioception as one token sequence, and <b>decode a
-            chunk</b> of future actions — either continuously (flow expert, fast at inference) or as
+            VLM, <b>fuse</b> vision, language and proprioception as one token sequence, and <b>decode a
+            chunk</b> of future actions, either continuously (flow expert, fast at inference) or as
             discrete tokens (FAST, simpler to train). Numbers shown are π0-class (2024–26 frontier);
             every VLA you will read this year is a variation on this diagram.
           </div>

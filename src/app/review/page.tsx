@@ -27,11 +27,11 @@ export default function ReviewPage() {
   return (
     <div className="mx-auto max-w-3xl space-y-5">
       <div>
-        <div className="mono-label">retrieval practice — closed book, then grade yourself honestly</div>
+        <div className="mono-label">retrieval practice: closed book, then grade yourself honestly</div>
         <h1 className="font-mono text-2xl font-bold">REVIEW · {queue.length} due</h1>
         <p className="mt-1 text-xs text-faint">
           Attempt cold, sketch your answer in 1–2 lines, then grade. Passing a review is what turns a
-          claimed node into a <span className="text-acc-robot">verified</span> one — and failing honestly
+          claimed node into a <span className="text-acc-robot">verified</span> one, and failing honestly
           re-marks it as needing work. Both directions are the system working.
         </p>
       </div>
@@ -68,7 +68,7 @@ export default function ReviewPage() {
                       disabled={(sketches[item.nodeId] ?? "").trim().length < 10}
                       onClick={() => setCommitted((r) => ({ ...r, [item.nodeId]: true }))}
                     >
-                      Commit — now grade me
+                      Commit, now grade me
                     </button>
                   </div>
                 ) : (

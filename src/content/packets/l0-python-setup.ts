@@ -8,7 +8,7 @@ import { ytEmbed } from "@/lib/packet-types";
 export const packet: LearningPacket = {
   nodeId: "l0-python-setup",
   whyNow:
-    "A lot of beginner robotics and ML trouble is really just environment trouble. PyTorch, MuJoCo, and LeRobot all install the same way you are about to practice here. The whole node is one question: which Python is running, and where does it keep its packages. Get this now and the classic 'I installed it but import fails' error becomes a two-minute fix instead of a wall.",
+    "A lot of beginner robotics and ML trouble is environment trouble. PyTorch, MuJoCo, and LeRobot all install the same way you are about to practice here. The whole node is one question: which Python is running, and where does it keep its packages. Get this now and the classic 'I installed it but import fails' error becomes a two-minute fix instead of a wall.",
   diagnostic: {
     prompt:
       "Cold, 3 min: what is the difference between python, python3, and a venv's python? Give two commands that show which interpreter and which pip are live (which python; python -c 'import sys; print(sys.prefix)'; pip --version). Then predict: what happens to a package you installed once you run deactivate?",

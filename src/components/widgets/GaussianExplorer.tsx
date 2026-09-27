@@ -105,10 +105,10 @@ export default function GaussianExplorer() {
           />
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
             <Katex tex="p(x)=\frac{1}{\sigma\sqrt{2\pi}}\,e^{-\frac{(x-\mu)^2}{2\sigma^2}}" block />
-            The shaded band is <Katex tex="\mu\pm\sigma" /> — it always holds ≈68.3% of the probability,
+            The shaded band is <Katex tex="\mu\pm\sigma" />. It always holds ≈68.3% of the probability,
             no matter how you stretch σ. Sample repeatedly: the histogram converges to the curve, and
-            the <b>within ±1σ</b> readout converges to 68.3%. Height is density, not probability —
-            only areas mean anything.
+            the <b>within ±1σ</b> readout converges to 68.3%. Height is density, not probability.
+            Only areas mean anything.
           </div>
         </>
       }

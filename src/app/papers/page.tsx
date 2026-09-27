@@ -47,7 +47,7 @@ function PapersInner() {
     <div className="space-y-5">
       <div className="flex flex-wrap items-end justify-between gap-3">
         <div>
-          <div className="mono-label">the {PAPERS.length}-paper ladder — no paper tourism</div>
+          <div className="mono-label">the {PAPERS.length}-paper ladder, no paper tourism</div>
           <h1 className="font-mono text-2xl font-bold">PAPER ROOM</h1>
         </div>
         <div className="flex gap-2">
@@ -137,7 +137,7 @@ function PaperCard({ paper: p, status, compact, focused }: { paper: Paper; statu
             <div className="text-xs">
               <span className="mono-label">reproduction:</span>{" "}
               <span className="text-acc-robot">{p.reproduction.feasibility}</span>
-              {p.reproduction.plan && <span className="text-dim"> — {p.reproduction.plan}</span>}
+              {p.reproduction.plan && <span className="text-dim">: {p.reproduction.plan}</span>}
               {p.reproduction.compute && <span className="text-faint"> ({p.reproduction.compute})</span>}
             </div>
           )}

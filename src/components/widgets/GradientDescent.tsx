@@ -150,10 +150,10 @@ export default function GradientDescent() {
             ]}
           />
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
-            <Katex tex="v \leftarrow \beta v - \eta\nabla f,\quad \theta \leftarrow \theta + v" /> — drag the
+            <Katex tex="v \leftarrow \beta v - \eta\nabla f,\quad \theta \leftarrow \theta + v" />. Drag the
             pink start point. On <b>ravine</b>, plain descent (β=0) zig-zags across the steep axis; raise η
             and it diverges, raise β instead and it glides. On <b>saddle</b>, start exactly on the axis and
-            descent stalls at a non-minimum — nudge the start off-axis and it escapes. This is the actual
+            descent stalls at a non-minimum. Nudge the start off-axis and it escapes. This is the actual
             optimizer you will write for every network in this program.
           </div>
         </>

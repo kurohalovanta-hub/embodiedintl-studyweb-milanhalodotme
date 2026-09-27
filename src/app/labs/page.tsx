@@ -112,7 +112,7 @@ function InstrumentBench() {
   return (
     <Panel accent={inst.color}>
       <SectionTitle right={<Link href={`/learn/${inst.lesson}`} className="text-xs text-acc hover:underline">its lesson →</Link>}>
-        instrument bench — manipulate the mathematics directly
+        instrument bench: manipulate the mathematics directly
       </SectionTitle>
       <div className="mb-3 flex flex-wrap gap-1.5">
         {INSTRUMENTS.map((i) => (

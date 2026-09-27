@@ -13,7 +13,7 @@ export const lesson: Lesson = {
       blocks: [
         {
           kind: "prose",
-          md: `A camera says the mug is at (0.3, 0.1, 0.5). **In whose coordinates?** The camera's. The arm needs it in the base frame; the gripper controller needs it in the wrist frame. Robotics is a bureaucracy of coordinate frames — base, camera, wrist, object, world — and *most real robot bugs are frame bugs*: a grasp that misses by exactly the camera offset, a rotation applied in the wrong direction because someone mixed up "rotate the frame" with "rotate the point".
+          md: `A camera says the mug is at (0.3, 0.1, 0.5). **In whose coordinates?** The camera's. The arm needs it in the base frame; the gripper controller needs it in the wrist frame. Robotics is a bureaucracy of coordinate frames (base, camera, wrist, object, world), and *most real robot bugs are frame bugs*: a grasp that misses by exactly the camera offset, a rotation applied in the wrong direction because someone mixed up "rotate the frame" with "rotate the point".
 
 The fix is notation discipline you'll use every day from now on: $^A p$ means "point p expressed in frame A", and $^A R_B$ is the rotation taking B-coordinates to A-coordinates:`,
         },
@@ -21,7 +21,7 @@ The fix is notation discipline you'll use every day from now on: $^A p$ means "p
           kind: "equation",
           tex: "^{A}p = {}^{A}R_{B}\\; {}^{B}p",
           label: "the frame-change contract",
-          note: "Subscripts must cancel like units: A←B applied to B-stuff yields A-stuff. If the letters don't chain, the equation is wrong — before you compute anything.",
+          note: "Subscripts must cancel like units: A←B applied to B-stuff yields A-stuff. If the letters don't chain, the equation is wrong, and you know it before you compute anything.",
         },
       ],
     },
@@ -33,7 +33,7 @@ The fix is notation discipline you'll use every day from now on: $^A p$ means "p
         {
           kind: "widget",
           id: "rotation-2d",
-          caption: "Lab 1 (passive): rotate the FRAME — the green point never moves, its body-coordinates do. Lab 2 (active): the same matrix physically moves the point. Drag θ through ±90° in both modes until the difference stops feeling slippery.",
+          caption: "Lab 1 (passive): rotate the FRAME. The green point never moves; its body-coordinates do. Lab 2 (active): the same matrix physically moves the point. Drag θ through ±90° in both modes until the difference stops feeling slippery.",
         },
         {
           kind: "misconception",
@@ -49,7 +49,7 @@ The fix is notation discipline you'll use every day from now on: $^A p$ means "p
               options: ["(0, 1, 0)", "(0, −1, 0)", "(1, 0, 0)", "(−1, 0, 0)"],
               answerIndex: 0,
               a: "ᵇp = ᵇR_c ᶜp = Rz(+90°)(1,0,0) = (0,1,0). The rotation that DESCRIBES the camera's orientation in base is exactly the matrix that converts camera-coordinates to base-coordinates.",
-              why: "This identity — 'the frame's pose matrix is the coordinate converter' — is the single most-used fact in robot software (every tf lookup in ROS).",
+              why: "This identity ('the frame's pose matrix is the coordinate converter') is the single most-used fact in robot software (every tf lookup in ROS).",
             },
           ],
         },
@@ -66,7 +66,7 @@ The fix is notation discipline you'll use every day from now on: $^A p$ means "p
 
 $$SO(3) = \\{R \\in \\mathbb R^{3\\times 3} : R^\\top R = I,\\; \\det R = +1\\}$$
 
-$R^\\top R = I$: columns are orthonormal ⇒ lengths and angles preserved (a rigid motion). $\\det = +1$: no mirror flip. Consequences you'll use daily: $R^{-1} = R^\\top$ (inverting is free), composition stays in the group, and the columns of $^A R_B$ are **B's axes expressed in A** — the columns-are-where-the-basis-lands fact from l2-matrices, now with a physical reading.
+$R^\\top R = I$: columns are orthonormal ⇒ lengths and angles preserved (a rigid motion). $\\det = +1$: no mirror flip. Consequences you'll use daily: $R^{-1} = R^\\top$ (inverting is free), composition stays in the group, and the columns of $^A R_B$ are **B's axes expressed in A**. This is the columns-are-where-the-basis-lands fact from l2-matrices, now with a physical reading.
 
 It's a *group*, not a vector space: $R_1 R_2$ is a rotation, but $R_1 + R_2$ is not, and averaging rotation matrices entry-wise gives garbage. This one fact drives the whole next node (Lie groups) and is why naive "average the quaternions" code corrupts orientations.`,
         },
@@ -75,12 +75,12 @@ It's a *group*, not a vector space: $R_1 R_2$ is a rotation, but $R_1 + R_2$ is 
           title: "group discipline",
           items: [
             {
-              q: "You need ᵂR_g (gripper in world) and you have ᵂR_b (base in world) and ᵇR_g (gripper in base). Write the product — and how do you know the order is right?",
+              q: "You need ᵂR_g (gripper in world) and you have ᵂR_b (base in world) and ᵇR_g (gripper in base). Write the product. How do you know the order is right?",
               a: "ᵂR_g = ᵂR_b · ᵇR_g. The inner letters (b) cancel, outer letters read W←g. Subscript-chaining catches order errors before any arithmetic.",
             },
             {
               q: "Why is (R₁ + R₂)/2 not a rotation, in one concrete sentence?",
-              a: "Averaging I and Rz(180°) gives diag(0,0,1) — it squashes the xy-plane to a point (det 0, not orthogonal). SO(3) is a curved surface; the straight line between two points on it leaves the surface.",
+              a: "Averaging I and Rz(180°) gives diag(0,0,1), which squashes the xy-plane to a point (det 0, not orthogonal). SO(3) is a curved surface; the straight line between two points on it leaves the surface.",
             },
           ],
         },
@@ -94,20 +94,20 @@ It's a *group*, not a vector space: $R_1 R_2$ is a rotation, but $R_1 + R_2$ is 
         {
           kind: "widget",
           id: "so3-explorer",
-          caption: "Axis–angle mode first: every orientation is ONE turn about ONE axis (Euler's theorem). Then Euler ZYX mode: drive pitch β to ±90° and watch the purple yaw axis and orange roll axis collapse onto each other — gimbal lock, live. Finish with q → −q: all four numbers flip, the cube doesn't move.",
+          caption: "Axis–angle mode first: every orientation is ONE turn about ONE axis (Euler's theorem). Then Euler ZYX mode: drive pitch β to ±90° and watch the purple yaw axis and orange roll axis collapse onto each other: gimbal lock, live. Finish with q → −q: all four numbers flip, the cube doesn't move.",
         },
         {
           kind: "prose",
-          md: `Four representations, four trade-offs — you will convert between all of them routinely:
+          md: `Four representations, four trade-offs. You will convert between all of them routinely:
 
 | representation | numbers | good | bad |
 |---|---|---|---|
 | rotation matrix | 9 | composes, converts | redundant; drifts off SO(3) numerically |
 | Euler angles ZYX | 3 | human-readable | **gimbal lock** at β=±90°; 12 conventions |
-| axis–angle | 3–4 | minimal, geometric | composition is awkward |
+| axis–angle | 3 to 4 | minimal, geometric | composition is awkward |
 | quaternion | 4 | compact, composes, no lock | double cover: q and −q same rotation |
 
-Datasets and policies (Level 11–12) mostly use quaternions or 6-D continuous representations *because* of the failure you just caused: near gimbal lock, tiny orientation changes need huge Euler-angle changes — a discontinuity that poisons learning targets.`,
+Datasets and policies (Levels 11 to 12) mostly use quaternions or 6-D continuous representations *because* of the failure you just caused: near gimbal lock, tiny orientation changes need huge Euler-angle changes, a discontinuity that poisons learning targets.`,
         },
         {
           kind: "misconception",
@@ -140,7 +140,7 @@ print(np.round(a), np.round(b))`,
           prompt: "Rotate (1,0,0): the rightmost matrix acts FIRST. Trace both pipelines, then choose.",
           options: ["[0. 0. -1.] [0. 1. 0.]", "[0. 1. 0.] [0. 0. -1.]", "[0. 1. 0.] [0. 1. 0.]", "[1. 0. 0.] [1. 0. 0.]"],
           answerIndex: 0,
-          explanation: "a = Rz(Ry x̂): Ry(90°) sends x̂ → (0,0,−1) (this Ry convention tips +x toward −z), and Rz leaves the z-axis alone → (0,0,−1). b = Ry(Rz x̂): Rz(90°) sends x̂ → ŷ, and Ry fixes its own axis ŷ → (0,1,0). Different answers: 3-D rotations do not commute, and compositions are always read right-to-left. If you got these swapped, you read left-to-right — the #1 kinematic-chain bug.",
+          explanation: "a = Rz(Ry x̂): Ry(90°) sends x̂ → (0,0,−1) (this Ry convention tips +x toward −z), and Rz leaves the z-axis alone → (0,0,−1). b = Ry(Rz x̂): Rz(90°) sends x̂ → ŷ, and Ry fixes its own axis ŷ → (0,1,0). Different answers: 3-D rotations do not commute, and compositions are always read right-to-left. If you got these swapped, you read left-to-right, the #1 kinematic-chain bug.",
         },
         {
           kind: "code",
@@ -162,7 +162,7 @@ print(np.round(a), np.round(b))`,
             "is_rotation passes on all 50 compositions",
             "Round-trip camera↔base agrees to 1e-12 using transposes only",
             "Drift experiment shows error growing (~1e-11 or worse), then ~1e-16 after SVD re-orthonormalization",
-            "Every variable in step 3 is named with its frame (cp, bp, bRc) — the notation IS the tool",
+            "Every variable in step 3 is named with its frame (cp, bp, bRc): the notation IS the tool",
           ],
         },
       ],
@@ -176,8 +176,8 @@ print(np.round(a), np.round(b))`,
           kind: "prose",
           md: `- **l5-quaternions** makes the 4-number representation precise (you've already met the double cover in the widget); **l5-lie-se3** adds translation and the calculus on top.
 - **ROS 2's tf2 (l7-launch-tf-urdf)** is an entire subsystem whose only job is maintaining the tree of ᴬT_B transforms you're now hand-computing. Your subscript-cancellation habit is exactly what its API enforces.
-- **Camera calibration (l8-calibration-opencv)** = estimating ᵇR_c, ᵇt_c — the exact matrix from your frames.py story, from data.
-- **Policy learning (L11–12):** action targets are poses; the Euler discontinuity you caused is why datasets ship quaternions/6-D and why naive angle regression fails near ±180°.`,
+- **Camera calibration (l8-calibration-opencv)** = estimating ᵇR_c, ᵇt_c from data, the exact matrix from your frames.py story.
+- **Policy learning (L11 to 12):** action targets are poses; the Euler discontinuity you caused is why datasets ship quaternions/6-D and why naive angle regression fails near ±180°.`,
         },
         {
           kind: "connection",
@@ -186,7 +186,7 @@ print(np.round(a), np.round(b))`,
           paperIds: ["paper-lie"],
           projectIds: ["p6-kinematics-viz"],
         },
-        { kind: "sources", note: "Modern Robotics ch. 3.1–3.2 (the notation here is theirs); 3Blue1Brown's quaternion video for double-cover geometry. Keep the MR appendix of rotation conventions bookmarked — everyone needs it eventually." },
+        { kind: "sources", note: "Modern Robotics ch. 3.1 to 3.2 (the notation here is theirs); 3Blue1Brown's quaternion video for double-cover geometry. Keep the MR appendix of rotation conventions bookmarked; everyone needs it eventually." },
       ],
     },
     {

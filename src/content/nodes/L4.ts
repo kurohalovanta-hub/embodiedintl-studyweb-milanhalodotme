@@ -19,7 +19,7 @@ export const L4_NODES: SkillNode[] = [
     exercises: [
       "Recreate your finite-difference gradient check against autograd on 5 functions",
       "Time matmul CPU vs GPU across sizes; find the crossover point",
-      "Recompute your L2 favorite: ∇‖Ax-b‖² via autograd, matches your hand derivation",
+      "Recompute your L2 favorite: ∇‖Ax-b‖² via autograd and match it to your hand derivation",
     ],
     masteryGate: "gold",
     masteryTest: "Implement linear regression three ways in PyTorch (manual grads, autograd, nn.Linear+optim) producing identical losses on a fixed seed, and explain what each abstraction hid.",
@@ -43,7 +43,7 @@ export const L4_NODES: SkillNode[] = [
     implementation: "Reusable train.py skeleton: config dict, loop, val evaluation, best-checkpoint saving, CSV + W&B logging, the skeleton you will reuse all program.",
     exercises: [
       "Train your L3 MLP architecture in PyTorch; match NumPy accuracy; compare wall-clock",
-      "Kill and resume training from a checkpoint mid-run; prove the curves continue seamlessly",
+      "Kill and resume training from a checkpoint mid-run; prove the curves continue without a break",
     ],
     masteryGate: "gold",
     masteryTest: "From a blank file, write a full training loop for a given model+dataset with validation, checkpointing and logging, no Lightning, no Trainer, no copying.",
@@ -58,12 +58,12 @@ export const L4_NODES: SkillNode[] = [
     why: "The single best 'debugging deep learning' education in existence is watching activations and gradients flow, or die. Karpathy v4 is the definitive lecture; you reproduce its diagnostics.",
     objectives: [
       "Activation/gradient statistics as health monitors; dead ReLUs, saturation",
-      "Initialization logic (fan-in scaling), why it matters, roughly derived",
+      "Initialization logic (fan-in scaling): why it matters, roughly derived",
       "BatchNorm/LayerNorm: what they fix, their train/eval duality, why transformers use LN",
     ],
     prereqs: [{ id: "l4-training-loop" }],
     hours: 6,
-    primary: { resourceId: "karpathy-z2h", sections: "v4 'Activations & Gradients, BatchNorm', reproduce every histogram" },
+    primary: { resourceId: "karpathy-z2h", sections: "v4 'Activations & Gradients, BatchNorm'; reproduce every histogram" },
     equations: ["\\operatorname{Var}(w) = 2/n_{\\text{in}}\\;\\text{(He init, ReLU)}", "\\hat{x} = \\frac{x-\\mu}{\\sqrt{\\sigma^2+\\epsilon}}\\gamma + \\beta"],
     exercises: [
       "Instrument your MLP: per-layer activation/grad histograms across depth; show a bad init killing layer 5+",
@@ -81,7 +81,7 @@ export const L4_NODES: SkillNode[] = [
     labs: ["ml"],
     why: "Convolution = weight sharing over space, the inductive bias that made deep vision work. CNNs still encode half the robot policies in production, and ResNet's skip connection is load-bearing everywhere.",
     objectives: [
-      "Convolution mechanics: kernels, stride, padding, channels, shape arithmetic fluent",
+      "Convolution mechanics: kernels, stride, padding, channels; shape arithmetic fluent",
       "Pooling; receptive fields; feature hierarchies",
       "ResNet residual blocks: why identity shortcuts fix depth",
     ],
@@ -114,7 +114,7 @@ export const L4_NODES: SkillNode[] = [
     exercises: ["One deliberate ablation (remove augmentation OR normalization): quantify the damage properly"],
     masteryGate: "gold",
     masteryTest: "P4 accepted: repo + 1-page experiment report (table, curves, ablation, 3 seeds, one limitation).",
-    diagnostic: ", ",
+    diagnostic: "No separate diagnostic. Use this node's mastery test.",
     projectIds: ["p4-classifier"],
     computeNote: "Any 8 GB GPU: ~10–30 min/run. CPU possible but slow.",
   },
@@ -132,7 +132,7 @@ export const L4_NODES: SkillNode[] = [
     ],
     prereqs: [{ id: "l4-training-loop" }],
     hours: 6,
-    primary: { resourceId: "karpathy-z2h", sections: "v2 (bigram) + v3 (MLP language model), code along fully" },
+    primary: { resourceId: "karpathy-z2h", sections: "v2 (bigram) + v3 (MLP language model); code along fully" },
     equations: ["P(x_{1:T}) = \\prod_t P(x_t \\mid x_{<t})"],
     exercises: [
       "Train makemore on a name corpus; sample names at temperatures 0.5/1.0/1.5 and explain the difference",
@@ -148,7 +148,7 @@ export const L4_NODES: SkillNode[] = [
     title: "Attention From a Blank File",
     track: "core",
     labs: ["ml"],
-    why: "The mechanism of the decade. Queries, keys, values, content-based routing of information, powers every VLA, world model, and LLM you will touch. You build it before you import it.",
+    why: "The mechanism of the decade. Queries, keys, values: content-based routing of information powers every VLA, world model, and LLM you will touch. You build it before you import it.",
     objectives: [
       "Q/K/V projections; scaled dot-product attention; why /√d",
       "Causal masking; multi-head as parallel subspace attention",
@@ -157,7 +157,7 @@ export const L4_NODES: SkillNode[] = [
     prereqs: [{ id: "l4-embeddings-lm" }],
     hours: 8,
     primary: { resourceId: "3b1b-nn", sections: "Ch 6 Attention (BEFORE building)" },
-    backup: { resourceId: "uva-notebooks", sections: "Tutorial 6 (after building, fills in encoder view, masking variants)" },
+    backup: { resourceId: "uva-notebooks", sections: "Tutorial 6 (after building; fills in encoder view, masking variants)" },
     equations: ["\\operatorname{Attn}(Q,K,V)=\\operatorname{softmax}\\!\\left(\\tfrac{QK^{\\top}}{\\sqrt{d_k}}\\right)V"],
     implementation: "Single-head attention from raw tensors with hand-verified shapes on a 4-token example; then batched multi-head causal attention as a clean nn.Module.",
     exercises: [
@@ -176,7 +176,7 @@ export const L4_NODES: SkillNode[] = [
     title: "The Transformer, Built & Trained",
     track: "core",
     labs: ["ml"],
-    why: "Assembly of everything so far: embeddings + attention + MLPs + LayerNorm + residuals = GPT. The architecture of π0, GR00T, Gemini Robotics, built by you, trained by you, debugged by you.",
+    why: "Assembly of everything so far: embeddings + attention + MLPs + LayerNorm + residuals = GPT. The architecture of π0, GR00T and Gemini Robotics, built, trained and debugged by you.",
     objectives: [
       "Pre-LN transformer block; residual stream mental model",
       "Positional information; the full decoder-only architecture",
@@ -204,7 +204,7 @@ export const L4_NODES: SkillNode[] = [
     title: "Tokenizers & RoPE (2026 Defaults)",
     track: "core",
     labs: ["ml"],
-    why: "BPE intuition transfers directly to ACTION tokenization (FAST compresses action sequences exactly like BPE compresses text). RoPE is the positional scheme every 2026 model actually uses.",
+    why: "BPE intuition transfers directly to ACTION tokenization (FAST compresses action sequences exactly like BPE compresses text). RoPE is the positional scheme every 2026 model uses.",
     objectives: [
       "BPE mechanics: merges, vocabulary, why subwords",
       "RoPE: rotating query/key pairs; relative-position property (working understanding)",
@@ -212,7 +212,7 @@ export const L4_NODES: SkillNode[] = [
     prereqs: [{ id: "l4-transformer" }],
     hours: 4,
     primary: { resourceId: "karpathy-z2h", sections: "v8 tokenizer video (once, don't over-invest)" },
-    backup: { resourceId: "labml", sections: "Annotated RoPE implementation, port into your GPT" },
+    backup: { resourceId: "labml", sections: "Annotated RoPE implementation; port into your GPT" },
     equations: ["\\text{RoPE: } q_m^{\\top} k_n = f(q, k, m-n)"],
     exercises: [
       "Run 200 BPE merges on a tiny corpus by hand-traceable code; inspect the vocabulary",
@@ -241,7 +241,7 @@ export const L4_NODES: SkillNode[] = [
     equations: ["N = HW/P^2\\;\\text{patches};\\; z_0=[x_{cls}; x_1E; \\dots; x_NE]+E_{pos}"],
     exercises: [
       "Patchify by hand with einops/reshape; verify patch count and dims for 224×224, P=16",
-      "CIFAR bake-off: your CNN vs small ViT at matched params, explain the gap you find",
+      "CIFAR bake-off: your CNN vs small ViT at matched params; explain the gap you find",
     ],
     masteryGate: "gold",
     masteryTest: "Implement patch embedding + ViT forward from scratch (reusing your transformer blocks) and train it; trace shapes 224×224→logits from memory.",
@@ -279,7 +279,7 @@ export const L4_NODES: SkillNode[] = [
     title: "Experiment Tracking & Ablation Craft",
     track: "research",
     labs: ["ml"],
-    why: "From now on, every run is an experiment with a record. W&B + a config discipline turns 'I think it helped' into evidence, the research spine starts here, not in Month 6.",
+    why: "From now on, every run is an experiment with a record. W&B + a config discipline turns 'I think it helped' into evidence. The research spine starts here, not in Month 6.",
     objectives: [
       "W&B (or CSV-hedged) run tracking: configs, metrics, artifacts",
       "One-variable-at-a-time ablations; naming and organizing runs",
@@ -309,7 +309,7 @@ export const L4_NODES: SkillNode[] = [
     hours: 8,
     masteryGate: "gold",
     masteryTest: "Three-part sitting: (1) implement a specified small transformer variant from a written spec (blank file); (2) fix a sabotaged training run (three planted bugs: mask, LR, norm placement) using diagnostics only; (3) oral defense: trace shapes and gradients through your model from memory, then explain one design tradeoff (heads vs width) with evidence from a 30-minute experiment.",
-    diagnostic: ", ",
+    diagnostic: "No separate diagnostic. Use this node's mastery test.",
     exercises: [],
   },
 ];

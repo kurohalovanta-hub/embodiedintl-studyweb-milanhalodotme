@@ -6,7 +6,7 @@ export const RANKS: RankDef[] = [
   { index: 0, title: "Initiate", requires: "Begin.", },
   {
     index: 1, title: "Computational Apprentice",
-    requires: "Level 0 survival complete — you operate a research environment.",
+    requires: "Level 0 survival complete: you operate a research environment.",
     levelCompletion: [[0, 0.9]],
   },
   {
@@ -22,7 +22,7 @@ export const RANKS: RankDef[] = [
   },
   {
     index: 4, title: "Deep Learning Practitioner",
-    requires: "DL Boss defeated — transformers are yours, including when they break.",
+    requires: "DL Boss defeated. You can build transformers and fix them when they break.",
     bossIds: ["boss-dl"],
     levelCompletion: [[4, 0.8]],
   },
@@ -34,19 +34,19 @@ export const RANKS: RankDef[] = [
   },
   {
     index: 6, title: "Autonomous Systems Builder",
-    requires: "Autonomy Boss defeated — the classical stack, integrated by you.",
+    requires: "Autonomy Boss defeated: the classical stack, integrated by you.",
     bossIds: ["boss-autonomy"],
     levelCompletion: [[7, 0.7], [8, 0.7], [9, 0.7]],
   },
   {
     index: 7, title: "Robot Learning Practitioner",
-    requires: "Robot Learning Boss defeated — policies trained, compared, and understood statistically.",
+    requires: "Robot Learning Boss defeated: policies trained, compared, and understood statistically.",
     bossIds: ["boss-robot-learning"],
     levelCompletion: [[10, 0.7], [11, 0.8]],
   },
   {
     index: 8, title: "Embodied AI Practitioner",
-    requires: "VLA Boss defeated — a frontier-lineage fine-tune evaluated like a researcher.",
+    requires: "VLA Boss defeated: a frontier-lineage fine-tune evaluated like a researcher.",
     bossIds: ["boss-vla"],
     levelCompletion: [[12, 0.8]],
   },

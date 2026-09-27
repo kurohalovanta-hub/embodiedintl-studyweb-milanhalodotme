@@ -83,7 +83,7 @@ export default function Dashboard() {
             </div>
             <div>
               <span className="font-mono text-xs text-acc">02</span>{" "}
-              Set your start date &amp; hours in <Link href="/settings" className="text-acc hover:underline">Settings</Link> to
+              Set your start date and hours in <Link href="/settings" className="text-acc hover:underline">Settings</Link> to
               start the day count.
             </div>
             <div>

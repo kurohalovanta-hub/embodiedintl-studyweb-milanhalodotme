@@ -271,7 +271,7 @@ export default function TreePage() {
             {path && path.missing.length > 0 && (
               <div className="mt-2 border-t border-line/60 pt-2">
                 <div className="text-xs font-medium text-acc-math">
-                  You are {path.missing.length} prerequisite gate{path.missing.length === 1 ? "" : "s"} away — path highlighted
+                  You are {path.missing.length} prerequisite gate{path.missing.length === 1 ? "" : "s"} away, path highlighted
                 </div>
                 <div className="mt-1 flex flex-wrap gap-1">
                   {path.missing.slice(0, 5).map((m) => (
@@ -289,7 +289,7 @@ export default function TreePage() {
               </div>
             )}
             {path && path.missing.length === 0 && selState === "locked" && (
-              <div className="mt-2 text-xs text-acc-robot">All prerequisite nodes met — claim the pending tiers to unlock.</div>
+              <div className="mt-2 text-xs text-acc-robot">All prerequisite nodes met. Claim the pending tiers to unlock.</div>
             )}
 
             <div className="mt-2.5 flex gap-2">

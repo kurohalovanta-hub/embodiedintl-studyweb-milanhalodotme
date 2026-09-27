@@ -129,10 +129,10 @@ export default function Kalman1D() {
           />
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
             <Katex tex="K=\frac{\sigma^2}{\sigma^2+R},\quad \mu\leftarrow\mu+K(z-\mu),\quad \sigma^2\leftarrow(1-K)\,\sigma^2" block />
-            K is a trust ratio. Press <b>predict</b> five times in a row: the belief spreads without bound —
-            motion without sensing is amnesia. Then one update snaps it tight. Crank R up: K → 0 and
+            K is a trust ratio. Press <b>predict</b> five times in a row: the belief spreads without bound.
+            Motion without sensing is amnesia. Then one update snaps it tight. Crank R up: K → 0 and
             updates barely move μ (sensor distrusted). Purple bars in the history are predicts (widening),
-            cyan are updates (tightening) — estimation is just this heartbeat, forever.
+            cyan are updates (tightening). Estimation is this heartbeat, repeated forever.
           </div>
         </>
       }

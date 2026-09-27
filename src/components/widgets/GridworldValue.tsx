@@ -144,9 +144,9 @@ export default function GridworldValue() {
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
             <Katex tex="V(s)\leftarrow\max_a\sum_{s'}P(s'|s,a)\left[R+\gamma V(s')\right]" block />
             Step one sweep at a time: value leaks outward from the terminals like heat. Click cells to
-            build walls and watch the policy re-route. Drop γ to 0.5 — the far half of the map goes
+            build walls and watch the policy re-route. Drop γ to 0.5 and the far half of the map goes
             numb (myopia). Turn <b>slip</b> off and the policy hugs the pit&apos;s edge; turn it on and it
-            detours — risk-awareness emerging from arithmetic, not rules. Living cost R = −0.04/step.
+            detours: risk-awareness emerging from arithmetic, not rules. Living cost R = −0.04/step.
           </div>
         </>
       }

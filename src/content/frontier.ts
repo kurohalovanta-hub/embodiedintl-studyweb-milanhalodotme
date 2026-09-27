@@ -4,7 +4,7 @@ import type { FrontierEntry } from "@/lib/types";
 // New entries are added over time; each carries a "does the roadmap change?" verdict.
 export const FRONTIER: FrontierEntry[] = [
   {
-    id: "f-pi07", date: "2026-04", title: "π0.7 — steerable generalist policies", org: "Physical Intelligence", kind: "model",
+    id: "f-pi07", date: "2026-04", title: "π0.7: steerable generalist policies", org: "Physical Intelligence", kind: "model",
     url: "https://arxiv.org/abs/2604.15483",
     whatChanged: "Multimodal prompting (language/metadata/visual subgoals), emergent skill recombination, matches RL-finetuned specialists out of the box. Closed weights; open releases lag ~2 versions (openpi stops at π0.5).",
     roadmapImpact: "minor", verdict: "SKIM at L12 for steerability ideas; capstone stays π0/π0.5 (the runnable lineage).", studyWhen: "at-level", relatedLevel: 12,
@@ -12,7 +12,7 @@ export const FRONTIER: FrontierEntry[] = [
   {
     id: "f-gemini-robotics-2", date: "2026-07", title: "Gemini Robotics 2 (whole-body, ER-2, On-Device-2)", org: "Google DeepMind", kind: "model",
     whatChanged: "Whole-body control 'feet to fingertips' on Apptronik Apollo 2; multi-robot collaboration; early access only, no paper/weights yet.",
-    roadmapImpact: "watch", verdict: "Blog-level awareness; whole-body VLAs remain out of solo-learner reach — watch for the tech report.", studyWhen: "later", relatedLevel: 12,
+    roadmapImpact: "watch", verdict: "Blog-level awareness; whole-body VLAs remain out of solo-learner reach. Watch for the tech report.", studyWhen: "later", relatedLevel: 12,
   },
   {
     id: "f-groot-n17", date: "2026-04", title: "GR00T N1.7 (Cosmos-Reason2 backbone)", org: "NVIDIA", kind: "model",
@@ -56,10 +56,10 @@ export const FRONTIER: FrontierEntry[] = [
     roadmapImpact: "minor", verdict: "SKIM the platform at L13; Cosmos-Policy checkpoints are a usable eval asset on 24 GB.", studyWhen: "at-level", relatedLevel: 13,
   },
   {
-    id: "f-dreamdojo", date: "2026-02", title: "DreamDojo — generalist robot world model from 44.7k hrs of human video", org: "NVIDIA GEAR", kind: "model",
+    id: "f-dreamdojo", date: "2026-02", title: "DreamDojo: generalist robot world model from 44.7k hrs of human video", org: "NVIDIA GEAR", kind: "model",
     url: "https://github.com/NVIDIA/DreamDojo",
     whatChanged: "ICML 2026; fully open 2B/14B checkpoints; distilled to 10 FPS real-time interaction; the open frontier of robot video world models.",
-    roadmapImpact: "watch", verdict: "L13 literacy material; too heavy to train solo — checkpoints usable for study.", studyWhen: "at-level", relatedLevel: 13,
+    roadmapImpact: "watch", verdict: "L13 literacy material; too heavy to train solo, but the checkpoints are usable for study.", studyWhen: "at-level", relatedLevel: 13,
   },
   {
     id: "f-vjepa21", date: "2026-03", title: "V-JEPA 2.1 (dense features, 80M→2B)", org: "Meta FAIR", kind: "model",
@@ -85,13 +85,13 @@ export const FRONTIER: FrontierEntry[] = [
   },
   {
     id: "f-ros-lyrical", date: "2026-05", title: "ROS 2 Lyrical Luth LTS (Ubuntu 26.04)", org: "OSRA", kind: "tool",
-    whatChanged: "New LTS to May 2031, Tier-1 only on Ubuntu 26.04 — which Isaac/CUDA stacks don't yet support. Kilted dies Dec 2026.",
+    whatChanged: "New LTS to May 2031, Tier-1 only on Ubuntu 26.04, which Isaac/CUDA stacks don't yet support. Kilted dies Dec 2026.",
     roadmapImpact: "none", verdict: "Stay on Jazzy/24.04 (audited decision); revisit when Isaac supports 26.04.", studyWhen: "skip", relatedLevel: 7,
   },
   {
     id: "f-sam3", date: "2026-03", title: "SAM 3 / 3.1 (concept-prompted segmentation)", org: "Meta AI", kind: "tool",
     url: "https://github.com/facebookresearch/sam3",
-    whatChanged: "Open-vocabulary text/exemplar prompts, segment+track, image+video — subsumes most Grounding-DINO+SAM-2 pipelines.",
+    whatChanged: "Open-vocabulary text/exemplar prompts, segment+track, image+video. Subsumes most Grounding-DINO+SAM-2 pipelines.",
     roadmapImpact: "minor", verdict: "ADOPTED as the L8 default segmentation tool.", studyWhen: "at-level", relatedLevel: 8,
   },
   {
@@ -100,7 +100,7 @@ export const FRONTIER: FrontierEntry[] = [
     roadmapImpact: "watch", verdict: "Ecosystem literacy at L12 (pick ONE matching your research direction); RDT2 upgrades to STUDY if the human-data route is chosen.", studyWhen: "at-level", relatedLevel: 12,
   },
   {
-    id: "f-corl-2026", date: "2026-11", title: "CoRL 2026 (Austin, Nov 9–12) — upcoming", org: "conference", kind: "event",
+    id: "f-corl-2026", date: "2026-11", title: "CoRL 2026 (Austin, Nov 9 to 12), upcoming", org: "conference", kind: "event",
     whatChanged: "Expected to be the RL-for-VLA and evaluation showdown; ICRA 2026's best-paper went to camera-conditioning/view-invariance work.",
     roadmapImpact: "watch", verdict: "Calendar it: proceedings week is a Frontier-Tracker refresh milestone during the research month.", studyWhen: "later", relatedLevel: 16,
   },

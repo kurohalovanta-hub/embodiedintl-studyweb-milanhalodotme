@@ -1,11 +1,17 @@
 import { Redis } from "@upstash/redis";
 import { createHmac, randomBytes, scrypt as scryptCb, timingSafeEqual } from "node:crypto";
 import { promisify } from "node:util";
+import { SupabaseKV } from "@/lib/server/supabase-kv";
 
 const scrypt = promisify(scryptCb);
 
 // ── storage ────────────────────────────────────────────────────────
 export function getRedis(): Redis | null {
+  // Supabase, when configured, replaces Upstash as the store. It answers the
+  // same calls, so every caller keeps treating it as the Redis client.
+  const sbUrl = process.env.SUPABASE_URL;
+  const sbKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+  if (sbUrl && sbKey) return new SupabaseKV(sbUrl, sbKey) as unknown as Redis;
   const url = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
   const token = process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!url || !token) return null;
@@ -204,9 +210,15 @@ export async function rateLimit(
   windowSec: number,
 ): Promise<boolean> {
   const k = `rl:${key}:${Math.floor(Date.now() / (windowSec * 1000))}`;
-  const n = await redis.incr(k);
-  if (n === 1) await redis.expire(k, windowSec);
-  return n <= limit;
+  try {
+    const n = await redis.incr(k);
+    if (n === 1) await redis.expire(k, windowSec);
+    return n <= limit;
+  } catch {
+    // Redis refusing writes (over its request quota, or down) must not lock
+    // everyone out of sign-in, which only needs reads. Fail open.
+    return true;
+  }
 }
 
 export function clientIp(req: Request): string {

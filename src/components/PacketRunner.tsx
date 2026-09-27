@@ -42,7 +42,7 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
   interface Step { id: string; label: string; done: boolean; skip?: boolean; body: ReactNode }
   const steps: Step[] = [
     allWatch.length > 0 && {
-      id: "watch", label: `WATCH — ${allWatch.reduce((s, m) => s + m.minutes, 0)} min`, done: watchDone,
+      id: "watch", label: `WATCH: ${allWatch.reduce((s, m) => s + m.minutes, 0)} min`, done: watchDone,
       body: (
         <div className="space-y-3">
           {allWatch.map((m) => (
@@ -58,7 +58,7 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
       ),
     },
     (packet.recall ?? []).length > 0 && {
-      id: "recall", label: `RECALL — ${(packet.recall ?? []).length} questions, closed book`, done: recallAll,
+      id: "recall", label: `RECALL: ${(packet.recall ?? []).length} questions, closed book`, done: recallAll,
       body: (
         <div className="space-y-2.5">
           {(packet.recall ?? []).map((r, i) => (
@@ -74,7 +74,7 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
       ),
     },
     ((packet.interactiveIds ?? []).length > 0 || (packet.lessonId && hasLesson(packet.lessonId))) && {
-      id: "interact", label: "SEE IT MOVE — manipulate the mathematics", done: watchDone || readAll || practiceAll,
+      id: "interact", label: "SEE IT MOVE: manipulate the mathematics", done: watchDone || readAll || practiceAll,
       skip: true,
       body: (
         <div className="space-y-3">
@@ -95,7 +95,7 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
       ),
     },
     (packet.coreRead ?? []).length > 0 && {
-      id: "read", label: `READ — exactly these sections`, done: readAll,
+      id: "read", label: `READ: exactly these sections`, done: readAll,
       body: (
         <div className="space-y-2">
           {(packet.coreRead ?? []).map((r) => (
@@ -117,7 +117,7 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
                 disabled={readTitle(r.title)}
                 onClick={() => store.recordEvidence({ nodeId: id, kind: "exposure", outcome: "info", note: `read:${r.title}`, minutes: r.minutes })}
               >
-                {readTitle(r.title) ? "✓ read" : "read — pen out, actively"}
+                {readTitle(r.title) ? "✓ read" : "read (pen out, actively)"}
               </button>
             </div>
           ))}
@@ -125,7 +125,7 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
       ),
     },
     packet.practice.length > 0 && {
-      id: "practice", label: `WORK — ${packet.practice.length} practice blocks`, done: practiceAll,
+      id: "practice", label: `WORK: ${packet.practice.length} practice blocks`, done: practiceAll,
       body: (
         <div className="space-y-2">
           {packet.practice.map((pr, i) => (
@@ -143,7 +143,7 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
                       solved it
                     </button>
                     <button className="btn !py-1 text-xs" onClick={() => store.recordEvidence({ nodeId: id, kind: "problem", outcome: "fail", note: `practice:${i}`, minutes: pr.minutes ?? 15 })}>
-                      struggled — log it
+                      struggled, log it
                     </button>
                   </>
                 )}
@@ -154,7 +154,7 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
       ),
     },
     buildNeeded && {
-      id: "build", label: "BUILD / DERIVE — the artifact is the point", done: buildDone,
+      id: "build", label: "BUILD / DERIVE: the artifact is the point", done: buildDone,
       body: (
         <div className="space-y-3">
           {packet.derive && (
@@ -169,7 +169,7 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
               />
               <TutorTaskLink
                 mode="socratic"
-                label="▸ work this with the tutor — Socratic, step by step"
+                label="▸ work this with the tutor (Socratic, step by step)"
                 text={`Work this derivation task with me step by step. Socratic mode — never hand me the result:\n\n${packet.derive.spec}${packet.derive.checks?.length ? `\n\nChecks it must pass: ${packet.derive.checks.join("; ")}` : ""}`}
               />
             </>
@@ -186,7 +186,7 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
               />
               <TutorTaskLink
                 mode="debug"
-                label="▸ build this with the tutor — hints and review, not solutions"
+                label="▸ build this with the tutor (hints and review, not solutions)"
                 text={`I'm working on this implementation task. Guide me with hints and review my attempts — don't write it for me:\n\n${packet.implement.spec}${packet.implement.checks?.length ? `\n\nChecks it must pass: ${packet.implement.checks.join("; ")}` : ""}`}
               />
             </>
@@ -195,7 +195,7 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
       ),
     },
     {
-      id: "prove", label: "PROVE IT — closed book, then it verifies", done: proved,
+      id: "prove", label: "PROVE IT: closed book, then it verifies", done: proved,
       body: (
         <div className="space-y-2">
           <div className="text-[13px] leading-relaxed text-ink">
@@ -208,20 +208,20 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
           </ul>
           <TutorTaskLink
             mode="examine"
-            label="▸ tutor as examiner — drill me on this bar first"
+            label="▸ tutor as examiner: drill me on this bar first"
             text={`Act as my closed-book examiner for this bar. Quiz me, push follow-ups, grade honestly, never reveal answers before I attempt:\n\n${packet.prove.task}\n\nCriteria: ${packet.prove.criteria.join("; ")}`}
           />
           <AssessmentBox id={id} />
           {packet.transfer && proved && (
             <div className="mt-2 rounded-md border border-acc-math/30 bg-acc-math/[0.05] px-3 py-2.5">
-              <div className="mono-label mb-1 text-acc-math">transfer — unfamiliar ground</div>
+              <div className="mono-label mb-1 text-acc-math">transfer: unfamiliar ground</div>
               <div className="text-[13px] text-ink">{packet.transfer.task}</div>
               <div className="mt-1.5 flex gap-2">
                 <button className="btn !py-1 text-xs" onClick={() => store.recordEvidence({ nodeId: id, kind: "transfer", outcome: "pass", note: "packet-transfer", independence: "independent" })}>
                   ✓ held on new ground
                 </button>
                 <button className="btn !py-1 text-xs" onClick={() => store.recordEvidence({ nodeId: id, kind: "transfer", outcome: "fail", note: "packet-transfer" })}>
-                  ✗ it broke — honest
+                  ✗ it broke (honest)
                 </button>
               </div>
             </div>
@@ -238,8 +238,8 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
     <div className="space-y-2.5">
       {!curated && (
         <div className="rounded-md border border-line bg-panel2/40 px-3 py-2 text-[11.5px] text-faint">
-          This node&apos;s packet is assembled from its verified sources (full micro-curation pending) —
-          study only the listed sections; the flow and the bar are identical.
+          This node&apos;s packet is assembled from its verified sources (full micro-curation pending).
+          Study only the listed sections; the flow and the bar are the same.
         </div>
       )}
       {steps.map((s, i) => (
@@ -248,15 +248,15 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
 
       {/* stuck path — always reachable, never a "step" */}
       <div className="rounded-lg border border-line bg-panel/60 px-4 py-3">
-        <div className="mono-label mb-2">stuck? — designed exits, not doomscrolling</div>
+        <div className="mono-label mb-2">stuck? designed exits, not doomscrolling</div>
         {packet.stuck?.alternate && (
           <div className="mb-2 text-[12.5px] text-dim">
-            alternate explanation: <a className="text-acc hover:underline" href={packet.stuck.alternate.url} target="_blank" rel="noopener noreferrer">{packet.stuck.alternate.creator} — {packet.stuck.alternate.title} ↗</a> ({packet.stuck.alternate.minutes} min)
+            alternate explanation: <a className="text-acc hover:underline" href={packet.stuck.alternate.url} target="_blank" rel="noopener noreferrer">{packet.stuck.alternate.creator}: {packet.stuck.alternate.title} ↗</a> ({packet.stuck.alternate.minutes} min)
           </div>
         )}
         {packet.stuck?.alternateRead && (
           <div className="mb-2 text-[12.5px] text-dim">
-            alternate read: <a className="text-acc hover:underline" href={packet.stuck.alternateRead.url} target="_blank" rel="noopener noreferrer">{packet.stuck.alternateRead.title} ↗</a> — {packet.stuck.alternateRead.sections}
+            alternate read: <a className="text-acc hover:underline" href={packet.stuck.alternateRead.url} target="_blank" rel="noopener noreferrer">{packet.stuck.alternateRead.title} ↗</a>: {packet.stuck.alternateRead.sections}
           </div>
         )}
         {packet.stuck?.note && <div className="mb-2 text-[12px] text-faint">{packet.stuck.note}</div>}
@@ -267,13 +267,13 @@ export function PacketRunner({ packet, curated }: { packet: LearningPacket; cura
       {packet.deepen && packet.deepen.length > 0 && (
         <details className="rounded-lg border border-line bg-panel/60 px-4 py-3">
           <summary className="cursor-pointer font-mono text-[11px] uppercase tracking-widest text-dim hover:text-acc">
-            deepen — only if needed
+            deepen (only if needed)
           </summary>
           <div className="mt-2 space-y-1.5">
             {packet.deepen.map((d) => (
               <div key={d.title} className="text-[12.5px] text-dim">
                 {d.url ? <a className="text-ink hover:text-acc" href={d.url} target="_blank" rel="noopener noreferrer">{d.title} ↗</a> : <span className="text-ink">{d.title}</span>}
-                {" — "}{d.sections} <span className="font-mono text-[10.5px] text-faint">~{d.minutes}m</span>
+                {": "}{d.sections} <span className="font-mono text-[10.5px] text-faint">~{d.minutes}m</span>
               </div>
             ))}
           </div>
@@ -373,11 +373,11 @@ function ArtifactBlock({ kind, title, spec, checks, done, onDone }: {
           <input
             value={artifact}
             onChange={(e) => setArtifact(e.target.value)}
-            placeholder={`where it lives — commit, path, or one-line summary (${kind})`}
+            placeholder={`where it lives: commit, path, or one-line summary (${kind})`}
             className="!py-1 font-mono !text-[12px]"
           />
           <button className="btn shrink-0 !py-1 text-xs" disabled={artifact.trim().length < 8} onClick={() => onDone(artifact.trim())}>
-            record — checks pass
+            record (checks pass)
           </button>
         </div>
       )}

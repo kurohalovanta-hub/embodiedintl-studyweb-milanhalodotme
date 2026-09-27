@@ -198,7 +198,7 @@ export const LEVELS: Level[] = [
     slug: "sim-to-real",
     title: "Sim-to-Real",
     codename: "REALITY",
-    goal: "Reality gap, domain randomization, sim2sim discipline, hardware optional.",
+    goal: "Reality gap, domain randomization, sim2sim discipline; hardware optional.",
     exitCriteria: [
       "DR ablation completed: policy robustness measured under perturbed dynamics",
       "Sim2sim transfer executed (train in GPU-parallel sim, validate in vanilla MuJoCo)",
@@ -224,7 +224,7 @@ export const LEVELS: Level[] = [
     slug: "original-research",
     title: "Original Research",
     codename: "FRONTIER",
-    goal: "One narrow question. One falsifiable hypothesis. Rigorous evidence.",
+    goal: "One narrow question and one falsifiable hypothesis, tested with rigorous evidence.",
     exitCriteria: [
       "Original hypothesis tested with baseline, controls, seeds, ablation",
       "Reproducible repository + technical report + future-work plan",

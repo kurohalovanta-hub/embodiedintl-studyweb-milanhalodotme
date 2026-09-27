@@ -11,8 +11,8 @@ import { useStore } from "@/lib/store";
 // No confetti. A defended paper is one you can argue for and against.
 
 const STANDARD_PROBES = [
-  "State the paper's core claim in two sentences — then name the single strongest piece of evidence the authors give for it.",
-  "Architecture & objective: what exactly is trained, with what loss, on what data? Write the loss if you can.",
+  "State the paper's core claim in two sentences, then name the single strongest piece of evidence the authors give for it.",
+  "Architecture and objective: what exactly is trained, with what loss, on what data? Write the loss if you can.",
   "Where does it break? Name the weakest assumption, or a failure mode the authors did not test.",
 ];
 
@@ -86,9 +86,9 @@ export function DefenseRunner({ paperId }: { paperId: string }) {
             <h1 className="mt-2 text-2xl font-bold text-ink">Defend {p.title.split(":")[0]}</h1>
             <ul className="mt-4 space-y-2 text-sm text-dim">
               <li>▸ <b className="text-ink">Closed book.</b> No paper, no notes, no tabs.</li>
-              <li>▸ Answer each question <b className="text-ink">out loud or on paper</b> — really answer, then commit.</li>
-              <li>▸ After committing you grade yourself. <b className="text-ink">Honest misses are worth more than dishonest hits</b> — a fake &quot;defended&quot; only costs you later, in front of real people.</li>
-              <li>▸ {total} questions: {p.questions.length} from this paper&apos;s reading list + 3 standard probes.</li>
+              <li>▸ Answer each question <b className="text-ink">out loud or on paper</b>. Give a full answer, then commit.</li>
+              <li>▸ After committing you grade yourself. <b className="text-ink">Honest misses are worth more than dishonest hits</b>. A fake &quot;defended&quot; only costs you later, in front of real people.</li>
+              <li>▸ {total} questions: {p.questions.length} from this paper&apos;s reading list plus 3 standard probes.</li>
               <li>▸ Defended ≥ 80% · Partial ≥ 50%.</li>
             </ul>
             {prior && (
@@ -162,9 +162,9 @@ export function DefenseRunner({ paperId }: { paperId: string }) {
             <div className="mt-2 font-mono text-sm text-dim">{score} / {total}</div>
             <p className="mx-auto mt-4 max-w-md text-sm text-dim">
               {score / total >= 0.8
-                ? "You own this paper. Log the misses in your notes anyway — they're your sharpest review questions."
+                ? "You own this paper. Log the misses in your notes anyway. They're your sharpest review questions."
                 : score / total >= 0.5
-                  ? "Real gaps, honestly found. Re-read exactly the sections behind your misses — targeted, not cover-to-cover — then defend again."
+                  ? "Real gaps, honestly found. Re-read only the sections behind your misses, not the whole paper, then defend again."
                   : "This paper isn't yours yet, and now you know precisely where. That's the whole point of the exercise. Re-read with the missed questions open beside you."}
             </p>
             <div className="mt-6 flex justify-center gap-2">

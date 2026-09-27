@@ -65,7 +65,7 @@ export default function AgentPage() {
         setTurns([...history, { role: "assistant", content: full }]);
       }
     } catch {
-      setTurns([...history, { role: "assistant", content: "⚠ connection dropped — send again." }]);
+      setTurns([...history, { role: "assistant", content: "⚠ connection dropped, send again." }]);
     } finally {
       setRunning(false);
     }
@@ -79,7 +79,7 @@ export default function AgentPage() {
           <h1 className="font-mono text-xl font-bold tracking-tight">&gt;_ your machine</h1>
         </div>
         <span className={`rounded px-1.5 py-0.5 font-mono text-[10.5px] ${avail === "ready" ? "bg-acc-robot/15 text-acc-robot" : "bg-warn/15 text-warn"}`}>
-          {avail === "checking" ? "…" : avail === "ready" ? "BRIDGE ONLINE — FULL CONTROL" : "BRIDGE OFFLINE"}
+          {avail === "checking" ? "…" : avail === "ready" ? "BRIDGE ONLINE: FULL CONTROL" : "BRIDGE OFFLINE"}
         </span>
         {models.length > 0 && (
           <select
@@ -96,8 +96,8 @@ export default function AgentPage() {
       </div>
 
       <p className="text-[12px] leading-relaxed text-faint">
-        Talks straight to Claude Code with full permissions in <code>C:\halo\Learn</code> on your machine —
-        it can edit the site, run commands, push to GitHub. No tutor rules apply here, and nothing done
+        Talks straight to Claude Code with full permissions in <code>C:\halo\Learn</code> on your machine.
+        It can edit the site, run commands, push to GitHub. No tutor rules apply here, and nothing done
         here counts as learning evidence.
       </p>
 
@@ -109,7 +109,7 @@ export default function AgentPage() {
 
       <div ref={scrollRef} className="h-[52vh] overflow-y-auto rounded-lg border border-line bg-bg/80 p-3 font-mono text-[12.5px] leading-relaxed">
         {turns.length === 0 && (
-          <div className="text-faint">$ waiting — try: &quot;list the files you can see&quot; or &quot;what changed in the last commit?&quot;</div>
+          <div className="text-faint">$ waiting. Try: &quot;list the files you can see&quot; or &quot;what changed in the last commit?&quot;</div>
         )}
         {turns.map((t, i) => (
           <div key={i} className={t.role === "user" ? "mt-3 text-acc" : "mt-1 whitespace-pre-wrap text-ink"}>
@@ -126,7 +126,7 @@ export default function AgentPage() {
             if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); void run(); }
           }}
           rows={2}
-          placeholder={avail === "ready" ? "tell your machine what to do — Enter runs it" : "bridge offline"}
+          placeholder={avail === "ready" ? "tell your machine what to do (Enter runs it)" : "bridge offline"}
           disabled={avail !== "ready"}
           className="flex-1 resize-y font-mono !text-[12.5px]"
         />

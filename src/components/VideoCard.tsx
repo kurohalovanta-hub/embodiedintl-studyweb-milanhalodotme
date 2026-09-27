@@ -14,8 +14,8 @@ export function VideoCard({
   return (
     <div className="overflow-hidden rounded-lg border border-line bg-panel2/40">
       <div className="flex flex-wrap items-baseline gap-2 border-b border-line/60 px-3 py-2">
-        <span className="font-mono text-[10px] uppercase tracking-widest text-acc">{role} — {media.minutes} min{media.unverified ? " (approx)" : ""}</span>
-        <span className="min-w-0 flex-1 truncate text-[13px] font-medium text-ink">{media.creator} — {media.title}</span>
+        <span className="font-mono text-[10px] uppercase tracking-widest text-acc">{role}: {media.minutes} min{media.unverified ? " (approx)" : ""}</span>
+        <span className="min-w-0 flex-1 truncate text-[13px] font-medium text-ink">{media.creator}: {media.title}</span>
       </div>
       {media.embedUrl ? (
         <div className="aspect-video w-full bg-black">
@@ -31,7 +31,7 @@ export function VideoCard({
         </div>
       ) : (
         <div className="px-3 py-3 text-sm text-dim">
-          Not embeddable here — open it directly, watch the listed span, come back.
+          Not embeddable here. Open it directly, watch the listed span, then come back.
         </div>
       )}
       <div className="space-y-2 px-3 py-2.5">
@@ -60,7 +60,7 @@ export function VideoCard({
             onClick={onWatched}
             disabled={watched}
           >
-            {watched ? "✓ watched" : "I watched it — actively"}
+            {watched ? "✓ watched" : "I watched it actively"}
           </button>
         </div>
       </div>

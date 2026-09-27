@@ -3,18 +3,18 @@ import type { Block } from "@/lib/types";
 // The daily operating template (HANDOVER §9) — minutes per block at the default
 // 6 h/day target; the scheduler scales these to the user's dailyHoursTarget.
 export const DAY_TEMPLATE: { block: Block; minutes: number; label: string; hint: string }[] = [
-  { block: "math", minutes: 105, label: "Math / theory", hint: "Learn, derive, solve — the math-track frontier node" },
-  { block: "implementation", minutes: 90, label: "Implementation", hint: "Code the idea — the code-track frontier node" },
+  { block: "math", minutes: 105, label: "Math / theory", hint: "Learn, derive, solve: the math-track frontier node" },
+  { block: "implementation", minutes: 90, label: "Implementation", hint: "Code the idea: the code-track frontier node" },
   { block: "specialization", minutes: 90, label: "Core specialization", hint: "The current robotics/ML/embodied topic" },
-  { block: "project", minutes: 75, label: "Project / experiment", hint: "Integrate — the active project's next step" },
-  { block: "review", minutes: 25, label: "Retrieval & review", hint: "Spaced recall from the review queue — closed book first" },
+  { block: "project", minutes: 75, label: "Project / experiment", hint: "Integrate: the active project's next step" },
+  { block: "review", minutes: 25, label: "Retrieval & review", hint: "Spaced recall from the review queue, closed book first" },
 ];
 
 // Research-mode template (Month 7 / HANDOVER §30).
 export const RESEARCH_DAY_TEMPLATE: { block: Block; minutes: number; label: string; hint: string }[] = [
   { block: "papers", minutes: 45, label: "Read / think", hint: "Direction-relevant reading; the idea inbox is open" },
   { block: "research", minutes: 240, label: "Experiment loop", hint: "Hypothesize → run → measure → log. The experiment log entry is mandatory" },
-  { block: "research", minutes: 45, label: "Write", hint: "The report grows a little every day — claims tied to evidence" },
+  { block: "research", minutes: 45, label: "Write", hint: "The report grows a little every day, with claims tied to evidence" },
   { block: "review", minutes: 20, label: "Review", hint: "Keep the foundations warm" },
 ];
 

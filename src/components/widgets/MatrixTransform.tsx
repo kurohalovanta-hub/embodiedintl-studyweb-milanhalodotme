@@ -143,9 +143,9 @@ export default function MatrixTransform({ params }: WidgetProps) {
           </div>
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
             The columns of <Katex tex="A" /> are where <Katex tex="\hat{\imath}" /> and <Katex tex="\hat{\jmath}" /> land.
-            The shaded square&apos;s area is <Katex tex="|\det A|" /> — drag toward <b>singular</b> and watch space flatten.
-            {eigenOn && eig && " Eigenvector directions (pink) don't rotate — they only stretch by λ."}
-            {eigenOn && !eig && " No real eigenvectors here — this map rotates every direction (complex eigenvalues)."}
+            The shaded square&apos;s area is <Katex tex="|\det A|" />. Drag toward <b>singular</b> and watch space flatten.
+            {eigenOn && eig && " Eigenvector directions (pink) don't rotate. They only stretch by λ."}
+            {eigenOn && !eig && " No real eigenvectors here. This map rotates every direction (complex eigenvalues)."}
           </div>
         </>
       }

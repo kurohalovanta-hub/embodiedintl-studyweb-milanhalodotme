@@ -68,7 +68,7 @@ export default function VectorPlayground() {
             <WBtn color="#52d68a" onClick={() => setB([-a[1], a[0]])}>make ⟂</WBtn>
           </div>
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
-            <Katex tex="a\cdot b = \|a\|\,\|b\|\cos\theta" /> — drag until <Katex tex="a\cdot b" /> is
+            <Katex tex="a\cdot b = \|a\|\,\|b\|\cos\theta" />. Drag until <Katex tex="a\cdot b" /> is
             zero and look at the angle. Then toggle the projection: it is the shadow of{" "}
             <span className="text-acc">a</span> along <span className="text-acc-math">b</span>, length{" "}
             <Katex tex="(a\cdot b)/\|b\|" />.

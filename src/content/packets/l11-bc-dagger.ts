@@ -138,7 +138,7 @@ export const packet: LearningPacket = {
     {
       title: "Imitation Learning Review (Branton DeMoss, Oxford)",
       url: "https://www.robots.ox.ac.uk/~bdemoss/research_notes/ImitationLearning.pdf",
-      sections: "The BC → DAgger → IRL arc, where this node sits in the wider imitation landscape",
+      sections: "The BC → DAgger → IRL arc, where this node sits in the wider imitation field",
       minutes: 40,
     },
     {

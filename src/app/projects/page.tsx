@@ -21,7 +21,7 @@ export default function ProjectsPage() {
   return (
     <div className="space-y-5">
       <div>
-        <div className="mono-label">the cumulative ladder — each reuses earlier work</div>
+        <div className="mono-label">the cumulative ladder: each reuses earlier work</div>
         <h1 className="font-mono text-2xl font-bold">PROJECTS</h1>
       </div>
 

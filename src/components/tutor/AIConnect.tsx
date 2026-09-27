@@ -99,7 +99,7 @@ export function AIConnect({ compact }: { compact?: boolean }) {
   if (linked === null) return null;
   if (linked === "unauthed") {
     if (compact) return null;
-    return <div className="text-[12.5px] text-faint">Sign in first — AI connections are per account.</div>;
+    return <div className="text-[12.5px] text-faint">Sign in first. AI connections are per account.</div>;
   }
 
   const origin = typeof window !== "undefined" ? window.location.origin : "https://www.milanhalo.me";
@@ -116,8 +116,8 @@ export function AIConnect({ compact }: { compact?: boolean }) {
           <span className="font-mono text-[12.5px] text-ink">your subscriptions</span>
           <span className="text-[11.5px] text-faint">Claude Code · ChatGPT Codex</span>
           {bridge?.online
-            ? <span className="text-[11.5px] text-acc-robot">bridge online — tutor runs on your plan</span>
-            : <span className="text-[11.5px] text-warn">{bridge?.exists ? "bridge offline — start it on your machine" : "not set up yet"}</span>}
+            ? <span className="text-[11.5px] text-acc-robot">bridge online, tutor runs on your plan</span>
+            : <span className="text-[11.5px] text-warn">{bridge?.exists ? "bridge offline, start it on your machine" : "not set up yet"}</span>}
         </div>
 
         {bridge?.online && (
@@ -145,7 +145,7 @@ export function AIConnect({ compact }: { compact?: boolean }) {
               <>
                 <div className="mono-label">mac / linux</div>
                 <pre className="overflow-x-auto rounded bg-bg/60 p-2 font-mono text-[11.5px] whitespace-pre text-ink">{command}</pre>
-                <div className="mono-label">windows (powershell — e.g. your RDP)</div>
+                <div className="mono-label">windows (powershell, e.g. your RDP)</div>
                 <pre className="overflow-x-auto rounded bg-bg/60 p-2 font-mono text-[11.5px] whitespace-pre text-ink">{commandWin}</pre>
                 <div className="flex gap-2">
                   <button
@@ -155,10 +155,10 @@ export function AIConnect({ compact }: { compact?: boolean }) {
                     {copied ? "✓ copied" : "copy command"}
                   </button>
                   <button className="font-mono text-[11px] text-faint underline-offset-2 hover:underline" onClick={refresh}>
-                    I ran it — check again
+                    I ran it, check again
                   </button>
                 </div>
-                <div className="text-[11px] text-faint">This key is shown once. Leave the script running — it answers the site&apos;s tutor through your own logins.</div>
+                <div className="text-[11px] text-faint">This key is shown once. Leave the script running. It answers the site&apos;s tutor through your own logins.</div>
               </>
             ) : (
               <button className="btn !py-1.5 text-xs" disabled={busy} onClick={() => void makeToken()}>
@@ -172,7 +172,7 @@ export function AIConnect({ compact }: { compact?: boolean }) {
       {/* advanced: API keys */}
       <details className="text-[12px]">
         <summary className="cursor-pointer font-mono text-[11px] text-faint hover:text-dim">
-          advanced — API keys (works with no machine of yours running)
+          advanced: API keys (works with no machine of yours running)
         </summary>
         <div className="mt-2 space-y-2">
           {(["anthropic", "openai"] as Provider[]).map((provider) => {

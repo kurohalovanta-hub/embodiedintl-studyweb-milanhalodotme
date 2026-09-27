@@ -139,7 +139,7 @@ export default function SO3Explorer() {
           {triad(ez, "#e86ea4", "zᴮ")}
           {locked && (
             <text x={230} y={318} fill="#f4586e" fontSize={11.5} fontFamily="var(--font-mono)" textAnchor="middle" fontWeight={700}>
-              GIMBAL LOCK — yaw and roll axes aligned (|cos| = {alignment.toFixed(2)}) · one DOF lost
+              GIMBAL LOCK: yaw and roll axes aligned (|cos| = {alignment.toFixed(2)}) · one DOF lost
             </text>
           )}
         </svg>
@@ -165,7 +165,7 @@ export default function SO3Explorer() {
           )}
           <div className="flex items-center gap-2">
             <WBtn color="#e86ea4" active={negate} onClick={() => setNegate(!negate)}>q → −q</WBtn>
-            <span className="font-mono text-[11px] text-faint">orientation unchanged — double cover</span>
+            <span className="font-mono text-[11px] text-faint">orientation unchanged (double cover)</span>
           </div>
           <Readout
             items={[
@@ -176,15 +176,15 @@ export default function SO3Explorer() {
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
             {mode === "axis" ? (
               <>
-                <Katex tex="q=\left(\cos\tfrac\theta2,\ \hat n\sin\tfrac\theta2\right)" /> — every rotation
+                <Katex tex="q=\left(\cos\tfrac\theta2,\ \hat n\sin\tfrac\theta2\right)" />: every rotation
                 is one turn about one axis (Euler&apos;s theorem). Press <b>q → −q</b>: all four numbers flip,
-                the cube doesn&apos;t move. Two quaternions per orientation — why training targets use geodesic
+                the cube doesn&apos;t move. Two quaternions per orientation, which is why training targets use geodesic
                 distance, not quaternion subtraction.
               </>
             ) : (
               <>
                 Drag <span className="text-acc-math">β to ±90°</span>: the purple yaw axis and orange roll
-                axis fall on top of each other, so α and γ now spin the body the same way — a whole DOF
+                axis fall on top of each other, so α and γ now spin the body the same way: a whole DOF
                 gone. This is why flight software and robot arms carry quaternions internally and use Euler
                 angles only at the UI boundary.
               </>

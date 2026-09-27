@@ -7,7 +7,7 @@ export const L5_NODES: SkillNode[] = [
     title: "Frames & Rotation Matrices (SO(3))",
     track: "core",
     labs: ["robotics", "math"],
-    why: "Robotics is the discipline of keeping track of where things are relative to other things. Wrong-frame bugs are the #1 practical error source in all of robotics, this node is the vaccine.",
+    why: "Robotics is the discipline of keeping track of where things are relative to other things. Wrong-frame bugs are the #1 practical error source in all of robotics. This node is the vaccine.",
     objectives: [
       "Coordinate frames; expressing a point in different frames",
       "Rotation matrices: orthonormal columns = axes of one frame in another; R∈SO(3)",
@@ -19,14 +19,14 @@ export const L5_NODES: SkillNode[] = [
     equations: ["R^{\\top}R=I,\\; \\det R = 1", "{}^{a}p = {}^{a}R_{b}\\,{}^{b}p", "{}^{a}R_{c}={}^{a}R_{b}{}^{b}R_{c}"],
     implementation: "Start your library: se3.py with rot_x/y/z, compose, is_rotation checks; visualize a triad rotating in matplotlib 3D.",
     exercises: [
-      "Compose Rz(90°)Rx(90°) vs Rx(90°)Rz(90°), predict both orientations with your hands before running",
+      "Compose Rz(90°)Rx(90°) vs Rx(90°)Rz(90°); predict both orientations with your hands before running",
       "Prove R⁻¹=Rᵀ from orthonormal columns (3 lines)",
       "Frame-chase drill: given {}^wR_a and {}^aR_b, express a point known in frame b in world frame",
     ],
     masteryGate: "gold",
-    masteryTest: "Superscript-notation frame-chase test: 5 multi-frame problems solved with explicit notation and verified in your library, zero frame errors.",
+    masteryTest: "Superscript-notation frame-chase test: 5 multi-frame problems solved with explicit notation and verified in your library, with zero frame errors.",
     diagnostic: "Why must det=+1 (not −1)? What breaks if you average two rotation matrices entrywise?",
-    misconceptions: ["Rotation matrices don't 'rotate points' only, the SAME matrix re-expresses vectors between frames; keep the two readings straight with notation."],
+    misconceptions: ["Rotation matrices don't 'rotate points' only. The SAME matrix re-expresses vectors between frames; keep the two readings straight with notation."],
   },
   {
     id: "l5-quaternions",
@@ -34,7 +34,7 @@ export const L5_NODES: SkillNode[] = [
     title: "Euler Angles, Axis-Angle & Quaternions",
     track: "core",
     labs: ["robotics", "math"],
-    why: "Every robot format (URDF, MJCF, ROS TF) speaks quaternions. Euler angles gimbal-lock and quaternions double-cover, misunderstanding either costs real debugging days.",
+    why: "Every robot format (URDF, MJCF, ROS TF) speaks quaternions. Euler angles gimbal-lock and quaternions double-cover. Misunderstanding either costs real debugging days.",
     objectives: [
       "Euler conventions and why 3 numbers must fail somewhere (gimbal lock demonstrated)",
       "Axis-angle; Rodrigues' formula",
@@ -42,7 +42,7 @@ export const L5_NODES: SkillNode[] = [
     ],
     prereqs: [{ id: "l5-frames-rotations" }],
     hours: 5,
-    primary: { resourceId: "eater-quaternions", sections: "All interactive parts, drag the rotations yourself" },
+    primary: { resourceId: "eater-quaternions", sections: "All interactive parts; drag the rotations yourself" },
     backup: { resourceId: "modern-robotics", sections: "Ch 3.2.3 + Appendix B" },
     equations: [
       "R = I + \\sin\\theta\\,[\\hat\\omega] + (1-\\cos\\theta)[\\hat\\omega]^2",
@@ -80,7 +80,7 @@ export const L5_NODES: SkillNode[] = [
     ],
     implementation: "Complete se3.py: SE(3) exp/log, adjoint, ⊞/⊟; property tests: exp(log(T))=T, log(exp(ξ))=ξ near identity.",
     exercises: [
-      "Interpolate two poses via log/exp geodesic vs naive lerp of matrices, visualize the difference",
+      "Interpolate two poses via log/exp geodesic vs naive lerp of matrices; visualize the difference",
       "Verify the SO(3) Jacobian tables numerically on random perturbations",
     ],
     masteryGate: "gold",
@@ -102,7 +102,7 @@ export const L5_NODES: SkillNode[] = [
     prereqs: [{ id: "l1-numpy" }, { id: "l1-classes" }],
     hours: 5,
     primary: { resourceId: "mujoco", sections: "Overview + Python bindings; skim MJCF reference as needed" },
-    backup: { resourceId: "menagerie", sections: "UR5e model, read its MJCF top to bottom" },
+    backup: { resourceId: "menagerie", sections: "UR5e model; read its MJCF top to bottom" },
     exercises: [
       "Author a 2-link pendulum MJCF from scratch; verify its DOFs and limits in the viewer",
       "Sinusoidal joint commands to a Menagerie UR5e; plot commanded vs actual positions (discover actuator dynamics exist)",
@@ -130,7 +130,7 @@ export const L5_NODES: SkillNode[] = [
     implementation: "kin.py: FK for the Menagerie UR5e from its screw axes; validate against MuJoCo's own body poses across 500 random configurations (<1e-6).",
     exercises: [
       "Derive the 2-link planar arm FK by hand from PoE; match your L2-trig version",
-      "Extract screw axes for the UR5e from its MJCF frames, document the process",
+      "Extract screw axes for the UR5e from its MJCF frames and document the process",
     ],
     masteryGate: "gold",
     masteryTest: "Your FK matches MuJoCo ground truth to 1e-6 on 500 random configs for a 6-DOF arm YOU parameterized from the model file, plus the 2-link hand derivation on paper.",
@@ -142,7 +142,7 @@ export const L5_NODES: SkillNode[] = [
     title: "The Manipulator Jacobian",
     track: "core",
     labs: ["robotics", "math"],
-    why: "The Jacobian maps joint velocities to hand velocities, control, IK, force transmission, and singularity analysis all live here. It is your L2 Jacobian wearing a hard hat.",
+    why: "The Jacobian maps joint velocities to hand velocities. Control, IK, force transmission, and singularity analysis all live here. It is your L2 Jacobian wearing a hard hat.",
     objectives: [
       "Geometric Jacobian columns as joint-axis contributions",
       "Velocity mapping V = J(θ)θ̇; force duality τ = Jᵀf",
@@ -167,7 +167,7 @@ export const L5_NODES: SkillNode[] = [
     title: "Inverse Kinematics (Numerical)",
     track: "core",
     labs: ["robotics"],
-    why: "IK answers 'what joints put the hand THERE', Newton's method on the manifold, damped near singularities. Differential IK from this node is the control law inside modern manipulation stacks.",
+    why: "IK answers 'what joints put the hand THERE': Newton's method on the manifold, damped near singularities. Differential IK from this node is the control law inside modern manipulation stacks.",
     objectives: [
       "Newton–Raphson IK with the SE(3) error via log map",
       "Damped least squares (why raw pseudo-inverse explodes near singularities)",
@@ -196,14 +196,14 @@ export const L5_NODES: SkillNode[] = [
     why: "You need the STRUCTURE M(q)q̈ + C(q,q̇)q̇ + g(q) = τ, for computed-torque control and for reading papers, not Featherstone derivations. Simulators do the rest; you learn what they're doing.",
     objectives: [
       "Lagrangian mechanics on a 2-link arm, once, by hand",
-      "The manipulator equation's terms: inertia, Coriolis, gravity, what each feels like",
+      "The manipulator equation's terms: inertia, Coriolis, gravity and what each feels like",
       "Forward vs inverse dynamics; where MuJoCo fits in",
     ],
     prereqs: [{ id: "l5-jacobians" }],
     hours: 5,
     primary: { resourceId: "modern-robotics", sections: "Ch 8.1–8.3 + 8.5 (skim 8.9); MuJoCo docs 'Computation' chapter for how a simulator actually does contacts" },
     equations: ["M(q)\\ddot q + C(q,\\dot q)\\dot q + g(q) = \\tau", "L = T - U"],
-    skip: ["Featherstone spatial algebra, O(n) ABA derivations, reference-only unless you someday build a simulator"],
+    skip: ["Featherstone spatial algebra, O(n) ABA derivations: reference-only unless you someday build a simulator"],
     exercises: [
       "Derive the 2-link arm's M(q) and g(q) via Lagrange; verify against MuJoCo's mass matrix at 10 configurations",
       "Feel gravity compensation: apply τ=g(q) and watch the arm float",
@@ -218,7 +218,7 @@ export const L5_NODES: SkillNode[] = [
     title: "Trajectory Generation",
     track: "core",
     labs: ["robotics"],
-    why: "Robots don't teleport between configurations, they follow time-parameterized paths with bounded velocity/acceleration. Also your first taste of the 'action sequence' objects policies output.",
+    why: "Robots don't teleport between configurations. They follow time-parameterized paths with bounded velocity/acceleration. Also your first taste of the 'action sequence' objects policies output.",
     objectives: [
       "Cubic/quintic time scaling; trapezoidal profiles",
       "Joint-space vs task-space (screw) trajectories",
@@ -231,7 +231,7 @@ export const L5_NODES: SkillNode[] = [
     implementation: "traj.py: quintic scaling + joint and Cartesian-screw trajectory generators; execute on the UR5e with position control; plot pos/vel/acc profiles.",
     exercises: ["Compare linear vs quintic scaling at the same duration: plot acceleration spikes; explain which a real motor prefers"],
     masteryGate: "silver",
-    masteryTest: "Smooth pick-motion trajectory through 3 via points executing on the sim arm with continuous velocity, profiles plotted and within declared limits.",
+    masteryTest: "Smooth pick-motion trajectory through 3 via points executing on the sim arm with continuous velocity, with profiles plotted and within declared limits.",
     diagnostic: "Why is jerk continuity nice? What's wrong with linear interpolation in SE(3) done naively?",
   },
   {
@@ -251,7 +251,7 @@ export const L5_NODES: SkillNode[] = [
     hours: 6,
     masteryGate: "gold",
     masteryTest: "One sitting, your library only (no frameworks): given a NEW Menagerie arm you haven't used (e.g. a Kinova or IIWA), parameterize its screw axes from the model, get FK matching MuJoCo to 1e-6, run your IK benchmark, and execute a smooth square-tracing trajectory with the end-effector, recorded on video with the test suite green.",
-    diagnostic: ", ",
+    diagnostic: "No separate diagnostic. Use this node's mastery test.",
     exercises: [],
     projectIds: ["p7-arm-kinematics"],
   },

@@ -9,12 +9,12 @@ import { Panel, SectionTitle, Stat } from "@/components/ui";
 // HANDOVER §23 — the seventh-day ritual.
 const QUESTIONS: { key: string; label: string; ph: string }[] = [
   { key: "learned", label: "What I truly learned (could rebuild cold)", ph: "Closed-book proof: what did you re-derive/re-implement this week?" },
-  { key: "recognized", label: "What I merely recognized", ph: "Honest list — these go back into the queue" },
+  { key: "recognized", label: "What I merely recognized", ph: "Honest list. These go back into the queue" },
   { key: "forgot", label: "What I forgot (review-queue evidence)", ph: "Which retrieval prompts failed?" },
   { key: "blockers", label: "What blocks next week", ph: "Concrete, named blockers" },
-  { key: "remove", label: "What should be removed from the plan", ph: "Cut with reasons — the audit gives permission" },
+  { key: "remove", label: "What should be removed from the plan", ph: "Cut with reasons. The audit gives permission" },
   { key: "accelerate", label: "What should be accelerated", ph: "Where did the diagnostics say 'skip ahead'?" },
-  { key: "explain", label: "Explain-back (Feynman check)", ph: "Paste your explanation of the week's hardest concept — where did it wobble?" },
+  { key: "explain", label: "Explain-back (Feynman check)", ph: "Paste your explanation of the week's hardest concept. Where did it wobble?" },
 ];
 
 function isoWeek(d = new Date()): string {
@@ -45,7 +45,7 @@ export default function WeeklyPage() {
   return (
     <div className="mx-auto max-w-3xl space-y-5">
       <div>
-        <div className="mono-label">the seventh-day ritual — HANDOVER §23</div>
+        <div className="mono-label">the seventh-day ritual (HANDOVER §23)</div>
         <h1 className="font-mono text-2xl font-bold">WEEKLY REVIEW · {week}</h1>
         {saved?.done && <div className="mt-1 text-xs text-acc-robot">✓ completed this week</div>}
       </div>
@@ -70,7 +70,7 @@ export default function WeeklyPage() {
 
       {pace && pace.verdict !== "on-pace" && pace.verdict !== "ahead" && (
         <Panel accent="#e8b34d">
-          <SectionTitle>plan adjustment — the pre-agreed levers</SectionTitle>
+          <SectionTitle>plan adjustment: the pre-agreed levers</SectionTitle>
           {DESCOPE_LEVERS.map((l, i) => (
             <div key={i} className="text-xs text-dim">▸ {l}</div>
           ))}

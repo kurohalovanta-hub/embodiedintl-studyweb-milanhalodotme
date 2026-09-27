@@ -6,7 +6,7 @@ import {
 export async function POST(req: Request) {
   const redis = getRedis();
   if (!redis) {
-    return Response.json({ error: "Accounts are not configured on this deployment." }, { status: 501 });
+    return Response.json({ error: "Accounts are not set up on this deployment." }, { status: 501 });
   }
   const body = (await req.json().catch(() => null)) as { username?: string; password?: string } | null;
   const username = normalizeUsername(body?.username ?? "");
@@ -15,16 +15,21 @@ export async function POST(req: Request) {
     return Response.json({ error: "Username and password required." }, { status: 400 });
   }
   if (!(await rateLimit(redis, `login:${clientIp(req)}:${username}`, 20, 600))) {
-    return Response.json({ error: "Too many attempts — try again later." }, { status: 429 });
+    return Response.json({ error: "Too many attempts. Try again later." }, { status: 429 });
   }
 
-  const user = await getUser(redis, username);
+  let user;
+  try {
+    user = await getUser(redis, username);
+  } catch {
+    return Response.json({ error: "Sign-in is unavailable right now. The database did not answer. Try again in a minute." }, { status: 503 });
+  }
   if (!user || typeof user !== "object" || !("hash" in user) || !(await verifyPassword(password, user))) {
     return Response.json({ error: "Invalid username or password." }, { status: 401 });
   }
   if (!user.approved) {
     return Response.json(
-      { error: "Your account is awaiting administrator approval.", pending: true },
+      { error: "An admin has switched this account off.", pending: true },
       { status: 403 },
     );
   }

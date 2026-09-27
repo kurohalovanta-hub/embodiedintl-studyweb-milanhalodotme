@@ -39,7 +39,7 @@ export const L15_NODES: SkillNode[] = [
     exercises: ["Map one topic (e.g. action tokenization): 15 papers, organized as a tree from 2 roots, each with a one-liner, timeboxed to 3 hours"],
     masteryGate: "silver",
     masteryTest: "Given a claimed-novel idea (I supply three), find the closest prior work within 45 minutes each and characterize the actual delta.",
-    diagnostic: "Forward vs backward citation search, when each? Where do 2026 robot-learning papers appear first?",
+    diagnostic: "Forward vs backward citation search: when each? Where do 2026 robot-learning papers appear first?",
   },
   {
     id: "l15-repro-methodology",
@@ -47,7 +47,7 @@ export const L15_NODES: SkillNode[] = [
     title: "Reproduction Methodology",
     track: "research",
     labs: ["embodied"],
-    why: "Running a repo is not research; reproducing a CLAIM is. The discipline, environment pinning, seed protocols, tolerance definitions, deviation logging, is what makes your results citable and your failures informative.",
+    why: "Running a repo is not research; reproducing a CLAIM is. The discipline (environment pinning, seed protocols, tolerance definitions, deviation logging) is what makes your results citable and your failures informative.",
     objectives: [
       "Reproduction tiers: run-the-demo → reproduce-the-number → reproduce-from-scratch",
       "Environment capture (versions, hardware, configs); tolerance: what counts as 'reproduced'",
@@ -67,7 +67,7 @@ export const L15_NODES: SkillNode[] = [
     level: 15,
     title: "Controlled Experiments & Ablations",
     labs: ["embodied"],
-    why: "The research method itself: hypothesis → independent variable → controls → measurement. Ablation, remove one component, measure the damage, is how the field assigns credit, and how your Month-7 claims will be earned.",
+    why: "The research method itself: hypothesis → independent variable → controls → measurement. Ablation (remove one component, measure the damage) is how the field assigns credit, and how your Month-7 claims will be earned.",
     objectives: [
       "Falsifiable hypotheses; independent/dependent variables; controls that actually control",
       "Ablation design: one axis at a time; interaction effects acknowledged",
@@ -87,7 +87,7 @@ export const L15_NODES: SkillNode[] = [
     title: "Analysis, Statistics & Failure Forensics",
     track: "research",
     labs: ["embodied"],
-    why: "Numbers become claims through analysis: CIs, seed distributions, per-condition breakdowns, and failure analysis (WATCH the rollouts) is where robot-learning insight actually lives.",
+    why: "Numbers become claims through analysis: CIs, seed distributions, per-condition breakdowns. Failure analysis (WATCH the rollouts) is where robot-learning insight lives.",
     objectives: [
       "Your l11 statistics applied to experiment grids; when differences are real",
       "Failure taxonomies: categorize rollout failures, count them, let the counts drive the next experiment",
@@ -135,7 +135,7 @@ export const L15_NODES: SkillNode[] = [
     exercises: ["Pre-register the whole plan (claim, tolerance, budget) in the app's experiment tracker before any GPU-hour is spent"],
     masteryGate: "gold",
     masteryTest: "P21 accepted: reproduction report (protocol, results vs claim with CIs, deviation log, failure analysis, 'what I'd tell the authors') + reusable repo. This is the strongest pre-research portfolio artifact in the program.",
-    diagnostic: ", ",
+    diagnostic: "No separate diagnostic. Use this node's mastery test.",
     projectIds: ["p21-reproduction"],
     computeNote: "Fits 16–24 GB local + ≤$30 optional cloud, by design of the menu.",
   },

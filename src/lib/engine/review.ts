@@ -40,7 +40,8 @@ export function reviewQueue(progress: Record<string, NodeProgress>, now = Date.n
     items.push({
       nodeId: id,
       title: node.title,
-      prompt: node.diagnostic !== "—" ? node.diagnostic : node.masteryTest,
+      // project and boss nodes carry a placeholder diagnostic; review those on the mastery test
+      prompt: node.diagnostic.startsWith("No separate diagnostic") ? node.masteryTest : node.diagnostic,
       due: p.review.due,
       overdueDays: Math.floor((now - p.review.due) / DAY),
     });

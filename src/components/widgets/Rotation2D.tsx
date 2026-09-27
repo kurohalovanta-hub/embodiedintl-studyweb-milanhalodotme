@@ -102,7 +102,7 @@ export default function Rotation2D() {
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
             {mode === "frame" ? (
               <>
-                Same physical point, two descriptions. The green point never moves — only the{" "}
+                Same physical point, two descriptions. The green point never moves. Only the{" "}
                 <span className="text-acc">body frame</span> turns, and its coordinates{" "}
                 <Katex tex="{}^{B}p=R^\top\,{}^{W}p" /> change. This is exactly how a robot re-expresses
                 a camera detection in its gripper frame.
@@ -110,7 +110,7 @@ export default function Rotation2D() {
             ) : (
               <>
                 Now the same matrix physically moves the point: <Katex tex="p'=R\,p" />. Length is
-                preserved (<Katex tex="R^\top R=I" />) — rotation never stretches. Passive vs active
+                preserved (<Katex tex="R^\top R=I" />): rotation never stretches. Passive vs active
                 is only a choice of what you hold fixed; mixing them up flips the sign of θ.
               </>
             )}

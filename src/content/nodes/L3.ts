@@ -10,7 +10,7 @@ export const L3_NODES: SkillNode[] = [
     why: "Before any algorithm: what does it mean for a machine to learn from data, and how do we know it worked? Getting train/val/test right is the difference between science and self-deception.",
     objectives: [
       "Supervised learning as function fitting; features/labels/hypothesis class",
-      "Train/validation/test splits, what each is FOR; leakage",
+      "Train/validation/test splits: what each is FOR; leakage",
       "Loss as 'how wrong'; empirical risk; the generalization question",
     ],
     prereqs: [{ id: "l1-numpy" }, { id: "l2-functions-graphs" }],
@@ -74,7 +74,7 @@ export const L3_NODES: SkillNode[] = [
     ],
     implementation: "NumPy logistic regression with GD on a 2D dataset; plot the decision boundary evolving during training.",
     exercises: [
-      "Derive ∂L/∂w for logistic regression, discover it is the same (ŷ-y)x form as linear regression, and explain why",
+      "Derive ∂L/∂w for logistic regression. Discover it is the same (ŷ-y)x form as linear regression, and explain why",
       "Implement stable softmax (subtract max); break the naive version with large logits",
     ],
     masteryGate: "gold",
@@ -87,7 +87,7 @@ export const L3_NODES: SkillNode[] = [
     title: "SGD, Momentum & Adam",
     track: "core",
     labs: ["ml"],
-    why: "Nobody trains on full batches. Stochasticity, momentum, and adaptive step sizes are the practical physics of training, learn their behavior on problems small enough to see.",
+    why: "Nobody trains on full batches. Stochasticity, momentum, and adaptive step sizes are the practical physics of training. Learn their behavior on problems small enough to see.",
     objectives: [
       "Minibatch SGD: noise vs speed tradeoff; batch-size effects",
       "Momentum and RMS scaling; Adam assembled from both",
@@ -176,7 +176,7 @@ export const L3_NODES: SkillNode[] = [
     masteryGate: "gold",
     masteryTest: "On paper, backprop a 2-layer network (matrix form) from loss to all parameters; then make your scalar autograd reproduce the numbers on a tiny example.",
     diagnostic: "Why does a node used twice SUM its gradients? What is ∂L/∂W's shape for W (m×n)?",
-    misconceptions: ["Backprop is not an approximation and not 'biologically mystical', it is exact chain-rule bookkeeping."],
+    misconceptions: ["Backprop is not an approximation and not 'biologically mystical'. It is exact chain-rule bookkeeping."],
   },
   {
     id: "l3-mlp-numpy",
@@ -195,7 +195,7 @@ export const L3_NODES: SkillNode[] = [
     primary: { resourceId: "karpathy-z2h", sections: "v3 makemore-MLP as companion (his tensor habits, your NumPy)" },
     implementation: "2-layer MLP on MNIST-class data (or make_moons→digits): forward, backward, train to >95%, all NumPy. Gradient-check every layer before training.",
     exercises: [
-      "Break it five ways on purpose (lr too high, no scaling, dead ReLU init, wrong CE, transposed W), recognize each failure signature",
+      "Break it five ways on purpose (lr too high, no scaling, dead ReLU init, wrong CE, transposed W) and recognize each failure signature",
       "Add L2 and early stopping; show the generalization gap closing",
     ],
     masteryGate: "gold",

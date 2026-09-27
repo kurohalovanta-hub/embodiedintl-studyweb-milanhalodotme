@@ -59,7 +59,7 @@ export function PaperView({ paperId }: { paperId: string }) {
         {prereqs.length > 0 && (
           <div className="mt-3 border-t border-line/60 pt-2.5">
             <div className={`text-xs font-medium ${ready ? "text-acc-robot" : "text-acc-math"}`}>
-              {ready ? "◉ You have every prerequisite — read it with full power." : "◌ Not ready yet — these gates first:"}
+              {ready ? "◉ You have every prerequisite. Read it with full power." : "◌ Not ready yet. Clear these gates first:"}
             </div>
             <div className="mt-1.5 flex flex-wrap gap-1.5">
               {prereqs.map((n) => {
@@ -103,7 +103,7 @@ export function PaperView({ paperId }: { paperId: string }) {
                 <Katex tex={eq} block />
               </div>
             ))}
-            <div className="text-[11px] text-faint">Every symbol above should be explainable — Defense Mode will ask.</div>
+            <div className="text-[11px] text-faint">Every symbol above should be explainable. Defense Mode will ask.</div>
           </div>
         )}
       </Panel>
@@ -148,8 +148,8 @@ export function PaperView({ paperId }: { paperId: string }) {
       <Panel accent="#e86ea4">
         <SectionTitle>paper defense</SectionTitle>
         <p className="text-[13px] text-dim">
-          {p.questions.length + 3} interrogation questions, closed book. The app doesn&apos;t grade you —
-          you grade yourself, honestly, answer by answer. Defended = you own this paper.
+          {p.questions.length + 3} interrogation questions, closed book. The app doesn&apos;t grade you.
+          You grade yourself, honestly, answer by answer. Defended means you own this paper.
         </p>
         {defense && (
           <div className="mt-2 flex items-center gap-2 text-xs">
@@ -195,14 +195,14 @@ function NotesArea({ paperId }: { paperId: string }) {
   const [val, setVal] = useState(notes);
   return (
     <div className="mt-3">
-      <div className="mono-label mb-1">notes — claims / evidence / assumptions / questions</div>
+      <div className="mono-label mb-1">notes: claims / evidence / assumptions / questions</div>
       <textarea
         value={val}
         rows={5}
         onChange={(e) => setVal(e.target.value)}
         onBlur={() => store.setPaperStatus(paperId, store.papers[paperId]?.status ?? "queue", val)}
         className="w-full font-mono text-xs"
-        placeholder="Three-pass template: (1) claim & contribution, (2) how it works, (3) what you'd probe…"
+        placeholder="Three-pass template: (1) claim and contribution, (2) how it works, (3) what you'd probe…"
       />
     </div>
   );

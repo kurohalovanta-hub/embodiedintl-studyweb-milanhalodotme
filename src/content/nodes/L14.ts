@@ -7,7 +7,7 @@ export const L14_NODES: SkillNode[] = [
     title: "The Reality Gap & Domain Randomization",
     track: "core",
     labs: ["embodied", "robotics"],
-    why: "Sim-trained policies meet a world with different friction, latency, and lighting. Domain randomization, train across randomized physics so reality looks like one more sample, is the recipe that took policies from sim to real hands and legs.",
+    why: "Sim-trained policies meet a world with different friction, latency, and lighting. Domain randomization (train across randomized physics so reality looks like one more sample) is the recipe that took policies from sim to real hands and legs.",
     objectives: [
       "Gap taxonomy: dynamics (mass/friction/latency/actuators) vs perception (lighting/texture) vs systematic modeling error",
       "DR done right: which parameters, what ranges, the robustness-vs-performance tradeoff",
@@ -17,7 +17,7 @@ export const L14_NODES: SkillNode[] = [
     hours: 5,
     primary: { resourceId: "reality-gap-survey", sections: "The 2026 Annual Reviews survey READ + Rudin (2109.11978) + ADR (1910.07113) papers" },
     implementation: "The DR ablation (the level's core experiment): train Go1/PushCube policies with and without friction+mass+latency randomization; evaluate BOTH under 10 perturbed-physics test conditions; the robustness gap quantified.",
-    exercises: ["Push DR ranges to absurd width: watch task performance collapse, find the sweet spot empirically and connect to ADR's automated answer"],
+    exercises: ["Push DR ranges to absurd width: watch task performance collapse. Find the sweet spot empirically and connect to ADR's automated answer"],
     masteryGate: "gold",
     masteryTest: "Your DR ablation table + the one-page 'DR design memo' for a new task (parameters, ranges, evidence-based reasoning).",
     diagnostic: "Why does DR work (the distribution argument)? Which gap does DR NOT fix (systematic modeling error)?",
@@ -53,9 +53,9 @@ export const L14_NODES: SkillNode[] = [
     why: "The phenomena simulation hides: control latency, actuator backlash, sensor timestamps, emergency stops. Learned as literacy now so the optional hardware track (or any future lab) doesn't start from zero.",
     objectives: [
       "The latency budget of a real control loop (sense→infer→act) and why async inference/RTC exists",
-      "Calibration debt: camera-to-robot extrinsics, joint offsets, what drifts and how you'd know",
+      "Calibration debt: camera-to-robot extrinsics, joint offsets, and what drifts and how you'd know",
       "Safety basics: workspace limits, force limits, e-stops, the 'never fight the robot' rules",
-      "Actuator reality: backlash, friction, thermal limits, why sim actuators are lies",
+      "Actuator reality: backlash, friction, thermal limits, and why sim actuators are lies",
     ],
     prereqs: [{ id: "l14-reality-gap" }],
     hours: 4,
@@ -74,7 +74,7 @@ export const L14_NODES: SkillNode[] = [
     title: "HIL-SERL: Real-Robot RL, In Sim",
     track: "core",
     labs: ["embodied"],
-    why: "The bridge between your SAC and real-world practice: sample-efficient RL with human interventions and a learned reward classifier, LeRobot ships a sim variant (gym_hil), so the workflow is learnable with zero hardware and drops onto a real SO-101 later.",
+    why: "The bridge between your SAC and real-world practice: sample-efficient RL with human interventions and a learned reward classifier. LeRobot ships a sim variant (gym_hil), so the workflow is learnable with zero hardware and drops onto a real SO-101 later.",
     objectives: [
       "The HIL-SERL loop: demos → reward classifier → SAC + human corrections",
       "Why interventions accelerate (and de-risk) real RL",

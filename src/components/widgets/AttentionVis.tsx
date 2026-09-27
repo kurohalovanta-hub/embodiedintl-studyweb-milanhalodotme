@@ -64,7 +64,7 @@ export default function AttentionVis() {
           </svg>
           <svg viewBox="0 0 300 260" className="w-full select-none rounded-md border border-line bg-panel2/40">
             <text x={HX + 2 * CELL} y={14} fill="#5b6b7d" fontSize={10} fontFamily="var(--font-mono)" textAnchor="middle">
-              softmax(e·eᵀ/τ√d) — keys →
+              softmax(e·eᵀ/τ√d), keys →
             </text>
             {LABELS.map((l, j) => (
               <text key={l} x={HX + j * CELL + CELL / 2} y={28} fill={COLORS[j]} fontSize={9.5} fontFamily="var(--font-mono)" textAnchor="middle">{l}</text>
@@ -114,11 +114,11 @@ export default function AttentionVis() {
             </div>
           </div>
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
-            <Katex tex="\mathrm{out}_i=\sum_j \mathrm{softmax}_j\!\left(\tfrac{e_i\cdot e_j}{\tau\sqrt d}\right) e_j" /> —
-            drag <b>mug</b> toward <b>robot</b> and watch its row concentrate; the green <b>out</b> arrow
+            <Katex tex="\mathrm{out}_i=\sum_j \mathrm{softmax}_j\!\left(\tfrac{e_i\cdot e_j}{\tau\sqrt d}\right) e_j" />.
+            Drag <b>mug</b> toward <b>robot</b> and watch its row concentrate; the green <b>out</b> arrow
             slides toward whatever wins. Lower τ → nearly hard selection; raise τ → uniform blur. Here
             queries, keys and values are all the raw embedding; a real Transformer first maps them through
-            learned <Katex tex="W_Q,W_K,W_V" /> — that is the <i>only</i> difference.
+            learned <Katex tex="W_Q,W_K,W_V" />. That is the <i>only</i> difference.
           </div>
         </div>
       }

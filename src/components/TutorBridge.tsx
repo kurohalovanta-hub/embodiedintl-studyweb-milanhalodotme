@@ -33,7 +33,7 @@ export function TutorBridge({
       setCopied(mode);
       setTimeout(() => setCopied(null), 2500);
     } catch {
-      setMsg("Clipboard blocked — long-press/select the packet from the node page instead.");
+      setMsg("Clipboard blocked. Long-press/select the packet from the node page instead.");
     }
   };
 
@@ -45,21 +45,21 @@ export function TutorBridge({
     }
     const evs = summaryToEvidence(parsed.summary);
     for (const e of evs) store.recordEvidence(e);
-    setMsg(`✓ Session recorded: ${evs.length} evidence entries for ${parsed.summary.node_id}. A tutor session supports progress — the typed prove-it is still yours to do.`);
+    setMsg(`✓ Session recorded: ${evs.length} evidence entries for ${parsed.summary.node_id}. A tutor session supports progress; the typed prove-it is still yours to do.`);
     setPaste("");
     setIngesting(false);
   };
 
   return (
     <div className={compact ? "" : "rounded-md border border-line bg-panel2/50 p-3"}>
-      {!compact && <div className="mono-label mb-2">stuck? bring a tutor — packet includes your exact state</div>}
+      {!compact && <div className="mono-label mb-2">stuck? bring a tutor. The packet includes your exact state</div>}
       <div className="flex flex-wrap gap-1.5">
         {shown.map((m) => (
           <button
             key={m}
             className="rounded-md border border-line2 bg-panel2 px-2.5 py-1.5 font-mono text-[11.5px] text-dim transition-colors hover:border-acc/50 hover:text-acc"
             onClick={() => copy(m)}
-            title="Copies a context packet — paste it into Claude or ChatGPT"
+            title="Copies a context packet. Paste it into Claude or ChatGPT"
           >
             {copied === m ? "✓ copied" : TUTOR_MODE_LABELS[m]}
           </button>
@@ -73,7 +73,7 @@ export function TutorBridge({
       </div>
       {copied && (
         <div className="mt-1.5 text-[11px] text-faint">
-          Packet copied — paste into Claude or ChatGPT. It carries your goal, state, the honesty rules,
+          Packet copied. Paste it into Claude or ChatGPT. It carries your goal, state, the honesty rules,
           and the summary format to bring back here.
         </div>
       )}
@@ -87,7 +87,7 @@ export function TutorBridge({
             placeholder='Paste the tutor&apos;s end-of-session JSON ({"node_id": …}) here…'
           />
           <button className="btn !py-1.5 text-xs" disabled={paste.trim().length < 10} onClick={ingest}>
-            Ingest as evidence
+            Save as evidence
           </button>
         </div>
       )}

@@ -14,7 +14,7 @@ const jbmono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jbmono" })
 export const metadata: Metadata = {
   title: { default: "HALO", template: "%s · HALO" },
   description:
-    "PROJECT : VANTA HALO — a mastery-gated ascent from zero to embodied-intelligence researcher.",
+    "PROJECT : VANTA HALO. A mastery-gated ascent from zero to embodied-intelligence researcher.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

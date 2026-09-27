@@ -40,7 +40,12 @@ first-class). Product target: **demonstrable independent capability, never engag
   the one overlay fires on *becameVerified* only and is suppressed during binges
   (`bingeSignal`). Reward = "you can now do X independently". Today shows ONE
   bottleneck. Do not add streak mechanics, confetti, or claim-speed affordances.
-- **Auth (ADR-004):** first registered user is admin; later users need approval.
+- **Auth (ADR-004):** first registered user is admin; joining is open (2026-09-27: no
+  approval step, every new account is `approved: true`; admin can revoke or delete).
+  `rateLimit` fails open when Redis refuses writes so sign-in survives a quota overrun.
+  Storage (2026-09-27): when `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` are set, `getRedis()`
+  returns `SupabaseKV` (`src/lib/server/supabase-kv.ts`, one `kv` table, schema in
+  `docs/architecture/supabase-kv.sql`) in place of Upstash. Callers are unchanged.
   scrypt passwords, HMAC session cookies, secret auto-generated into Redis (`SET NX`)
   — zero env vars. Upstash env names `KV_REST_API_URL`/`KV_REST_API_TOKEN` (never
   `Redis.fromEnv()`). No Redis ⇒ graceful local mode. Per-user progress at

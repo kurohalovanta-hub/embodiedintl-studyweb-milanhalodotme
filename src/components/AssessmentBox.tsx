@@ -38,12 +38,12 @@ export function AssessmentBox({ id, diagnostic }: { id: string; diagnostic?: boo
           <span className="text-acc-robot">✓ Verified.</span>
         ) : result.provisional ? (
           <span className="text-dim">
-            <span className="text-acc-robot">Recorded.</span> Gate reached —{" "}
+            <span className="text-acc-robot">Recorded.</span> Gate reached,{" "}
             <span className="text-acc-math">verifies at your next review (≈2 days)</span>. Unlocks are live now.
           </span>
         ) : (
           <span className="text-dim">
-            Recorded honestly. The gap you just found is the syllabus — work the practice again, then retry.
+            Recorded honestly. The gap you found is what to study next. Work the practice again, then retry.
           </span>
         )}
         <button
@@ -68,7 +68,7 @@ export function AssessmentBox({ id, diagnostic }: { id: string; diagnostic?: boo
             placeholder={
               diagnostic
                 ? "Closed book: answer the test-out above here (or do it in your editor and paste the result)…"
-                : "Closed book: work the bar above here — derivation, answer, or paste your artifact/output…"
+                : "Closed book: work the bar above here: derivation, answer, or paste your artifact/output…"
             }
           />
           <button className="btn btn-acc !py-1.5 text-xs" disabled={attempt.trim().length < minLen} onClick={() => setCommitted(true)}>
@@ -112,7 +112,7 @@ export function AssessmentBox({ id, diagnostic }: { id: string; diagnostic?: boo
           </div>
           {choice === "ai" && (
             <div className="text-[11px] text-acc-math">
-              Honest answer — this attempt can reach Silver at most. Redo it yourself later for the gate.
+              Honest answer. This attempt can reach Silver at most. Redo it yourself later for the gate.
             </div>
           )}
           <div className="flex gap-2">

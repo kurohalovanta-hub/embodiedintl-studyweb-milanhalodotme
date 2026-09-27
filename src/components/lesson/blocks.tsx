@@ -90,7 +90,7 @@ function Derivation({ block }: { block: DerivationBlock }) {
   return (
     <div className="overflow-hidden rounded-lg border border-acc-math/25">
       <div className="border-b border-acc-math/20 bg-acc-math/[0.06] px-4 py-2.5">
-        <div className="mono-label text-acc-math">derivation{block.title ? ` — ${block.title}` : ""}</div>
+        <div className="mono-label text-acc-math">derivation{block.title ? `: ${block.title}` : ""}</div>
         {block.intro && <div className="mt-1 text-[13px] text-dim">{block.intro}</div>}
       </div>
       <ol className="space-y-0 px-4 py-2">
@@ -117,7 +117,7 @@ function Derivation({ block }: { block: DerivationBlock }) {
           </button>
         ) : (
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs text-acc-robot">■ Derivation complete — now close the page and reproduce it.</span>
+            <span className="text-xs text-acc-robot">■ Derivation complete. Now close the page and reproduce it.</span>
             <button className="btn-ghost btn !py-1 text-xs" onClick={() => setShown(1)}>restart</button>
           </div>
         )}
@@ -133,7 +133,7 @@ function Widget({ id, caption, params }: { id: string; caption?: string; params?
     <figure className="overflow-hidden rounded-lg border border-acc/25">
       <div className="flex items-center justify-between border-b border-acc/15 bg-acc/[0.05] px-4 py-2">
         <span className="mono-label text-acc">interactive · {id}</span>
-        <span className="hidden text-[10.5px] text-faint sm:block">drag & slide — the math is live</span>
+        <span className="hidden text-[10.5px] text-faint sm:block">drag and slide, the math is live</span>
       </div>
       <div className="bg-[#0b1017] p-3 sm:p-4">
         {W ? <W params={params} /> : <div className="py-8 text-center text-sm text-faint">widget “{id}” unavailable</div>}
@@ -176,7 +176,7 @@ function CodeExercise({ block, checkId, nodeId }: { block: CodeBlockSpec; checkI
         <span className="mono-label text-acc-robot">code · {modeLabels[block.mode]}</span>
         {prior && (
           <span className={`font-mono text-[10px] ${prior === "got" ? "text-acc-robot" : "text-acc-frontier"}`}>
-            {prior === "got" ? "✓ solved" : "✗ missed — retry welcome"}
+            {prior === "got" ? "✓ solved" : "✗ missed, retry welcome"}
           </span>
         )}
       </div>
@@ -225,7 +225,7 @@ function CodeExercise({ block, checkId, nodeId }: { block: CodeBlockSpec; checkI
 
         {block.mode === "write" && block.checks && (
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2">
-            <div className="mono-label mb-1">acceptance checks — verify in your own editor</div>
+            <div className="mono-label mb-1">acceptance checks: verify in your own editor</div>
             {block.checks.map((c, i) => (
               <div key={i} className="py-0.5 text-[13px] text-ink">□ {c}</div>
             ))}
@@ -279,7 +279,7 @@ function CodeExercise({ block, checkId, nodeId }: { block: CodeBlockSpec; checkI
             {block.explanation && <Markdown className="mt-1.5 !text-[13px]">{block.explanation}</Markdown>}
             {!auto && committed !== null && (
               <div className="mt-2 flex items-center gap-2 border-t border-line/50 pt-2">
-                <span className="text-[11px] text-faint">your commit: <span className="font-mono text-dim">{String(committed)}</span> — honest grade:</span>
+                <span className="text-[11px] text-faint">your commit: <span className="font-mono text-dim">{String(committed)}</span>. Honest grade:</span>
                 <button className="btn !min-h-0 !py-1 text-xs" onClick={() => grade(nodeId, checkId, "got")}>✓ I had it</button>
                 <button className="btn btn-danger !min-h-0 !py-1 text-xs" onClick={() => grade(nodeId, checkId, "missed")}>✗ I missed</button>
               </div>
@@ -302,7 +302,7 @@ function Quiz({ block, sectionId, nodeId, index }: { block: QuizBlock; sectionId
   return (
     <div className="overflow-hidden rounded-lg border border-acc-learn/25">
       <div className="border-b border-acc-learn/20 bg-acc-learn/[0.05] px-4 py-2">
-        <span className="mono-label text-acc-learn">{block.title ?? "retrieval check"} — closed book</span>
+        <span className="mono-label text-acc-learn">{block.title ?? "retrieval check"}, closed book</span>
       </div>
       <div className="divide-y divide-line/50">
         {block.items.map((item, i) => (
@@ -363,7 +363,7 @@ function QuizItem({
 
           {!mcq && !revealed && (
             <button className="btn mt-2 !py-1.5 text-xs" onClick={() => setRevealed(true)}>
-              I answered aloud/on paper — reveal
+              I answered aloud/on paper, reveal
             </button>
           )}
 
@@ -416,7 +416,7 @@ function Exercise({ block }: { block: ExerciseBlock }) {
           {block.solution && (
             <details className="mt-1.5">
               <summary className="text-[12px] text-faint hover:text-acc-math hover:underline">
-                solution — only after an honest attempt
+                solution (only after an honest attempt)
               </summary>
               <Markdown className="mt-1 !text-[13px] opacity-90">{block.solution}</Markdown>
             </details>
@@ -493,7 +493,7 @@ function Sources({ node, note }: { node: SkillNode; note?: string }) {
   ].filter(Boolean) as { role: string; b: NonNullable<SkillNode["primary"]> }[];
   return (
     <div className="rounded-lg border border-line bg-panel2/50 px-4 py-3">
-      <div className="mono-label mb-2">go deeper — the verified sources</div>
+      <div className="mono-label mb-2">go deeper: the verified sources</div>
       {note && <p className="mb-2 text-[12.5px] text-dim">{note}</p>}
       <div className="space-y-2">
         {bindings.map(({ role, b }, i) => {
@@ -512,7 +512,7 @@ function Sources({ node, note }: { node: SkillNode; note?: string }) {
             </div>
           );
         })}
-        {bindings.length === 0 && <div className="text-[13px] text-faint">Self-contained node — this lesson is the material.</div>}
+        {bindings.length === 0 && <div className="text-[13px] text-faint">Self-contained node. This lesson is the material.</div>}
       </div>
     </div>
   );

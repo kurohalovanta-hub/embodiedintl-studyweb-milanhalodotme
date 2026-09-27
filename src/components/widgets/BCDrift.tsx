@@ -134,7 +134,7 @@ export default function BCDrift() {
             never seen these states and barely corrects. Small errors → drift out of the band → bigger
             errors: compounding, <Katex tex="O(\varepsilon T^2)" /> regret (Ross &amp; Bagnell). Narrow the
             coverage or raise η and watch trajectories peel off mid-corridor. <b>+ DAgger</b> collects
-            expert labels on the <i>learner&apos;s own states</i> — coverage follows the learner, error stays{" "}
+            expert labels on the <i>learner&apos;s own states</i>: coverage follows the learner, error stays{" "}
             <Katex tex="O(\varepsilon T)" />, and the same η suddenly succeeds. This exact failure is why
             robot imitation learning collects corrective data.
           </div>

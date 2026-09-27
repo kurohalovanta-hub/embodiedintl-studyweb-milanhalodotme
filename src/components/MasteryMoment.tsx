@@ -100,7 +100,7 @@ export function MasteryMomentHost() {
           </p>
           {rankUp && (
             <div className="mt-3 rounded-md border border-acc-math/40 bg-acc-math/10 px-3 py-2 text-[13px] text-acc-math">
-              Rank {delta.rankAfter.index} — {delta.rankAfter.title}
+              Rank {delta.rankAfter.index}: {delta.rankAfter.title}
             </div>
           )}
         </div>

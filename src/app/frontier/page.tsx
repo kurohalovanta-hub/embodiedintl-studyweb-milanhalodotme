@@ -17,11 +17,11 @@ export default function FrontierPage() {
   return (
     <div className="mx-auto max-w-4xl space-y-5">
       <div>
-        <div className="mono-label">the field moves — the roadmap versions itself · verified 2026-08-21</div>
+        <div className="mono-label">the field moves, the roadmap versions itself · verified 2026-08-21</div>
         <h1 className="font-mono text-2xl font-bold">FRONTIER TRACKER</h1>
         <p className="mt-1 text-sm text-dim">
           Every entry answers: what changed, and does the roadmap change? New developments get logged here
-          FIRST; curriculum edits follow the verdict — never hype. (Breadth addiction and premature frontier
+          FIRST; curriculum edits follow the verdict, never hype. (Breadth addiction and premature frontier
           obsession are named failure modes.)
         </p>
       </div>
@@ -64,7 +64,7 @@ export default function FrontierPage() {
 
       <Panel>
         <div className="text-xs text-faint">
-          Refresh ritual: monthly (and at CoRL/ICRA/RSS weeks) — sweep arXiv/lab blogs for your directions, add entries with verdicts,
+          Refresh ritual: monthly (and at CoRL/ICRA/RSS weeks). Sweep arXiv/lab blogs for your directions, add entries with verdicts,
           and only then edit the curriculum. The awesome-vla-2026 index and the WM survey&apos;s living repo are the entry points.
         </div>
       </Panel>

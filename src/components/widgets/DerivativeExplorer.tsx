@@ -98,8 +98,8 @@ export default function DerivativeExplorer() {
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
             <Katex tex="f'(x_0)=\lim_{h\to 0}\frac{f(x_0+h)-f(x_0)}{h}" block />
             The amber secant is the average rate over <Katex tex="[x_0,x_0+h]" />. Press{" "}
-            <span className="text-acc2">let h → 0</span> and watch it rotate onto the green tangent —
-            the gap readout is the limit happening numerically.
+            <span className="text-acc2">let h → 0</span> and watch it rotate onto the green tangent.
+            The gap readout is the limit happening numerically.
           </div>
         </>
       }

@@ -3,7 +3,7 @@ import type { Lesson } from "@/lib/lesson-types";
 export const lesson: Lesson = {
   nodeId: "l2-optimization",
   title: "Gradient Descent",
-  subtitle: "Following the slope — the algorithm that trains everything",
+  subtitle: "Following the slope: the algorithm that trains everything",
   minutes: 75,
   sections: [
     {
@@ -13,21 +13,21 @@ export const lesson: Lesson = {
       blocks: [
         {
           kind: "prose",
-          md: `Every model you will train — the linear regressor in Level 3, the Transformer in Level 4, the π0-style VLA fine-tune in Level 12 — is trained by the *same* algorithm, and you can state it in one line:
+          md: `Every model you will train (the linear regressor in Level 3, the Transformer in Level 4, the π0-style VLA fine-tune in Level 12) is trained by the *same* algorithm, and you can state it in one line:
 
 **measure which way is uphill, take a small step downhill, repeat.**
 
-The gradient $\\nabla f$ is the vector of partial derivatives — it points in the direction of steepest *increase* (you saw why in l2-multivariable: it's the direction that maximizes the directional derivative). So learning is:`,
+The gradient $\\nabla f$ is the vector of partial derivatives. It points in the direction of steepest *increase* (you saw why in l2-multivariable: it's the direction that maximizes the directional derivative). So learning is:`,
         },
         {
           kind: "equation",
           tex: "\\theta_{t+1} = \\theta_t - \\eta\\,\\nabla f(\\theta_t)",
           label: "gradient descent",
-          note: "η (learning rate) is the step size — the single most consequential hyperparameter in deep learning.",
+          note: "η (learning rate) is the step size, the single most consequential hyperparameter in deep learning.",
         },
         {
           kind: "prose",
-          md: `What makes this interesting isn't the update — it's *where it goes wrong*: steps too big diverge, narrow valleys cause zig-zag, saddle points stall, curved valleys crawl. Deep-learning lore ("use momentum", "warm up the LR") is a bag of fixes for exactly these failures. Today you'll cause every failure yourself, on purpose, and fix each one.`,
+          md: `The interesting part is *where it goes wrong*: steps too big diverge, narrow valleys cause zig-zag, saddle points stall, curved valleys crawl. Deep-learning lore ("use momentum", "warm up the LR") is a bag of fixes for exactly these failures. Today you'll cause every failure yourself, on purpose, and fix each one.`,
         },
       ],
     },
@@ -39,7 +39,7 @@ The gradient $\\nabla f$ is the vector of partial derivatives — it points in t
         {
           kind: "widget",
           id: "gradient-descent",
-          caption: "Four labs: (1) bowl — raise η past 1.0 until it diverges; (2) ravine — watch β=0 zig-zag across the steep axis, then raise β to 0.9; (3) saddle — start ON the axis (drag the pink point to y≈0) and watch it stall at a non-minimum, then nudge off-axis; (4) valley — the curved canyon where small η crawls and momentum flies.",
+          caption: "Four labs: (1) bowl: raise η past 1.0 until it diverges; (2) ravine: watch β=0 zig-zag across the steep axis, then raise β to 0.9; (3) saddle: start ON the axis (drag the pink point to y≈0) and watch it stall at a non-minimum, then nudge off-axis; (4) valley: the curved canyon where small η crawls and momentum flies.",
         },
         {
           kind: "quiz",
@@ -54,12 +54,12 @@ The gradient $\\nabla f$ is the vector of partial derivatives — it points in t
                 "The gradient points at the minimum but η rounds it",
               ],
               answerIndex: 0,
-              a: "The gradient is dominated by the steep direction (12y vs x); each step overshoots across the valley and only inches along it. Ill-conditioning = ratio of curvatures = ratio of Hessian eigenvalues — your l2-eigen-svd spectrum, running the show.",
-              why: "This is why 'condition number' appears in every optimization text — and why Adam normalizes per-coordinate.",
+              a: "The gradient is dominated by the steep direction (12y vs x); each step overshoots across the valley and only inches along it. Ill-conditioning = ratio of curvatures = ratio of Hessian eigenvalues, the spectrum from l2-eigen-svd.",
+              why: "This is why 'condition number' appears in every optimization text, and why Adam normalizes per-coordinate.",
             },
             {
               q: "What did momentum (β=0.9) change, mechanically?",
-              a: "Velocity averages recent gradients: the alternating cross-valley components cancel, the consistent along-valley components accumulate. Zig-zag damped, progress compounded.",
+              a: "Velocity averages recent gradients: the alternating cross-valley components cancel, the consistent along-valley components accumulate. The zig-zag is damped and progress compounds.",
             },
           ],
         },
@@ -73,19 +73,19 @@ The gradient $\\nabla f$ is the vector of partial derivatives — it points in t
         {
           kind: "derivation",
           title: "The quadratic that predicts divergence",
-          intro: "On f(x) = ½ax² (a = curvature), gradient descent is fully solvable — and it tells you exactly when you blow up:",
+          intro: "On f(x) = ½ax² (a = curvature), gradient descent is fully solvable, and it tells you exactly when you blow up:",
           steps: [
             { text: "The update with f′(x) = ax:", tex: "x_{t+1} = x_t - \\eta\\,a x_t = (1-\\eta a)\\,x_t" },
             { text: "So after t steps:", tex: "x_t = (1-\\eta a)^t\\,x_0" },
             { text: "Convergence iff the factor has magnitude < 1:", tex: "|1-\\eta a| < 1 \\iff 0 < \\eta < \\tfrac{2}{a}" },
             { text: "In many dimensions, a becomes the Hessian's eigenvalues; the steepest direction (λ_max) sets the ceiling:", tex: "\\eta < \\frac{2}{\\lambda_{\\max}}" },
-            { text: "And the SLOWEST direction converges like (1−ηλ_min)ᵗ — the condition number λ_max/λ_min bounds how fast you can possibly go. Ravine, explained.", tex: "\\text{rate} \\sim \\left(1 - \\tfrac{2\\lambda_{\\min}}{\\lambda_{\\max}}\\right)^t" },
+            { text: "And the SLOWEST direction converges like (1−ηλ_min)ᵗ. The condition number λ_max/λ_min bounds how fast you can possibly go. That explains the ravine.", tex: "\\text{rate} \\sim \\left(1 - \\tfrac{2\\lambda_{\\min}}{\\lambda_{\\max}}\\right)^t" },
           ],
         },
         {
           kind: "misconception",
           wrong: "Divergence means the code has a bug; a smaller loss is always one more epoch away.",
-          right: "Divergence at large η is a mathematical property of the loss's curvature — your derivation above predicts the exact threshold on a quadratic. When a real training run's loss explodes, your FIRST hypothesis should be η vs curvature, not a bug.",
+          right: "Divergence at large η is a mathematical property of the loss's curvature. Your derivation above predicts the exact threshold on a quadratic. When a real training run's loss explodes, your FIRST hypothesis should be η vs curvature, not a bug.",
         },
       ],
     },
@@ -115,7 +115,7 @@ print(round(gd(lambda x: 2*x, 1.0, 1.1, 3), 4))`,
         {
           kind: "code",
           mode: "write",
-          title: "optim.py — your own optimizer",
+          title: "optim.py: your own optimizer",
           source: `# Spec — numpy:
 # 1. gd(grad, x0, lr, steps) and momentum(grad, x0, lr, beta, steps),
 #    each returning the full path (list of points).
@@ -141,11 +141,11 @@ print(round(gd(lambda x: 2*x, 1.0, 1.1, 3), 4))`,
       blocks: [
         {
           kind: "prose",
-          md: `Everything transfers, almost embarrassingly directly:
+          md: `Everything transfers directly:
 
 - **SGD** (l3-sgd-optimizers) = today's algorithm with *noisy* gradients from mini-batches; **Adam** = momentum + per-coordinate step scaling (a poor man's fix for the ravine you just met). You will read the Adam paper and recognize every term.
 - **LR warmup/decay schedules** in Transformer training (L4) manage the η-vs-curvature ceiling as curvature changes during training.
-- **Policy gradient RL** (L10) is gradient *ascent* on expected reward — same machine, flipped sign, noisier gradients.
+- **Policy gradient RL** (L10) is gradient *ascent* on expected reward: the same machine with a flipped sign and noisier gradients.
 - **Real robot fine-tuning** (L12): compute is scarce; understanding conditioning and LR is the difference between a 2-hour and a 2-week fine-tune.
 
 And a limit to respect: gradient descent finds *local* structure. Modern deep nets work not because the landscape is nice, but because in high dimensions most bad-looking critical points are saddles (your widget's saddle escape, scaled up).`,
@@ -156,7 +156,7 @@ And a limit to respect: gradient descent finds *local* structure. Modern deep ne
           nodeIds: ["l3-linear-regression", "l3-sgd-optimizers"],
           paperIds: ["paper-adam"],
         },
-        { kind: "sources", note: "The primary text's optimization chapter formalizes convexity and convergence rates — read AFTER playing the widget, and skim the proofs; the quadratic analysis you derived is the load-bearing case." },
+        { kind: "sources", note: "The primary text's optimization chapter formalizes convexity and convergence rates. Read it AFTER playing the widget, and skim the proofs; the quadratic analysis you derived is the load-bearing case." },
       ],
     },
     {

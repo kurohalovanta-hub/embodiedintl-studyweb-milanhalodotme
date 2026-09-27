@@ -3,7 +3,7 @@ import type { Lesson } from "@/lib/lesson-types";
 export const lesson: Lesson = {
   nodeId: "l11-bc-dagger",
   title: "Behavior Cloning & DAgger",
-  subtitle: "Imitation's quiet failure mode — and the fix that defined a field",
+  subtitle: "Imitation's quiet failure mode, and the fix that defined a field",
   minutes: 80,
   sections: [
     {
@@ -13,15 +13,15 @@ export const lesson: Lesson = {
       blocks: [
         {
           kind: "prose",
-          md: `**Behavior cloning (BC)** is the obvious idea: record an expert's (observation, action) pairs, fit a network with supervised learning, deploy. No reward design, no exploration, no simulator. It is *the* workhorse of modern robot learning — ACT, Diffusion Policy, and every VLA in Level 12 are, at their core, behavior cloning with better function classes.
+          md: `**Behavior cloning (BC)** is the obvious idea: record an expert's (observation, action) pairs, fit a network with supervised learning, deploy. No reward design, no exploration, no simulator. It is *the* workhorse of modern robot learning: ACT, Diffusion Policy, and every VLA in Level 12 are behavior cloning with better function classes.
 
-So why did imitation learning need thirty years of research? Because BC has a failure mode that **does not show up in your validation loss.** Your held-out metrics can be superb while the robot drifts off the table. Understanding exactly why — and what fixes it — is the difference between someone who runs LeRobot scripts and someone who can debug a policy that 'trained fine' but fails on hardware.`,
+So why did imitation learning need thirty years of research? Because BC has a failure mode that **does not show up in your validation loss.** Your held-out metrics can be superb while the robot drifts off the table. Understanding exactly why, and what fixes it, separates someone who runs LeRobot scripts from someone who can debug a policy that 'trained fine' but fails on hardware.`,
         },
         {
           kind: "callout",
           tone: "insight",
           title: "the crack in the frame",
-          md: `Supervised learning's guarantee assumes test inputs come from the SAME distribution as training inputs. But a policy's test inputs are **states its own past actions produced.** The moment it errs, it manufactures inputs the expert never visited — and its guarantee evaporates. This is **covariate shift by feedback**, and it is unique to sequential decision making.`,
+          md: `Supervised learning's guarantee assumes test inputs come from the SAME distribution as training inputs. But a policy's test inputs are **states its own past actions produced.** The moment it errs, it manufactures inputs the expert never visited, and its guarantee no longer holds. This is **covariate shift by feedback**, and it is unique to sequential decision making.`,
         },
       ],
     },
@@ -33,7 +33,7 @@ So why did imitation learning need thirty years of research? Because BC has a fa
         {
           kind: "widget",
           id: "bc-drift",
-          caption: "A corridor task. Green dashes: expert path. Green band: where expert data exists. Cyan/red: 14 policy rollouts. Labs: (1) raise η (model error) and watch trajectories peel off mid-corridor — note they fail LATE, having started fine. (2) Narrow the data band: earlier failures. (3) Toggle + DAgger with the SAME η: suddenly the same imperfect policy succeeds. (4) Watch the mean-|offset| strip: BC bends upward (compounding); DAgger stays flat.",
+          caption: "A corridor task. Green dashes: expert path. Green band: where expert data exists. Cyan/red: 14 policy rollouts. Labs: (1) raise η (model error) and watch trajectories peel off mid-corridor. Note they fail LATE, having started fine. (2) Narrow the data band: earlier failures. (3) Toggle + DAgger with the SAME η: the same imperfect policy now succeeds. (4) Watch the mean-|offset| strip: BC bends upward (compounding); DAgger stays flat.",
         },
         {
           kind: "quiz",
@@ -42,18 +42,18 @@ So why did imitation learning need thirty years of research? Because BC has a fa
             {
               q: "Rollouts start perfectly and fail late. Why is failure back-loaded, mechanically?",
               options: [
-                "Small in-band errors accumulate as a random walk until |offset| exits the data band; outside, the policy barely corrects, so drift accelerates — error compounds with horizon",
+                "Small in-band errors accumulate as a random walk until |offset| exits the data band; outside, the policy barely corrects, so drift accelerates: error compounds with horizon",
                 "The corridor narrows near the end",
                 "The policy's weights degrade over the rollout",
                 "Later states are intrinsically harder",
               ],
               answerIndex: 0,
               a: "In-distribution the policy is good (tiny errors); those errors random-walk the state toward the band edge; past it, corrections die and drift explodes. The failure is a property of the LOOP, not of any single prediction.",
-              why: "This is why validation loss (computed on expert states!) cannot see the problem — the bad inputs don't exist in the dataset.",
+              why: "This is why validation loss (computed on expert states!) cannot see the problem: the bad inputs don't exist in the dataset.",
             },
             {
-              q: "What, precisely, does DAgger change about the data — not about the model?",
-              a: "It relabels states VISITED BY THE LEARNER with expert actions, so the training distribution follows the learner's own induced distribution. Same architecture, same loss — different data-collection loop.",
+              q: "What, precisely, does DAgger change about the data (not about the model)?",
+              a: "It relabels states VISITED BY THE LEARNER with expert actions, so the training distribution follows the learner's own induced distribution. The architecture and loss stay the same; only the data-collection loop changes.",
             },
           ],
         },
@@ -78,18 +78,18 @@ So why did imitation learning need thirty years of research? Because BC has a fa
         },
         {
           kind: "derivation",
-          title: "Where the T² actually comes from",
-          intro: "The two-line heart of the BC bound — worth owning, not memorizing:",
+          title: "Where the T² comes from",
+          intro: "The two-line heart of the BC bound, worth deriving yourself rather than memorizing:",
           steps: [
             { text: "P(at least one error in T steps), errors ≤ ε per step on-distribution:", tex: "P(\\text{fail}) \\le \\varepsilon T" },
-            { text: "After the FIRST error, states leave the expert distribution; assume nothing — worst case forfeits the rest, up to T cost:", tex: "\\text{extra cost} \\le \\underbrace{\\varepsilon T}_{\\text{prob}} \\times \\underbrace{T}_{\\text{damage}} = \\varepsilon T^2" },
+            { text: "After the FIRST error, states leave the expert distribution; assume nothing: the worst case forfeits the rest, up to T cost:", tex: "\\text{extra cost} \\le \\underbrace{\\varepsilon T}_{\\text{prob}} \\times \\underbrace{T}_{\\text{damage}} = \\varepsilon T^2" },
             { text: "DAgger's fix: ε now holds on the LEARNER's own distribution (expert labeled those very states), so each step's damage stays O(ε) and costs merely add:", tex: "\\text{extra cost} \\le \\varepsilon T" },
           ],
         },
         {
           kind: "misconception",
-          wrong: "More demonstrations fix BC drift — it's a data-quantity problem.",
-          right: "More perfect-expert demos concentrate MORE data on the expert's narrow tube of states — the off-tube desert stays empty. What helps is data COVERAGE of recovery states: DAgger (query the expert on learner states), or noise-injected demos, or teleoperators who make and fix mistakes. This is why 'sloppy' human demos with corrections often train better policies than flawless ones — and why UMI/ALOHA-style data collection deliberately includes recoveries.",
+          wrong: "More demonstrations fix BC drift. It's a data-quantity problem.",
+          right: "More perfect-expert demos concentrate MORE data on the expert's narrow tube of states, and the off-tube desert stays empty. What helps is data COVERAGE of recovery states: DAgger (query the expert on learner states), or noise-injected demos, or teleoperators who make and fix mistakes. This is why 'sloppy' human demos with corrections often train better policies than flawless ones, and why UMI/ALOHA-style data collection deliberately includes recoveries.",
         },
       ],
     },
@@ -116,18 +116,18 @@ data += [(s, expert(s)) for s in states]  # expert labels learner's states
 current_policy = train(data)`,
           prompt: "In DAgger's rollout, whose actions move the environment, and whose actions go into the dataset?",
           options: [
-            "Learner's actions drive; expert's labels are stored — that mismatch IS the algorithm",
+            "Learner's actions drive; expert's labels are stored. That mismatch IS the algorithm",
             "Expert drives; expert labels stored",
             "Learner drives; learner's actions stored",
             "They alternate steps",
           ],
           answerIndex: 0,
-          explanation: "The learner steers (so states come from ITS distribution); the expert only labels (so targets are correct). Store expert-driven states instead and you've silently reimplemented BC — a real and common bug in imitation codebases.",
+          explanation: "The learner steers (so states come from ITS distribution); the expert only labels (so targets are correct). Store expert-driven states instead and you've silently reimplemented BC, a common bug in imitation codebases.",
         },
         {
           kind: "code",
           mode: "write",
-          title: "drift_lab.py — reproduce the theory",
+          title: "drift_lab.py: reproduce the theory",
           source: `# Spec — numpy; mirrors the widget so you can sanity-check visually:
 # 1. Corridor env: state = (s, e); e' = e + a*ds + noise; success iff
 #    |e| < 0.9 for all 100 steps. Expert: a* = -2.4*e.
@@ -151,26 +151,26 @@ current_policy = train(data)`,
     },
     {
       id: "embodied",
-      title: "This lesson is the skeleton key to Level 11–12",
+      title: "This lesson is the skeleton key to Levels 11 and 12",
       depth: "research",
       blocks: [
         {
           kind: "prose",
           md: `Almost every design choice in modern imitation is a response to today's failure mode:
 
-- **Action chunking (ACT, l11-act):** predicting H=50-step chunks cuts the number of feedback interactions per episode by 50× — fewer chances to drift. (Chunking attacks the T in εT².)
+- **Action chunking (ACT, l11-act):** predicting H=50-step chunks cuts the number of feedback interactions per episode by 50×, so there are fewer chances to drift. (Chunking attacks the T in εT².)
 - **Diffusion/flow policies (l11-diffusion-policy, l12-pi0-flow):** multimodal action distributions avoid the 'average of two good actions is a bad action' pathology that inflates ε on real, multi-solution tasks.
-- **Data collection culture:** UMI's handheld grippers and ALOHA's teleop capture natural human recoveries — coverage of off-nominal states without an oracle in the loop. HG-DAgger/hg-style interventions ('human grabs the leash when the robot drifts') are DAgger adapted to hardware reality.
-- **Evaluation (l11-eval-statistics):** because validation loss is blind to compounding, real robot papers report ROLLOUT success over many trials — and you now know exactly why nothing less counts.`,
+- **Data collection culture:** UMI's handheld grippers and ALOHA's teleop capture natural human recoveries: coverage of off-nominal states without an oracle in the loop. HG-DAgger/hg-style interventions ('human grabs the leash when the robot drifts') are DAgger adapted to hardware reality.
+- **Evaluation (l11-eval-statistics):** because validation loss is blind to compounding, real robot papers report ROLLOUT success over many trials.`,
         },
         {
           kind: "connection",
-          md: "Read paper-dagger now — it's short, and you've derived its main theorem's shape. Then ACT and Diffusion Policy read as two escalating answers to the same ε and T. Your p17-bc-task will make you feel the gap between val-loss and rollout success firsthand.",
+          md: "Read paper-dagger now: it's short, and you've derived its main theorem's shape. Then ACT and Diffusion Policy read as two escalating answers to the same ε and T. Your p17-bc-task will make you feel the gap between val-loss and rollout success firsthand.",
           nodeIds: ["l11-act", "l11-diffusion-policy", "l11-data-quality"],
           paperIds: ["paper-dagger", "paper-act", "paper-umi"],
           projectIds: ["p17-bc-task"],
         },
-        { kind: "sources", note: "Ross, Gordon & Bagnell 2011 (AISTATS) §1–3 — the primary source, now fully readable; LeRobot's imitation tutorials for the modern practice you'll use in l11-lerobot." },
+        { kind: "sources", note: "Ross, Gordon & Bagnell 2011 (AISTATS) §1 to 3, the primary source, now readable; LeRobot's imitation tutorials for the modern practice you'll use in l11-lerobot." },
       ],
     },
     {
@@ -180,7 +180,7 @@ current_policy = train(data)`,
       blocks: [
         {
           kind: "prose",
-          md: `**The bar:** explain covariate-shift-by-feedback without notes (and why val loss can't see it); reproduce the εT² vs εT argument; state exactly what DAgger changes (data distribution, not model); drift_lab.py passes. Gold = given a failing real-robot BC policy, list your first three diagnostic questions — all three should be about the DATA distribution, and you should be able to defend that ordering.`,
+          md: `**The bar:** explain covariate-shift-by-feedback without notes (and why val loss can't see it); reproduce the εT² vs εT argument; state exactly what DAgger changes (data distribution, not model); drift_lab.py passes. Gold = given a failing real-robot BC policy, list your first three diagnostic questions. All three should be about the DATA distribution, and you should be able to defend that ordering.`,
         },
         { kind: "mastery" },
       ],

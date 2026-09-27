@@ -48,7 +48,7 @@ export function MemorySync({ compact }: { compact?: boolean }) {
       });
       const j = (await r.json()) as { ok?: boolean; repo?: string; error?: string };
       if (j.ok) {
-        setMsg(`✓ Linked ${j.repo} — syncing your memory there now.`);
+        setMsg(`✓ Linked ${j.repo}. Syncing your memory there now.`);
         setToken(""); setFormOpen(false);
         refresh();
         await syncNow(true);
@@ -83,7 +83,7 @@ export function MemorySync({ compact }: { compact?: boolean }) {
     setBusy(true); setMsg(null);
     await fetch("/api/memory", { method: "DELETE" }).catch(() => {});
     setBusy(false);
-    setMsg("Unlinked. The repo and its history stay yours — the app just stops writing there.");
+    setMsg("Unlinked. The repo and its history stay yours. The app stops writing there.");
     refresh();
   };
 
@@ -92,7 +92,7 @@ export function MemorySync({ compact }: { compact?: boolean }) {
     if (compact) return null;
     return (
       <div className="text-[12.5px] text-faint">
-        Sign in first — memory is per account{auth.status === "local" ? " (this deployment has no accounts yet)" : ""}.
+        Sign in first. Memory is per account{auth.status === "local" ? " (this deployment has no accounts yet)" : ""}.
       </div>
     );
   }
@@ -113,7 +113,7 @@ export function MemorySync({ compact }: { compact?: boolean }) {
       ) : (
         <div className="text-[12.5px] leading-relaxed text-dim">
           <b className="text-ink">No memory repo linked.</b> Link a <b>private</b> GitHub repo and the app keeps an
-          AI-readable file there — progress, weaknesses, recent tutor chats — so any assistant (Claude here,
+          AI-readable file there (progress, weaknesses, recent tutor chats) so any assistant (Claude here,
           ChatGPT elsewhere) can pick up exactly where the last one stopped.{" "}
           <button className="text-acc underline-offset-2 hover:underline" onClick={() => setFormOpen(!formOpen)}>
             {formOpen ? "close" : "link one →"}

@@ -129,10 +129,10 @@ export default function PIDTuner() {
           />
           <div className="rounded-md border border-line bg-panel2/60 px-3 py-2 text-[12px] leading-relaxed text-dim">
             <Katex tex="u=K_p e+K_i\!\int\! e\,dt+K_d\dot e" />, plant <Katex tex="m\ddot x=u-c\dot x" />.
-            Run the classic experiment: P alone + <b>constant load</b> → the error readout never reaches
+            Run the classic experiment: P alone with <b>constant load</b> → the error readout never reaches
             zero (the controller needs a nonzero e to hold force). Add K<sub>i</sub> → it does. Push
             K<sub>p</sub> high → overshoot and ring; K<sub>d</sub> damps it. The spike in the amber u-trace
-            at each setpoint jump is <i>derivative kick</i> — real controllers differentiate the
+            at each setpoint jump is <i>derivative kick</i>. Real controllers differentiate the
             measurement, not the error, to avoid it.
           </div>
         </>

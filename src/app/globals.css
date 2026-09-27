@@ -425,7 +425,14 @@ input[type="range"]::-moz-range-thumb {
     linear-gradient(90deg, #1d1a1f, #221c1a 45%, #1a1d22);
   padding-block: 5px;
 }
-.reel-rec > span { animation: pulse-dot 1.6s ease-in-out infinite; }
+/* the tally reads like a frame counter burned into a film edge */
+.reel-tally {
+  padding: 1px 7px;
+  border-radius: 4px;
+  border: 1px solid color-mix(in oklab, var(--color-acc-robot) 35%, transparent);
+  background: color-mix(in oklab, var(--color-acc-robot) 9%, transparent);
+  font-variant-numeric: tabular-nums;
+}
 .reel-link {
   background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
   transition: background-size 220ms var(--ease-out);

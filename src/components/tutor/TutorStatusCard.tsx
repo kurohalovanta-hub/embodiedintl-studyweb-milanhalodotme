@@ -68,7 +68,7 @@ export function TutorStatusCard() {
           <><b className="text-acc-robot">Live, running on {BACKEND_LABEL[status.backend]}.</b> Ask anything from Today or any node; every conversation is saved to your account.</>
         )}
         {status.state === "off" && status.reason === "sign-in" && (
-          <><b className="text-warn">Sign in to wake your tutor.</b> It runs on the AI you connect to your account.</>
+          <><b className="text-warn">Sign in to wake your tutor.</b> Claude Max 20x plan recommended. A lot of projects unlock as your total skills proven goes up. Keep your GitHub handy to save your data.</>
         )}
         {status.state === "off" && status.reason === "connect" && (
           <div className="space-y-2">

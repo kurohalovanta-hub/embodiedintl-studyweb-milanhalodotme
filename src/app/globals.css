@@ -417,6 +417,23 @@ input[type="range"]::-moz-range-thumb {
   }
 }
 
+/* ── funding reel (FundingReel.tsx): a strip of film across the top ── */
+.funding-reel {
+  background:
+    radial-gradient(circle at 50% 50%, var(--color-bg) 2px, transparent 2.5px) 0 1px / 14px 6px repeat-x,
+    radial-gradient(circle at 50% 50%, var(--color-bg) 2px, transparent 2.5px) 0 calc(100% - 1px) / 14px 6px repeat-x,
+    linear-gradient(90deg, #1d1a1f, #221c1a 45%, #1a1d22);
+  padding-block: 5px;
+}
+.reel-rec > span { animation: pulse-dot 1.6s ease-in-out infinite; }
+.reel-link {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 220ms var(--ease-out);
+}
+.reel-link:hover { background-size: 100% 1px; }
+.reel-cta:hover > span { transform: translateX(2px); }
+.reel-cta > span { transition: transform 160ms var(--ease-out); font-size: 9px; }
+
 /* ── mobile chrome ───────────────────────────────────────────────── */
 .safe-bottom {
   padding-bottom: max(8px, env(safe-area-inset-bottom));

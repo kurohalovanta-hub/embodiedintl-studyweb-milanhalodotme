@@ -119,6 +119,14 @@ export default function SettingsPage() {
               </button>
             </div>
           </div>
+        ) : auth.status === "guest" ? (
+          <div className="space-y-3">
+            <p className="text-sm text-dim">
+              <b className="text-ink">Guest view.</b> Anything you do here stays in this browser only. An
+              account saves your progress and unlocks the tutor.
+            </p>
+            <button className="btn" onClick={auth.leaveGuest}>Sign in or join</button>
+          </div>
         ) : (
           <div className="space-y-2">
             <p className="text-sm text-dim">

@@ -11,6 +11,7 @@ export type AuthStatus =
   | "loading" // first /api/auth/me in flight
   | "local" // no Redis configured — browser-only mode, no accounts
   | "signedout" // accounts configured, no valid session
+  | "guest" // chose to look around without an account — browser-only, nothing syncs
   | "authed";
 
 interface AuthState {
@@ -22,9 +23,24 @@ interface AuthState {
   login: (username: string, password: string) => Promise<{ ok: boolean; error?: string; pending?: boolean }>;
   register: (username: string, password: string) => Promise<{ ok: boolean; error?: string; approved?: boolean }>;
   logout: () => Promise<void>;
+  enterGuest: () => void;
+  leaveGuest: () => void;
   changePassword: (currentPassword: string, newPassword: string) => Promise<{ ok: boolean; error?: string; note?: string }>;
   generateRecoveryCode: () => Promise<{ ok: boolean; code?: string; error?: string }>;
   resetWithCode: (username: string, code: string, newPassword: string) => Promise<{ ok: boolean; error?: string; note?: string }>;
+}
+
+// Guest choice survives reloads in this browser only. Storage can throw
+// (private windows, blocked site data) — the guest view still works without it.
+const GUEST_KEY = "halo_guest";
+function readGuest(): boolean {
+  try { return localStorage.getItem(GUEST_KEY) === "1"; } catch { return false; }
+}
+function writeGuest(on: boolean) {
+  try {
+    if (on) localStorage.setItem(GUEST_KEY, "1");
+    else localStorage.removeItem(GUEST_KEY);
+  } catch { /* ignore */ }
 }
 
 async function json<T>(res: Response): Promise<T & { error?: string }> {
@@ -47,9 +63,12 @@ export const useAuth = create<AuthState>((set, get) => ({
       if (!data.configured) {
         set({ status: "local", user: null });
       } else {
+        const bootstrapped = data.bootstrapped ?? true;
+        // no guest view before the first account exists — that screen is the admin setup
+        const guest = !data.user && bootstrapped && readGuest();
         set({
-          status: data.user ? "authed" : "signedout",
-          bootstrapped: data.bootstrapped ?? true,
+          status: data.user ? "authed" : guest ? "guest" : "signedout",
+          bootstrapped,
           user: data.user ?? null,
         });
       }
@@ -67,6 +86,7 @@ export const useAuth = create<AuthState>((set, get) => ({
     });
     const data = await json<{ ok?: boolean; user?: AuthUser; pending?: boolean }>(res);
     if (res.ok && data.user) {
+      writeGuest(false);
       set({ status: "authed", user: data.user });
       return { ok: true };
     }
@@ -89,6 +109,16 @@ export const useAuth = create<AuthState>((set, get) => ({
 
   logout: async () => {
     await fetch("/api/auth/logout", { method: "POST" }).catch(() => undefined);
+    set({ status: "signedout", user: null });
+  },
+
+  enterGuest: () => {
+    writeGuest(true);
+    set({ status: "guest", user: null });
+  },
+
+  leaveGuest: () => {
+    writeGuest(false);
     set({ status: "signedout", user: null });
   },
 

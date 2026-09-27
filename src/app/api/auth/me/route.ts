@@ -24,6 +24,13 @@ export async function GET(req: Request) {
       // fall through as signed-out
     }
   }
-  const bootstrapped = (await userCount(redis)) > 0;
+  // Redis down or over quota: report signed-out rather than a 500, which the
+  // client would mistake for "no accounts configured".
+  let bootstrapped = true;
+  try {
+    bootstrapped = (await userCount(redis)) > 0;
+  } catch {
+    // keep the default
+  }
   return Response.json({ configured: true, bootstrapped, user });
 }

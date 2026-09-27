@@ -186,10 +186,21 @@ export function LoginGate() {
             )}
           </div>
 
+          {!firstRun && (
+            <button
+              type="button"
+              onClick={auth.enterGuest}
+              className="btn mt-3 w-full justify-center !py-2.5"
+            >
+              Look around as a guest
+            </button>
+          )}
+
           <div className="mt-4"><TutorStatusCard /></div>
 
           <p className="mt-4 text-center text-[11px] text-faint">
             Your progress and tutor chats save to your account and follow you across devices.
+            Guests can see everything, but it only saves in this browser.
           </p>
         </div>
       </div>

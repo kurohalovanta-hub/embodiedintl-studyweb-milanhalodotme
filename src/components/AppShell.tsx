@@ -128,6 +128,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <Sidebar pathname={pathname} onSearch={() => setPaletteOpen(true)} />
       <div className="min-w-0 flex-1">
         <MobileTopBar onMenu={() => setDrawerOpen(true)} onSearch={() => setPaletteOpen(true)} />
+        {auth.status === "guest" && <GuestBar onLeave={auth.leaveGuest} />}
         <main className="pb-tabbar px-4 py-4 sm:px-6 sm:py-6 lg:px-10 lg:pb-6">
           <div className="mx-auto max-w-[1400px]" style={{ zoom: uiScale }}>{children}</div>
         </main>
@@ -137,6 +138,19 @@ export function AppShell({ children }: { children: ReactNode }) {
       {paletteOpen && <SearchPalette onClose={() => setPaletteOpen(false)} />}
       <MasteryMomentHost />
       <Rundown />
+    </div>
+  );
+}
+
+function GuestBar({ onLeave }: { onLeave: () => void }) {
+  return (
+    <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line bg-panel2/60 px-4 py-2 text-[12px] text-dim sm:px-6 lg:px-10">
+      <span>
+        <span className="text-ink">Guest view.</span> Nothing here saves to an account, and the tutor needs one.
+      </span>
+      <button onClick={onLeave} className="btn !min-h-[32px] !px-3 !py-1 text-[12px]">
+        Sign in or join
+      </button>
     </div>
   );
 }
